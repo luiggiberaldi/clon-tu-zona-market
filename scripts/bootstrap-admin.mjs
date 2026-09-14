@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import { createClient } from '@supabase/supabase-js';
+if(fs.existsSync('.env.local'))process.loadEnvFile('.env.local');
+const url=process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.SUPABASE_SERVICE_ROLE_KEY,email=process.env.ADMIN_EMAIL;
+const role=process.argv.includes('--driver')?'driver':'admin';
+if(!url||!key||!email)throw new Error('Configura SUPABASE, SERVICE_ROLE y ADMIN_EMAIL. No se crea ninguna contraseña predeterminada.');
+if(!process.argv.includes('--confirm'))throw new Error('Esta acción otorga privilegios al correo configurado. Revisa ADMIN_EMAIL y vuelve a ejecutar con --confirm.');
+const client=createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}});
+const profile=await client.from('users').select('id').eq('email',email).single();
+if(profile.error)throw new Error('No existe un perfil único para el correo. Registra y confirma primero la cuenta.');
+const auth=await client.auth.admin.getUserById(profile.data.id);
+if(auth.error||!auth.data.user.email_confirmed_at)throw new Error('La cuenta debe haber confirmado su correo.');
+const update=await client.from('users').update({role}).eq('id',profile.data.id);if(update.error)throw new Error('No se pudo otorgar el rol.');
+const audit=await client.from('audit_log').insert({actor_id:profile.data.id,action:'staff.bootstrap',details:{role}});if(audit.error)throw new Error('Rol actualizado, pero falló su registro de auditoría; revisar antes de continuar.');
+console.log('Rol actualizado. El administrador debe configurar y verificar MFA en /perfil/seguridad.');

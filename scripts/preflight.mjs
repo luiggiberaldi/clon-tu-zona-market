@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+if(fs.existsSync('.env.local'))process.loadEnvFile('.env.local');
+const checks=[];const add=(name,ok,required=true)=>checks.push({name,ok:Boolean(ok),required});
+const env=process.env;
+const [major,minor,patch]=process.versions.node.split('.').map(Number);
+add('Node >=22.22.2 <25',(major>22||(major===22&&(minor>22||(minor===22&&patch>=2))))&&major<25);
+add('Supabase URL',/^https:\/\//.test(env.NEXT_PUBLIC_SUPABASE_URL||''));
+add('Supabase public key',Boolean(env.NEXT_PUBLIC_SUPABASE_ANON_KEY));
+add('Supabase server key',Boolean(env.SUPABASE_SERVICE_ROLE_KEY));
+add('Production HTTPS site URL',/^https:\/\//.test(env.NEXT_PUBLIC_SITE_URL||'')&&!/localhost|127\.0\.0\.1/.test(env.NEXT_PUBLIC_SITE_URL||''));
+add('Demo disabled',env.NEXT_PUBLIC_DEMO_MODE!=='true');
+add('Support email configured',/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(env.NEXT_PUBLIC_SUPPORT_EMAIL||''));
+add('Maintenance secret >=32 characters',(env.CRON_SECRET||'').length>=32);
+add('Transactional email credentials',Boolean(env.RESEND_API_KEY&&env.EMAIL_FROM),false);
+for(const c of checks)console.log((c.ok?'OK':'MISSING')+' '+c.name+(c.required?'':' (optional)'));
+console.log('Manual gates: Supabase Auth SMTP and redirects, applied migrations, admin MFA, current rate, enabled payment instructions, coverage/catalog, terms/privacy, scheduled maintenance, backups + restore, staging order test.');
+if(checks.some(c=>c.required&&!c.ok))process.exitCode=1;

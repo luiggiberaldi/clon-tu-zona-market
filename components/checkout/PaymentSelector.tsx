@@ -1,0 +1,8 @@
+'use client';
+import { cn } from '@/lib/utils/cn';
+import type { CorePaymentMethod, PaymentMethodConfig } from '@/types/commerce';
+export function PaymentSelector({ methods, selected, onSelect }: { methods: PaymentMethodConfig[]; selected?: CorePaymentMethod; onSelect: (method: CorePaymentMethod) => void }) {
+  const enabled = methods.filter(method => method.enabled && ['cash', 'pagomovil', 'transfer'].includes(method.id));
+  const method = enabled.find(entry => entry.id === selected);
+  return <section className="space-y-3" aria-labelledby="payment-title"><h2 id="payment-title" className="text-lg font-semibold">3. Método de pago</h2><div className="grid gap-2 sm:grid-cols-2">{enabled.map(entry => <button key={entry.id} type="button" aria-pressed={selected === entry.id} onClick={() => onSelect(entry.id)} className={cn('rounded-lg border p-3 text-left text-sm', selected === entry.id ? 'border-primary bg-primary/10' : 'hover:bg-secondary')}><span className="block font-medium">{entry.label}</span><span className="text-xs text-muted-foreground">Pago en {entry.currency} · verificación manual</span></button>)}</div>{!enabled.length && <p role="alert" className="text-sm text-destructive">El comercio aún no ha habilitado métodos de pago. No es posible confirmar pedidos.</p>}{method && <div className="rounded-lg bg-secondary p-3 text-sm"><p className="whitespace-pre-wrap">{method.instructions || 'Consulta las instrucciones con el comercio.'}</p><p className="mt-2 text-muted-foreground">Crear el pedido no confirma su pago. El comercio verifica el ingreso antes de aprobarlo.</p></div>}</section>;
+}

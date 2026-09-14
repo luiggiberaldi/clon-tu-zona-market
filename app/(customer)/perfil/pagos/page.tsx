@@ -1,0 +1,3 @@
+import { getCheckoutConfig } from '@/lib/catalog';
+export const dynamic='force-dynamic';
+export default async function Page(){const config=await getCheckoutConfig();return <div className="container-prose space-y-4 py-8"><h1 className="text-2xl font-bold">Métodos de pago habilitados</h1><p className="text-sm text-muted-foreground">La tienda no guarda datos de tarjeta. Los pagos manuales requieren verificación del comercio.</p>{config.payment_methods.length?config.payment_methods.map(method=><section key={method.id} className="rounded-xl border p-5"><h2 className="font-bold">{method.label} · {method.currency}</h2><p className="mt-2 whitespace-pre-line text-sm">{method.instructions}</p></section>):<p>No hay métodos configurados todavía. No se aceptan pagos.</p>}</div>;}

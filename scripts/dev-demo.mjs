@@ -1,0 +1,18 @@
+import { spawn } from 'node:child_process';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const require=createRequire(import.meta.url);
+const cwd=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const port=process.env.PORT||'3000';
+if(!/^\d{1,5}$/.test(port)||Number(port)>65535)throw new Error('Puerto inválido.');
+const env={...process.env,NODE_ENV:'development',NEXT_PUBLIC_DEMO_MODE:'true',NEXT_PUBLIC_SITE_URL:'http://127.0.0.1:'+port,NEXT_TELEMETRY_DISABLED:'1',DEMO_DATA_DIR:process.env.DEMO_DATA_DIR||path.join(cwd,'.workbuddy-ai','demo-local')};
+for(const key of ['NEXT_PUBLIC_SUPABASE_URL','NEXT_PUBLIC_SUPABASE_ANON_KEY','SUPABASE_SERVICE_ROLE_KEY','DATABASE_URL','CRON_SECRET','RESEND_API_KEY','EMAIL_FROM','ADMIN_EMAIL'])env[key]='';
+env.NEXT_PUBLIC_ENABLE_GOOGLE_AUTH='false';
+console.log('Demo local: http://127.0.0.1:'+port+'/carabobo');
+console.log('Datos de prueba persistentes: '+env.DEMO_DATA_DIR);
+console.log('No se realizan pedidos, cobros, envíos ni correos externos. Usa las cuentas de prueba de la barra superior.');
+const child=spawn(process.execPath,[require.resolve('next/dist/bin/next'),'dev','--webpack','--hostname','127.0.0.1','--port',port],{cwd,stdio:'inherit',env});
+child.on('error',error=>{console.error(error.message);process.exitCode=1;});
+child.on('exit',(code,signal)=>{process.exitCode=code??(signal?1:0);});
+for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>child.kill(signal));

@@ -1,0 +1,18 @@
+{
+  "source_url": "https://api.tuzonamarket.com/api/website/resolve",
+  "captured_at": "2026-09-13T22:35:07.314Z",
+  "usd_to_ves": 842.21,
+  "source_dollar_rate_raw": 84221,
+  "verification": {
+    "url": "https://tuzonamarket.com/carabobo/producto/harina-maiz-blanco-libre-de-gluten-pan-1-kg",
+    "usd_base": 1.31,
+    "ves_base": 1103.30,
+    "usd_final": 1.04,
+    "ves_final": 875.90,
+    "method": "Tasa pública dividida entre 100, comprobada al cambiar USD a bolívares en la misma ficha. No se presenta como tasa vigente."
+  },
+  "delivery": {
+    "simulation": true,
+    "note": "Envío local simulado sin cargo; no representa cobertura, tarifa ni reserva en TuZonaMarket."
+  }
+}

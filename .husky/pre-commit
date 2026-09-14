@@ -1,0 +1,5 @@
+﻿#!/usr/bin/env sh
+set -eu
+node scripts/check-secrets.mjs
+npm run lint
+npm run typecheck

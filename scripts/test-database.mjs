@@ -1,0 +1,138 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import { fileURLToPath } from 'node:url';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const moduleName = process.env.PGLITE_MODULE || '@electric-sql/pglite';
+const { PGlite } = await import(moduleName);
+const db = new PGlite();
+await db.exec(`
+  CREATE ROLE anon NOLOGIN; CREATE ROLE authenticated NOLOGIN; CREATE ROLE service_role NOLOGIN BYPASSRLS;
+  CREATE SCHEMA auth; GRANT USAGE ON SCHEMA auth, public TO anon,authenticated,service_role;
+  CREATE TABLE auth.users(id uuid PRIMARY KEY,email text,phone text,raw_user_meta_data jsonb DEFAULT '{}'::jsonb);
+  CREATE FUNCTION auth.uid() RETURNS uuid LANGUAGE sql STABLE AS $$ SELECT nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
+  CREATE FUNCTION auth.jwt() RETURNS jsonb LANGUAGE sql STABLE AS $$ SELECT coalesce(nullif(current_setting('request.jwt.claims',true),''),'{}')::jsonb $$;
+`);
+const migrations = fs.readdirSync(path.join(root, 'supabase/migrations')).filter(f=>f.endsWith('.sql')).sort();
+for (const name of migrations) {
+  try { await db.exec(fs.readFileSync(path.join(root, 'supabase/migrations',name),'utf8')); console.log('Migration OK:',name); }
+  catch (error) { console.error('Migration failed:',name,error.message); await db.close(); process.exit(1); }
+}
+const ids = { customer:'11111111-1111-4111-8111-111111111111', other:'22222222-2222-4222-8222-222222222222', admin:'33333333-3333-4333-8333-333333333333', driver:'44444444-4444-4444-8444-444444444444', state:'55555555-5555-4555-8555-555555555555', city:'66666666-6666-4666-8666-666666666666', area:'77777777-7777-4777-8777-777777777777', address:'88888888-8888-4888-8888-888888888888', product:'99999999-9999-4999-8999-999999999999' };
+let passed = 0;
+async function check(name,fn) { try { await fn(); console.log('PASS',name); passed++; } catch(error) { console.error('FAIL',name,error.message); throw error; } }
+async function asUser(id,aal='aal1',role='authenticated') {
+  await db.exec('RESET ROLE');
+  await db.query("SELECT set_config('request.jwt.claim.sub',$1,false),set_config('request.jwt.claims',$2,false)",[id||'',JSON.stringify({sub:id,role,aal})]);
+  await db.exec('SET ROLE '+role);
+}
+async function rpc(name,args=[]) { return (await db.query(`SELECT public.${name}(${args.map((_,i)=>'$'+(i+1)).join(',')}) result`,args)).rows[0].result; }
+async function denied(fn) { let failed=false; try { await fn(); } catch { failed=true; } assert.equal(failed,true,'operation unexpectedly allowed'); }
+try {
+  for (const [name,id] of Object.entries(ids).slice(0,4)) await db.query('INSERT INTO auth.users(id,email,raw_user_meta_data) VALUES($1,$2,$3)',[id,name+'@test.invalid',JSON.stringify({full_name:name,role:'admin'})]);
+  await check('signup ignores caller role metadata', async()=> assert.equal((await db.query('SELECT role FROM public.users WHERE id=$1',[ids.customer])).rows[0].role,'customer'));
+  await db.query("UPDATE public.users SET role='admin' WHERE id=$1",[ids.admin]);
+  await db.query("UPDATE public.users SET role='driver' WHERE id=$1",[ids.driver]);
+  await db.query('INSERT INTO states(id,name) VALUES($1,$2)',[ids.state,'Test state']);
+  await db.query('INSERT INTO cities(id,state_id,name,delivery_fee_usd,min_order_usd) VALUES($1,$2,$3,2.50,1)',[ids.city,ids.state,'Test city']);
+  await db.query('INSERT INTO areas(id,city_id,name) VALUES($1,$2,$3)',[ids.area,ids.city,'Test area']);
+  await db.query('INSERT INTO addresses(id,user_id,area_id,full_address) VALUES($1,$2,$3,$4)',[ids.address,ids.customer,ids.area,'Test address']);
+  await db.query('INSERT INTO products(id,name,slug,price_usd,price_ves,stock_quantity,is_offer,offer_percentage) VALUES($1,$2,$3,10,1,3,true,20)',[ids.product,'Test product','test-product']);
+  await db.exec("UPDATE settings SET value=jsonb_build_object('usd_to_ves',40,'updated_at',now()) WHERE key='exchange_rate'; UPDATE payment_methods SET enabled=true,instructions='Operator verifies payment' WHERE id IN ('cash','pagomovil');");
+  await asUser(ids.customer);
+  await check('own role update denied',()=>denied(()=>db.query("UPDATE users SET role='admin' WHERE id=$1",[ids.customer])));
+  await check('own Prime update denied',()=>denied(()=>db.query('UPDATE users SET is_prime=true WHERE id=$1',[ids.customer])));
+  await check('own name update allowed',()=>db.query("UPDATE users SET full_name='Changed' WHERE id=$1",[ids.customer]));
+  await check('direct order insert denied',()=>denied(()=>db.exec('INSERT INTO orders DEFAULT VALUES')));
+  await check('direct stock modification denied',()=>denied(()=>db.query('UPDATE products SET stock_quantity=99 WHERE id=$1',[ids.product])));
+  await check('expiry client execution denied',()=>denied(()=>rpc('expire_order_reservations',[10])));
+  await check('settings writes denied',()=>denied(()=>db.exec("UPDATE settings SET value='{}'::jsonb")));
+  const items = JSON.stringify([{product_id:ids.product,quantity:2}]);
+  await check('invalid zero quantity denied',()=>denied(()=>rpc('quote_order',[JSON.stringify([{product_id:ids.product,quantity:0}]),ids.address])));
+  await check('duplicate item ids denied',()=>denied(()=>rpc('quote_order',[JSON.stringify([{product_id:ids.product,quantity:1},{product_id:ids.product,quantity:1}]),ids.address])));
+  const quote = await rpc('quote_order',[items,ids.address]);
+  await check('single discounted price and authoritative shipping',async()=>{assert.equal(Number(quote.total_usd),18.5);assert.equal(Number(quote.total_ves),740);});
+  const slots=await rpc('available_delivery_slots',[ids.address]);
+  await check('future delivery slots available',async()=>assert.ok(slots.length>0));
+  const slot=slots.at(-1);
+  const args=[items,ids.address,'pagomovil',slot.date,slot.start,'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',18.5,40,null];
+  await check('tampered total rejected',()=>denied(()=>rpc('place_order',[...args.slice(0,6),0,40,null])));
+  const order=await rpc('place_order',args);
+  await check('atomic order debits stock once',async()=>assert.equal((await db.query('SELECT stock_quantity FROM products WHERE id=$1',[ids.product])).rows[0].stock_quantity,1));
+  await check('idempotent retry returns same order',async()=>assert.equal((await rpc('place_order',args)).id,order.id));
+  await check('idempotency key cannot change request',()=>denied(()=>rpc('place_order',[...args.slice(0,6),19,40,null])));
+  await check('out of stock second purchase rejected',()=>denied(()=>rpc('place_order',[...args.slice(0,5),'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',18.5,40,null])));
+  await check('payment submission stays unpaid',async()=>assert.equal((await rpc('submit_payment_reference',[order.id,'TEST-REF-0001'])).payment_status,'pending'));
+  await check('customer cannot approve payment',()=>denied(()=>rpc('review_order_payment',[order.id,'approve','Bank checked'])));
+  await asUser(ids.other);
+  await check('other customer sees no order',async()=>assert.equal((await db.query('SELECT id FROM orders WHERE id=$1',[order.id])).rows.length,0));
+  await check('other customer cannot quote owned address',()=>denied(()=>rpc('quote_order',[items,ids.address])));
+  await asUser(ids.admin,'aal1');
+  await check('administrator requires MFA for payment',()=>denied(()=>rpc('review_order_payment',[order.id,'approve','Bank checked'])));
+  await asUser(ids.admin,'aal2');
+  await check('admin verified payment changes to paid',async()=>assert.equal((await rpc('review_order_payment',[order.id,'approve','Bank transfer verified'])).payment_status,'paid'));
+  await check('paid order cannot cancel without refund',()=>denied(()=>rpc('transition_order',[order.id,'cancelled',null,'Customer cancelled'])));
+  await rpc('review_order_payment',[order.id,'refund','Refund executed and checked']);
+  await rpc('transition_order',[order.id,'cancelled',null,'Customer requested cancellation']);
+  await check('cancel restores stock exactly once',async()=>assert.equal((await db.query('SELECT stock_quantity FROM products WHERE id=$1',[ids.product])).rows[0].stock_quantity,3));
+  await check('terminal order cannot cancel again',()=>denied(()=>rpc('transition_order',[order.id,'cancelled',null,'Cancel again'])));
+  await check('stock delta RPC is atomic',async()=>assert.equal(Number((await rpc('admin_adjust_stock',[ids.product,2,'delta','New delivery received'])).stock),5));
+  await check('stock negative set rejected',()=>denied(()=>rpc('admin_adjust_stock',[ids.product,-1,'set','Invalid adjustment'])));
+  await asUser(ids.customer);
+  await check('cart replace persists final quantity',async()=>{const result=await rpc('sync_cart',[JSON.stringify([{product_id:ids.product,quantity:4}]),'replace']); assert.equal(result.items[0].quantity,4);});
+  await check('cart empty replaces by deletion',async()=>assert.equal((await rpc('sync_cart',['[]','replace'])).items.length,0));
+  await asUser(null,'aal1','service_role');
+  await check('server role works without user identity',()=>db.query("UPDATE users SET full_name='Server update' WHERE id=$1",[ids.customer]));
+  await check('outbox claim is service-only and atomic',async()=>{const batch=await db.query('SELECT * FROM claim_outbox(5)');assert.ok(batch.rows.length>0);const id=batch.rows[0].id;const token=batch.rows[0].claim_token;assert.equal(await rpc('finish_outbox',[id,token,null]),true);assert.equal(await rpc('finish_outbox',[id,token,null]),false);});
+  await asUser(ids.customer);
+  const newAddress = await rpc('save_address',[JSON.stringify({area_id:ids.area,full_address:'New default address',is_default:true}),'aaaaaaaa-1111-4111-8111-111111111111']);
+  const anotherAddress = await rpc('save_address',[JSON.stringify({area_id:ids.area,full_address:'Second default address',is_default:true}),'aaaaaaaa-2222-4222-8222-222222222222']);
+  await check('default address is unique after sequential saves',async()=>assert.equal((await db.query('SELECT id FROM addresses WHERE is_default')).rows.length,1));
+  await check('save address retry is idempotent',async()=>assert.equal((await rpc('save_address',[JSON.stringify({area_id:ids.area,full_address:'Second default address',is_default:true}),anotherAddress.id])).id,anotherAddress.id));
+  await check('direct address writes cannot bypass serialization',()=>denied(()=>db.query('UPDATE addresses SET is_default=true WHERE id=$1',[newAddress.id])));
+  await check('direct cart writes cannot bypass serialization',()=>denied(()=>db.query('INSERT INTO cart_items(user_id,product_id,quantity) VALUES($1,$2,1)',[ids.customer,ids.product])));
+  await check('history address cannot be removed',()=>denied(()=>rpc('delete_address',[ids.address])));
+  await asUser(ids.other);
+  await check('cannot edit another customer address',()=>denied(()=>rpc('save_address',[JSON.stringify({area_id:ids.area,full_address:'Foreign address attempt',is_default:true}),newAddress.id])));
+  await check('cannot delete another customer address',()=>denied(()=>rpc('delete_address',[newAddress.id])));
+  await asUser(ids.customer);
+  await check('can delete an unused own default',async()=>assert.equal(await rpc('delete_address',[anotherAddress.id]),true));
+  await asUser(null,'aal1','anon');
+  await check('anonymous cannot read disabled payment instructions',async()=>assert.equal((await db.query("SELECT * FROM payment_methods WHERE id='transfer'")).rows.length,0));
+  await check('anonymous can read enabled payment methods',async()=>assert.equal((await db.query("SELECT * FROM payment_methods WHERE id='cash'")).rows.length,1));
+  await asUser(ids.admin,'aal1');
+  await check('aal1 cannot adjust stock',()=>denied(()=>rpc('admin_adjust_stock',[ids.product,1,'delta','MFA missing'])));
+  await check('aal1 cannot transition order',()=>denied(()=>rpc('transition_order',[order.id,'confirmed',null,null])));
+  await asUser(ids.admin,'aal2');
+  await check('admin can read disabled methods',async()=>assert.equal((await db.query("SELECT * FROM payment_methods WHERE id='transfer'")).rows.length,1));
+  await asUser(ids.customer);
+  const oneItem=JSON.stringify([{product_id:ids.product,quantity:1}]);
+  const makeOrder=async(key,method='cash')=>rpc('place_order',[oneItem,ids.address,method,slot.date,slot.start,key,10.5,40,null]);
+  const referenceOrder=await makeOrder('bbbbbbbb-1111-4111-8111-111111111111','pagomovil');
+  const firstSubmission=await rpc('submit_payment_reference',[referenceOrder.id,'UNIQUE-REF-02']);
+  await check('same reference does not extend reservation again',async()=>assert.equal((await rpc('submit_payment_reference',[referenceOrder.id,'unique ref 02'])).reservation_expires_at,firstSubmission.reservation_expires_at));
+  await check('rapidly changing references are throttled',()=>denied(()=>rpc('submit_payment_reference',[referenceOrder.id,'UNIQUE-REF-03'])));
+  await asUser(null,'aal1','service_role');
+  await check('same reference creates only one durable event',async()=>assert.equal(Number((await db.query("SELECT count(*) total FROM outbox WHERE aggregate_id=$1 AND event_type='payment.submitted'",[referenceOrder.id])).rows[0].total),1));
+  await db.query("UPDATE orders SET reservation_expires_at=now()-interval '1 minute' WHERE id=$1",[referenceOrder.id]);
+  await check('reservation expiry releases once',async()=>{assert.equal(await rpc('expire_order_reservations',[100]),1);assert.equal(await rpc('expire_order_reservations',[100]),0);});
+  await asUser(ids.customer);
+  const cashOrder=await makeOrder('cccccccc-1111-4111-8111-111111111111');
+  await asUser(ids.admin,'aal2');
+  await rpc('transition_order',[cashOrder.id,'confirmed',ids.driver,null]);
+  await rpc('transition_order',[cashOrder.id,'preparing',null,null]);
+  await asUser(ids.other);
+  await check('unassigned user cannot dispatch',()=>denied(()=>rpc('transition_order',[cashOrder.id,'on_way',null,null])));
+  await asUser(ids.driver);
+  await rpc('transition_order',[cashOrder.id,'on_way',null,null]);
+  await check('cash delivery requires payment verification',()=>denied(()=>rpc('transition_order',[cashOrder.id,'delivered',null,null])));
+  await asUser(ids.admin,'aal2');
+  await rpc('review_order_payment',[cashOrder.id,'approve','Cash received and counted']);
+  await asUser(ids.driver);
+  await check('assigned driver can deliver paid order',async()=>assert.equal((await rpc('transition_order',[cashOrder.id,'delivered',null,null])).status,'delivered'));
+  await asUser(null,'aal1','service_role');
+  await db.exec("UPDATE settings SET value=jsonb_build_object('usd_to_ves',40,'updated_at',now()-interval '25 hours') WHERE key='exchange_rate'");
+  await asUser(ids.customer);
+  await check('stale exchange rate fails closed',()=>denied(()=>rpc('quote_order',[oneItem,ids.address])));
+  console.log(JSON.stringify({passed,migrations:migrations.length,engine:'PGlite PostgreSQL, synthetic Supabase auth roles; sequential tests, no remote services',result:'PASS'}));
+} finally { await db.close(); }

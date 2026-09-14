@@ -1,0 +1,3 @@
+'use client';
+import { useEffect } from 'react';
+export function LegacyCacheCleanup(){useEffect(()=>{if(!('serviceWorker' in navigator))return;void navigator.serviceWorker.getRegistrations().then(async registrations=>{for(const registration of registrations){const script=registration.active?.scriptURL;if(script&&new URL(script).origin===location.origin&&new URL(script).pathname==='/sw.js'){await registration.unregister();}}if('caches' in window){const legacy=['apis','others','next-data','cross-origin','static-data-assets'];const names=await caches.keys();await Promise.all(names.filter(n=>legacy.includes(n)||n.startsWith('workbox-precache')).map(n=>caches.delete(n)));}}).catch(()=>{});},[]);return null;}
