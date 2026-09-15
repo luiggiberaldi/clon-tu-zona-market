@@ -388,8 +388,6 @@
   .header-currency { display: block; }
 }
 
-.review-notice { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 18px; padding: 12px 20px; background: #fff6df; color: #65491c; font-size: 12px; line-height: 1.6; }
-.review-notice strong { white-space: nowrap; }
 .demo-toolbar { overflow-wrap: anywhere; }
 .demo-toolbar nav { gap: 4px 12px; }
 .demo-toolbar nav > a, .demo-toolbar nav > button { display: inline-flex; align-items: center; min-height: 36px; }
