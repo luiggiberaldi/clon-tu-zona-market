@@ -27,3 +27,37 @@ jobs:
       - run: npm run build
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
+  browser:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [desktop, touch]
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      QA_OUTPUT_DIR: outputs/browser-qa
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.22.2'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Install isolated browser test runtime
+        run: npm install --prefix "$RUNNER_TEMP/browser-runtime" --no-audit --no-fund --no-save playwright@1.63.0-alpha-2026-08-31
+      - name: Install Chromium for local browser checks
+        run: node "$RUNNER_TEMP/browser-runtime/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Verify local demo without external services
+        run: BROWSER_DRIVER_ENTRY="$RUNNER_TEMP/browser-runtime/node_modules/playwright/package.json" node scripts/qa/browser-flows.mjs --${{ matrix.suite }}-only
+      - name: Preserve browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-${{ matrix.suite }}
+          path: |
+            outputs/browser-qa/*.json
+            outputs/browser-qa/*.png
+            outputs/browser-qa/*.log
+          retention-days: 7
