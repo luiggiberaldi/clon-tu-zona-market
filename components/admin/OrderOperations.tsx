@@ -29,7 +29,19 @@ function OrderRow({
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
-  const options = (nextStates[order.status] || []).filter(
+  const [orderStatus, setOrderStatus] = useState(order.status);
+  const [paymentStatus, setPaymentStatus] = useState(order.payment_status);
+  const [assignedDriverId, setAssignedDriverId] = useState(order.driver_id);
+  const [prevOrder, setPrevOrder] = useState(order);
+
+  if (order !== prevOrder) {
+    setPrevOrder(order);
+    setOrderStatus(order.status);
+    setPaymentStatus(order.payment_status);
+    setAssignedDriverId(order.driver_id);
+  }
+
+  const options = (nextStates[orderStatus] || []).filter(
     (s) => !driverMode || ['on_way', 'delivered'].includes(s)
   );
   async function run(e: React.FormEvent<HTMLFormElement>, payment: boolean) {
@@ -41,16 +53,22 @@ function OrderRow({
       if (payment) {
         if (f.get('verified') !== 'on')
           throw new Error('Confirma la verificación del movimiento real.');
-        await adminRequest('/api/admin/ordenes/' + order.id + '/pago', 'POST', {
+        const res = await adminRequest<{ order?: Order }>('/api/admin/ordenes/' + order.id + '/pago', 'POST', {
           action: f.get('action'),
           note: f.get('note')
         });
+        if (res?.order?.payment_status) setPaymentStatus(res.order.payment_status);
+        else if (f.get('action') === 'approve') setPaymentStatus('paid');
       } else {
+        const nextStatus = f.get('status') as OrderStatus;
+        const nextDriver = f.get('driver_id') ? String(f.get('driver_id')) : undefined;
         await adminRequest('/api/ordenes/' + order.id, 'PATCH', {
-          status: f.get('status'),
-          driver_id: f.get('driver_id') || undefined,
+          status: nextStatus,
+          driver_id: nextDriver,
           cancellation_reason: String(f.get('reason') || '') || undefined
         });
+        if (nextStatus) setOrderStatus(nextStatus);
+        if (nextDriver !== undefined) setAssignedDriverId(nextDriver);
       }
       setMessage('Cambio guardado.');
       router.refresh();
@@ -77,7 +95,7 @@ function OrderRow({
             {formatMoney(order.total_usd, 'USD')} · {formatMoney(order.total_ves, 'VES')}
           </p>
           <p className="text-xs">
-            {ORDER_STATUS_LABELS[order.status]} · Pago: {order.payment_status} ·{' '}
+            {ORDER_STATUS_LABELS[orderStatus]} · Pago: {paymentStatus} ·{' '}
             {order.payment_method}
           </p>
         </div>
@@ -105,7 +123,7 @@ function OrderRow({
               Repartidor
               <SelectDropdown
                 name="driver_id"
-                defaultValue={order.driver_id || ''}
+                defaultValue={assignedDriverId || ''}
                 ariaLabel="Repartidor"
                 placeholder="Mantener asignación"
                 className="mt-1 block"
@@ -130,8 +148,8 @@ function OrderRow({
         </form>
       )}
       {!driverMode &&
-        order.status !== 'cancelled' &&
-        ['pending', 'paid'].includes(order.payment_status) && (
+        orderStatus !== 'cancelled' &&
+        ['pending', 'paid'].includes(paymentStatus) && (
           <details className="mt-4 border-t pt-3">
             <summary className="cursor-pointer text-sm font-semibold">
               Conciliar pago / registrar devolución
@@ -146,7 +164,7 @@ function OrderRow({
                   name="action"
                   ariaLabel="Acción"
                   className="ml-2"
-                  options={order.payment_status === 'paid'
+                  options={paymentStatus === 'paid'
                     ? [{ value: 'refund', label: 'Devolución ejecutada' }]
                     : order.payment_method !== 'cash'
                       ? [{ value: 'approve', label: 'Pago recibido y verificado' }, { value: 'reject', label: 'Referencia rechazada' }]
@@ -194,7 +212,7 @@ export function OrderOperations({
     <div className="space-y-4">
       {orders.length ? (
         orders.map((o) => (
-          <OrderRow key={o.id + o.updated_at} order={o} drivers={drivers} driverMode={driverMode} />
+          <OrderRow key={o.id} order={o} drivers={drivers} driverMode={driverMode} />
         ))
       ) : (
         <p className="rounded-xl border bg-white p-6 text-muted-foreground">

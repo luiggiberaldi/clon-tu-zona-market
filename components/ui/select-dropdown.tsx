@@ -49,7 +49,8 @@ export function SelectDropdown({ options, value, defaultValue, onChange, name, p
   // (inicial o porque la lista cambió), se usa defaultValue o la primera
   // opción — igual que hacía el <select> nativo que reemplaza.
   const fallback = defaultValue ?? options[0]?.value ?? '';
-  const current = override ?? (isControlled ? value! : internal && options.some(option => option.value === internal) ? internal : fallback);
+  const validOverride = override && options.some(option => option.value === override) ? override : null;
+  const current = validOverride ?? (isControlled ? value! : internal && options.some(option => option.value === internal) ? internal : fallback);
   const selected = options.find(option => option.value === current);
   const label = selected ? selected.label : placeholder ?? '';
 
