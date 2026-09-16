@@ -1,6 +1,11 @@
+const envStoreName = process.env.NEXT_PUBLIC_STORE_NAME?.trim();
+const resolvedStoreName = !envStoreName || envStoreName === 'Mercado Cercano' ? 'Todo Market' : envStoreName;
+const envShortName = process.env.NEXT_PUBLIC_STORE_SHORT_NAME?.trim();
+const resolvedShortName = !envShortName || envShortName === 'Cercano' ? 'TodoMarket' : envShortName;
+
 export const storeConfig = {
-  name: process.env.NEXT_PUBLIC_STORE_NAME?.trim() || 'Todo Market',
-  shortName: process.env.NEXT_PUBLIC_STORE_SHORT_NAME?.trim() || 'TodoMarket',
+  name: resolvedStoreName,
+  shortName: resolvedShortName,
   description: 'Tu supermercado en un solo lugar.',
   email: process.env.NEXT_PUBLIC_SUPPORT_EMAIL?.trim() || '',
   phone: process.env.NEXT_PUBLIC_SUPPORT_PHONE?.trim() || '',
