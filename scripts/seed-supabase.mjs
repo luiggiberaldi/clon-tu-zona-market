@@ -44,7 +44,17 @@ let uploadErrors = 0;
 for (const product of products) {
   const sourceId = product.metadata?.source?.product_id ?? 'sin-id';
   for (const image of product.metadata?.source?.images ?? []) {
+    if (image.local_path && image.local_path.startsWith('http')) {
+      uploaded.set(image.local_path, image.local_path);
+      continue;
+    }
     const localPath = path.join(publicDir, image.local_path.replace(/^\//, ''));
+    if (!fs.existsSync(localPath)) {
+      if (image.source_url && image.source_url.startsWith('http')) {
+        uploaded.set(image.local_path, image.source_url);
+        continue;
+      }
+    }
     const filename = path.basename(image.local_path);
     const bytes = fs.readFileSync(localPath);
     if (bytes.length > 5 * 1024 * 1024) { console.error('Imagen demasiado grande para el bucket:', image.local_path); uploadErrors++; continue; }
@@ -81,7 +91,9 @@ while (pending.length > 0 && guard++ <= pending.length + 5) {
 const seenSkus = new Set();
 let productCount = 0;
 for (const row of products) {
-  const images = (row.metadata?.source?.images ?? []).map(image => uploaded.get(image.local_path)).filter(Boolean);
+  const images = (row.images && row.images.length > 0 && row.images.every(img => img.startsWith('http')))
+    ? row.images
+    : (row.metadata?.source?.images ?? []).map(image => uploaded.get(image.local_path)).filter(Boolean);
   if (images.length === 0) throw new Error(`El producto ${row.slug} quedó sin imágenes; se detiene.`);
   const sku = row.sku && !seenSkus.has(row.sku) ? (seenSkus.add(row.sku), row.sku) : null;
   const { error } = await admin.from('products').upsert({

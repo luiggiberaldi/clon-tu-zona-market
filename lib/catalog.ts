@@ -4,6 +4,7 @@ import { hasSupabaseConfig, isDemoMode } from '@/lib/config';
 import { makeDemoServerClient } from '@/lib/demo/server-client';
 import { productPriceUsd } from '@/lib/demo/pricing';
 import { syncExchangeRateDeduped } from '@/lib/rates-sync';
+import { syncCatalogToSupabase } from '@/lib/catalog-sync';
 import type { ProductFilters, ProductWithCategory, Category, State, City, Area } from '@/types';
 import type { CheckoutConfig, PaymentMethodConfig } from '@/types/commerce';
 
@@ -49,6 +50,7 @@ export async function getCatalog(filters: ProductFilters = {}): Promise<{ data: 
       rows = [...rows].sort((a,b) => filters.sort === 'price_asc' ? productPriceUsd(a)-productPriceUsd(b) : filters.sort === 'price_desc' ? productPriceUsd(b)-productPriceUsd(a) : filters.sort === 'name_asc' ? a.name.localeCompare(b.name,'es') : b.created_at.localeCompare(a.created_at));
       return { data: rows.slice((page-1)*pageSize,page*pageSize), total: rows.length, page, pageSize, hasMore: page*pageSize<rows.length };
     }
+    void syncCatalogToSupabase().catch(() => undefined);
     let query = publicClient().from('products').select('*, category:categories(id,name,slug)', { count: 'exact' }).eq('is_active', true);
     if (filters.category) query = query.in('category_id', [...categoryIds]);
     if (filters.search) query = query.ilike('name', '%' + filters.search.slice(0, 100).replace(/[%_\\]/g, '') + '%');
