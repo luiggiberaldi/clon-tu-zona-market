@@ -24,19 +24,21 @@ export function CartDrawer() {
       <div className="min-h-0 flex-1 overflow-y-auto px-4">{items.length ? <div className="divide-y">{items.map(line => <CartItem key={line.product.id} line={line} />)}</div> : <EmptyCart compact />}</div>
       {items.length > 0 && (
         <div className="space-y-3 border-t p-4">
-          <div className="rounded-lg bg-secondary/50 p-2.5 text-xs">
+          <div className="rounded-lg border border-amber-200/80 bg-amber-50/70 p-2.5 text-xs dark:border-amber-900/50 dark:bg-amber-950/20">
             {subtotal >= 40 ? (
-              <div className="flex items-center gap-1.5 font-medium text-emerald-700 dark:text-emerald-400">
+              <div className="flex items-center gap-1.5 font-semibold text-emerald-800 dark:text-emerald-300">
                 <span>🎉</span>
                 <span>¡Calificas para <strong>Envío GRATIS</strong>!</span>
               </div>
             ) : (
               <div>
-                <div className="flex justify-between font-medium text-foreground">
-                  <span>Envío gratis desde $40</span>
-                  <span className="font-bold text-primary">Faltan ${(40 - subtotal).toFixed(2)}</span>
+                <div className="flex items-center justify-between font-medium text-foreground">
+                  <span className="text-stone-800 dark:text-stone-200">Envío gratis desde $40</span>
+                  <span className="inline-flex items-center rounded-md bg-amber-200/80 px-2 py-0.5 text-xs font-bold text-amber-950 dark:bg-amber-900/70 dark:text-amber-100">
+                    Faltan ${(40 - subtotal).toFixed(2)}
+                  </span>
                 </div>
-                <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+                <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-amber-200/60 dark:bg-slate-700">
                   <div
                     className="h-full bg-primary transition-all duration-300"
                     style={{ width: `${Math.min(100, Math.round((subtotal / 40) * 100))}%` }}
