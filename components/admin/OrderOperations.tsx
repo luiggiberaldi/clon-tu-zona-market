@@ -97,8 +97,8 @@ function OrderRow({
       {options.length > 0 && (
         <form onSubmit={(e) => void run(e, false)} className="mt-4 flex flex-wrap items-end gap-3">
           <label className="text-xs">
-            Siguiente estado
-            <SelectDropdown name="status" ariaLabel="Siguiente estado" className="mt-1 block" options={options.map((s) => ({ value: s, label: ORDER_STATUS_LABELS[s] }))} />
+            Cambiar estado
+            <SelectDropdown name="status" ariaLabel="Cambiar estado" className="mt-1 block" options={options.map((s) => ({ value: s, label: ORDER_STATUS_LABELS[s] }))} />
           </label>
           {!driverMode && (
             <label className="text-xs">
