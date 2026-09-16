@@ -23,10 +23,8 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function handleLogin(formData: FormData) {
     if (unavailable || loading) return;
-    const formData = new FormData(e.currentTarget);
     const values = {
       email: String(formData.get('email') ?? ''),
       password: String(formData.get('password') ?? '')
@@ -82,7 +80,15 @@ function LoginForm() {
       <CardContent>
         {unavailable && <p role="status" className="mb-4 text-sm text-destructive">{isDemoMode() ? 'Modo demostración: el acceso a cuentas está desactivado.' : 'El acceso a cuentas no está configurado. Contacta con la tienda.'}</p>}
         {searchParams.get('error') && <p role="alert" className="mb-4 text-sm text-destructive">El enlace es inválido o ha vencido. Solicita un nuevo enlace o inicia sesión.</p>}
-        <form onSubmit={onSubmit} className="space-y-4" noValidate>
+        <form
+          action={handleLogin}
+          onSubmit={(e) => {
+            e.preventDefault();
+            void handleLogin(new FormData(e.currentTarget));
+          }}
+          className="space-y-4"
+          noValidate
+        >
           <div className="space-y-1.5">
             <Label htmlFor="email">Email</Label>
             <Input id="email" name="email" type="email" autoComplete="email" required />

@@ -17,10 +17,9 @@ export default function RecuperarPage() {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function handleRecover(formData: FormData) {
     if (unavailable || loading) return;
-    const parsed = z.string().trim().email().safeParse(new FormData(e.currentTarget).get('email'));
+    const parsed = z.string().trim().email().safeParse(formData.get('email'));
     if (!parsed.success) {
       toast({ title: 'Escribe un correo válido', variant: 'error' });
       return;
@@ -52,7 +51,15 @@ export default function RecuperarPage() {
             {isDemoMode() ? <>Si la cuenta local existe, el enlace aparece en el <Link className="text-primary underline" href="/demo/buzon">buzón local de pruebas</Link>. No se ha enviado correo externo.</> : 'Si el email existe, te enviamos un enlace para reiniciar tu contraseña. Revisa tu bandeja (y spam).'}
           </p>
         ) : (
-          <form onSubmit={onSubmit} className="space-y-4" noValidate>
+          <form
+            action={handleRecover}
+            onSubmit={(e) => {
+              e.preventDefault();
+              void handleRecover(new FormData(e.currentTarget));
+            }}
+            className="space-y-4"
+            noValidate
+          >
             <div className="space-y-1.5">
               <Label htmlFor="email">Email</Label>
               <Input id="email" name="email" type="email" autoComplete="email" required />

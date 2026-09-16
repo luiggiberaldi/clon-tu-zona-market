@@ -19,10 +19,8 @@ export default function RegistroPage() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function handleRegister(formData: FormData) {
     if (unavailable || loading) return;
-    const formData = new FormData(e.currentTarget);
     const values = {
       full_name: String(formData.get('full_name') ?? ''),
       email: String(formData.get('email') ?? ''),
@@ -75,7 +73,15 @@ export default function RegistroPage() {
       </CardHeader>
       <CardContent>
         {unavailable && <p role="status" className="mb-4 text-sm text-destructive">{isDemoMode() ? 'Modo demostración: el registro está desactivado.' : 'El registro no está configurado. Contacta con la tienda.'}</p>}
-        <form onSubmit={onSubmit} className="space-y-4" noValidate>
+        <form
+          action={handleRegister}
+          onSubmit={(e) => {
+            e.preventDefault();
+            void handleRegister(new FormData(e.currentTarget));
+          }}
+          className="space-y-4"
+          noValidate
+        >
           <div className="space-y-1.5">
             <Label htmlFor="full_name">Nombre completo</Label>
             <Input id="full_name" name="full_name" autoComplete="name" required />
