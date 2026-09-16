@@ -24,6 +24,8 @@ export function PATCH(request:Request) { return endpoint(async()=>{
     const sync=await syncExchangeRateFromBcv(true);
     if(!sync.updated||!sync.rate) throw new HttpError(503, sync.reason || 'No se pudo obtener la tasa BCV en este momento; conserva la tasa actual.');
     result=await admin.from('settings').upsert({key:'exchange_rate',value:{usd_to_ves:sync.rate,updated_at:new Date().toISOString(),source:sync.source,manual:false},updated_at:new Date().toISOString()},{onConflict:'key'});
+  } else if(payload.kind==='payment_method'){
+    result=await admin.from('payment_methods').upsert(payload.value);
   } else {
     result=await admin.from('settings').upsert({key:payload.kind,value:payload.kind==='exchange_rate'?{usd_to_ves:payload.usd_to_ves,updated_at:new Date().toISOString(),manual:true}:payload.value,updated_at:new Date().toISOString()},{onConflict:'key'});
   }
