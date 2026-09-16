@@ -116,7 +116,7 @@ export default function RegistroPage() {
       </CardContent>
       <CardFooter className="justify-center text-sm">
         ¿Ya tienes cuenta?{' '}
-        <Link href="/login" className="ml-1 text-primary hover:underline">
+        <Link href="/login" className="ml-1 font-semibold text-amber-900 underline hover:text-amber-950 dark:text-amber-300">
           Inicia sesión
         </Link>
       </CardFooter>

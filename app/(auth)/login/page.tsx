@@ -107,14 +107,14 @@ function LoginForm() {
         {googleEnabled && <Button variant="outline" type="button" className="mt-4 w-full" disabled={loading || unavailable} onClick={onGoogle}>Continuar con Google</Button>}
 
         <p className="mt-4 text-center text-sm">
-          <Link href="/recuperar" className="text-primary hover:underline">
+          <Link href="/recuperar" className="font-semibold text-amber-900 underline hover:text-amber-950 dark:text-amber-300">
             ¿Olvidaste tu contraseña?
           </Link>
         </p>
       </CardContent>
       <CardFooter className="justify-center text-sm">
         ¿No tienes cuenta?{' '}
-        <Link href="/registro" className="ml-1 text-primary hover:underline">
+        <Link href="/registro" className="ml-1 font-semibold text-amber-900 underline hover:text-amber-950 dark:text-amber-300">
           Regístrate
         </Link>
       </CardFooter>

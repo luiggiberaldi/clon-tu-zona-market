@@ -48,7 +48,7 @@ export default function RecuperarPage() {
         {unavailable && <p role="status" className="mb-4 text-sm text-destructive">{isDemoMode() ? 'Modo demostración: no se envían correos de recuperación.' : 'La recuperación no está configurada. Contacta con la tienda.'}</p>}
         {sent ? (
           <p className="text-sm text-muted-foreground">
-            {isDemoMode() ? <>Si la cuenta local existe, el enlace aparece en el <Link className="text-primary underline" href="/demo/buzon">buzón local de pruebas</Link>. No se ha enviado correo externo.</> : 'Si el email existe, te enviamos un enlace para reiniciar tu contraseña. Revisa tu bandeja (y spam).'}
+            {isDemoMode() ? <>Si la cuenta local existe, el enlace aparece en el <Link className="font-semibold text-amber-900 underline hover:text-amber-950 dark:text-amber-300" href="/demo/buzon">buzón local de pruebas</Link>. No se ha enviado correo externo.</> : 'Si el email existe, te enviamos un enlace para reiniciar tu contraseña. Revisa tu bandeja (y spam).'}
           </p>
         ) : (
           <form
@@ -71,7 +71,7 @@ export default function RecuperarPage() {
         )}
       </CardContent>
       <CardFooter className="justify-center text-sm">
-        <Link href="/login" className="text-primary hover:underline">
+        <Link href="/login" className="font-semibold text-amber-900 underline hover:text-amber-950 dark:text-amber-300">
           Volver a iniciar sesión
         </Link>
       </CardFooter>
