@@ -7,8 +7,8 @@ import { z } from 'zod';
 export class HttpError extends Error {
   constructor(public status: number, message: string, public code?: string) { super(message); }
 }
-export function json(data: unknown, status = 200) {
-  return Response.json(data, { status, headers: { 'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff' } });
+export function json(data: unknown, status = 200, headers: Record<string, string> = {}) {
+  return Response.json(data, { status, headers: { 'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff', ...headers } });
 }
 export async function session(roles?: string[]) {
   if (!isDemoMode() && !hasSupabaseConfig()) throw new HttpError(503, 'Configura Supabase para activar esta función.');

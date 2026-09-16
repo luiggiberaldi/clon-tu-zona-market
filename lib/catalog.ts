@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { hasSupabaseConfig, isDemoMode } from '@/lib/config';
 import { makeDemoServerClient } from '@/lib/demo/server-client';
 import { productPriceUsd } from '@/lib/demo/pricing';
+import { syncExchangeRateDeduped } from '@/lib/rates-sync';
 import type { ProductFilters, ProductWithCategory, Category, State, City, Area } from '@/types';
 import type { CheckoutConfig, PaymentMethodConfig } from '@/types/commerce';
 
@@ -89,6 +90,9 @@ export async function getCheckoutConfig(): Promise<CheckoutConfig> {
   };
   if (!hasSupabaseConfig() && !isDemoMode()) return defaults;
   const client = publicClient();
+  // Autocuración: si la tasa publicada expiró, intenta sincronizarla con la
+  // tasa BCV en vivo antes de leerla (antiduplicado; solo service-role).
+  void syncExchangeRateDeduped().catch(() => undefined);
   const [settings, methods] = await Promise.all([
     client.from('settings').select('key,value').in('key', ['exchange_rate', 'delivery_hours']),
     client.from('payment_methods').select('*').eq('enabled', true)

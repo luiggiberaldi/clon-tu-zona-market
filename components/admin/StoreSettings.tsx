@@ -48,14 +48,25 @@ export function StoreSettings() {
           e.preventDefault();
           void save({
             kind: 'exchange_rate',
+            mode: 'manual',
             usd_to_ves: Number(new FormData(e.currentTarget).get('rate'))
           });
         }}
       >
         <h2 className="mb-2 text-lg font-semibold">Tasa USD / VES</h2>
         <p className="mb-3 text-sm text-muted-foreground">
-          {isDemoMode() ? 'La tasa inicial es una captura verificada de la fuente, no una cotización en vivo. Publicar otra tasa modifica únicamente esta simulación local.' : 'Se bloquea la compra si la tasa no se actualiza en 24 horas. Introduce la tasa aprobada por el comercio, no un dato de demostración.'}
+          {isDemoMode() ? 'La tasa inicial es una captura verificada de la fuente, no una cotización en vivo. Publicar otra tasa modifica únicamente esta simulación local.' : 'Por defecto la tasa se actualiza sola con el valor oficial del BCV (varias veces al día). Si publicas una tasa manual, esa manda y no se sobrescribe; puedes volver al automático cuando quieras.'}
         </p>
+        {rate?.manual === false && !isDemoMode() && (
+          <p className="mb-3 rounded-lg bg-emerald-50 p-2 text-xs font-medium text-emerald-800">
+            Modo automático activo · {String(rate?.source || 'BCV')} · última sincronización: {String(rate?.updated_at || '—')}
+          </p>
+        )}
+        {rate?.manual === true && (
+          <p className="mb-3 rounded-lg bg-amber-50 p-2 text-xs font-medium text-amber-800">
+            Tasa manual (el sistema no la sobrescribe) · publicada: {String(rate?.updated_at || '—')}
+          </p>
+        )}
         <label className="text-sm">
           Bolívares por USD
           <input
@@ -69,7 +80,13 @@ export function StoreSettings() {
             className="mx-3 rounded border p-2"
           />
         </label>
-        <Button disabled={busy}>Publicar tasa</Button>
+        <Button disabled={busy}>Publicar tasa manual</Button>
+        {!isDemoMode() && (
+          <Button type="button" variant="outline" className="ml-2" disabled={busy}
+            onClick={() => void save({ kind: 'exchange_rate', mode: 'auto' })}>
+            Usar tasa BCV automática
+          </Button>
+        )}
         <p className="mt-2 text-xs">
           Última publicación: {String(rate?.updated_at || 'Sin configurar')}
         </p>
