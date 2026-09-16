@@ -39,7 +39,7 @@ function AuthenticatedCheckout({ userId }: { userId: string }) {
   const [slot, setSlot] = useState<DeliverySlot>();
   const [payment, setPayment] = useState<CorePaymentMethod>();
   const [instructions, setInstructions] = useState('');
-  const [simulatePayment, setSimulatePayment] = useState(true);
+  const [simulatePayment, setSimulatePayment] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string>();

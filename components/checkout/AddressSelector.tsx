@@ -95,16 +95,21 @@ export function AddressSelector({ userId, selectedId, onSelect }: { userId: stri
       return (
         <div
           key={address.id}
-          onClick={() => { if (covered && !saving) onSelect(address.id); }}
           className={cn(
-            'group relative flex flex-col justify-between rounded-xl border p-4 transition-all cursor-pointer text-left',
+            'group relative flex flex-col justify-between rounded-xl border p-4 transition-all text-left',
             isSelected
               ? 'border-amber-400 bg-amber-50/50 shadow-xs ring-1 ring-amber-400 dark:bg-amber-950/20'
               : 'border-border bg-card hover:border-amber-400/50 hover:bg-secondary/40',
-            (!covered || saving) && 'cursor-not-allowed opacity-60'
+            (!covered || saving) && 'opacity-60'
           )}
         >
-          <div>
+          <button
+            type="button"
+            aria-pressed={isSelected}
+            disabled={!covered || saving}
+            onClick={() => onSelect(address.id)}
+            className="w-full text-left focus:outline-hidden disabled:cursor-not-allowed"
+          >
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2.5">
                 <span className={cn(
@@ -139,14 +144,14 @@ export function AddressSelector({ userId, selectedId, onSelect }: { userId: stri
                 </span>
               </div>
             )}
-          </div>
+          </button>
 
           <div className="mt-3 flex items-center justify-end gap-3 border-t border-border/40 pt-2 pl-7">
             <button
               type="button"
               className="text-xs font-medium text-amber-900 underline hover:text-amber-950 dark:text-amber-300"
               disabled={saving}
-              onClick={(e) => { e.stopPropagation(); edit(address); }}
+              onClick={() => edit(address)}
             >
               Editar
             </button>
@@ -154,7 +159,7 @@ export function AddressSelector({ userId, selectedId, onSelect }: { userId: stri
               type="button"
               className="text-xs text-destructive underline hover:opacity-80"
               disabled={saving}
-              onClick={(e) => { e.stopPropagation(); void remove(address); }}
+              onClick={() => void remove(address)}
             >
               Eliminar
             </button>
