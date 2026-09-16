@@ -199,7 +199,7 @@
 .filter-price { display: flex; align-items: center; gap: 8px; color: #79866e; }
 .filter-price input { border: 1px solid #e1e7d9; border-radius: 6px; background: #fff; padding: 8px; width: 78px; font-size: 11px; }
 .filter-sort { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 11px; color: #7b8672; }
-.filter-sort select { border: 1px solid #e1e7d9; border-radius: 6px; background: #fff; color: #3e5135; padding: 8px 10px; }
+.filter-sort > :last-child { flex: 0 1 auto; }
 .filter-apply { border-radius: 20px; background: #edf3e6; padding: 9px 16px; font-size: 11px; font-weight: 600; color: #387047; }
 .catalog-empty { min-height: 290px; display: flex; flex-direction: column; gap: 15px; align-items: center; justify-content: center; padding: 45px 20px; border-radius: 12px; background: #f7f8f2; text-align: center; color: #7c8d70; margin-block: 25px; }
 .catalog-empty h2 { color: #495d3d; font-size: 20px; font-weight: 650; }

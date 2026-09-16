@@ -2,6 +2,7 @@
 import { useState, useSyncExternalStore } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { SelectDropdown } from '@/components/ui/select-dropdown';
 import { adminRequest } from '@/lib/admin-client';
 import type { Category } from '@/types';
 const subscribeToHydration = () => () => {};
@@ -56,14 +57,7 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
         </label>
         <label>
           Padre
-          <select name="parent_id" className="ml-2 rounded border p-2">
-            <option value="">Categoría principal</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+          <SelectDropdown name="parent_id" ariaLabel="Categoría padre" placeholder="Categoría principal" className="ml-2" options={categories.map((c) => ({ value: c.id, label: c.name }))} />
         </label>
         <label>
           Orden

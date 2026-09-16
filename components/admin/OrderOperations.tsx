@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { SelectDropdown } from '@/components/ui/select-dropdown';
 import { adminRequest } from '@/lib/admin-client';
 import { formatMoney } from '@/lib/utils/formatters';
 import { ORDER_STATUS_LABELS } from '@/lib/utils/constants';
@@ -97,29 +98,19 @@ function OrderRow({
         <form onSubmit={(e) => void run(e, false)} className="mt-4 flex flex-wrap items-end gap-3">
           <label className="text-xs">
             Siguiente estado
-            <select name="status" required className="mt-1 block rounded border p-2">
-              {options.map((s) => (
-                <option key={s} value={s}>
-                  {ORDER_STATUS_LABELS[s]}
-                </option>
-              ))}
-            </select>
+            <SelectDropdown name="status" ariaLabel="Siguiente estado" className="mt-1 block" options={options.map((s) => ({ value: s, label: ORDER_STATUS_LABELS[s] }))} />
           </label>
           {!driverMode && (
             <label className="text-xs">
               Repartidor
-              <select
+              <SelectDropdown
                 name="driver_id"
                 defaultValue={order.driver_id || ''}
-                className="mt-1 block rounded border p-2"
-              >
-                <option value="">Mantener asignación</option>
-                {drivers.map((d) => (
-                  <option key={d.id} value={d.id}>
-                    {d.full_name || d.email}
-                  </option>
-                ))}
-              </select>
+                ariaLabel="Repartidor"
+                placeholder="Mantener asignación"
+                className="mt-1 block"
+                options={drivers.map((d) => ({ value: d.id, label: d.full_name || d.email }))}
+              />
             </label>
           )}
           {!driverMode && (
@@ -129,7 +120,7 @@ function OrderRow({
                 name="reason"
                 minLength={5}
                 maxLength={1000}
-                className="mt-1 block rounded border p-2"
+                className="mt-1 block rounded-lg border p-2"
               />
             </label>
           )}
@@ -151,18 +142,16 @@ function OrderRow({
               </p>
               <label className="block text-xs">
                 Acción
-                <select name="action" className="ml-2 rounded border p-2">
-                  {order.payment_status === 'paid' ? (
-                    <option value="refund">Devolución ejecutada</option>
-                  ) : (
-                    <>
-                      <option value="approve">Pago recibido y verificado</option>
-                      {order.payment_method !== 'cash' && (
-                        <option value="reject">Referencia rechazada</option>
-                      )}
-                    </>
-                  )}
-                </select>
+                <SelectDropdown
+                  name="action"
+                  ariaLabel="Acción"
+                  className="ml-2"
+                  options={order.payment_status === 'paid'
+                    ? [{ value: 'refund', label: 'Devolución ejecutada' }]
+                    : order.payment_method !== 'cash'
+                      ? [{ value: 'approve', label: 'Pago recibido y verificado' }, { value: 'reject', label: 'Referencia rechazada' }]
+                      : [{ value: 'approve', label: 'Pago recibido y verificado' }]}
+                />
               </label>
               <label className="block text-xs">
                 Nota de verificación

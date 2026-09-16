@@ -7,6 +7,7 @@ export async function runFinalRechecks({browser,base,out,dataset,scenario,observ
   await observe(context);
   const page=await context.newPage();page.setDefaultTimeout(180000);page.setDefaultNavigationTimeout(180000);
   const assert=(value,message)=>{if(!value)throw new Error(message);};
+  const pick=async(page,root,name,optionLabel)=>{await root.getByRole('combobox',{name,exact:true}).click({timeout:180000});await page.getByRole('option',{name:optionLabel,exact:true}).click({timeout:180000});};
   const headers={Origin:base,'Sec-Fetch-Site':'same-origin','Content-Type':'application/json'};
   async function post(url,data) {
     const response=await context.request.post(base+url,{data,headers,timeout:360000});
@@ -70,8 +71,8 @@ export async function runFinalRechecks({browser,base,out,dataset,scenario,observ
       await row.locator('input[name="verified"]').check();await row.getByRole('button',{name:'Registrar revisión',exact:true}).click();
       await row.getByText(/Pago: paid/).waitFor();
       for(const status of ['confirmed','preparing','on_way']) {
-        row=page.locator('article').filter({hasText:order.order_number});await row.locator('select[name="status"]').selectOption(status);
-        if(status==='on_way')await row.locator('select[name="driver_id"]').selectOption({label:'Repartidor de prueba'});
+        row=page.locator('article').filter({hasText:order.order_number});await pick(page,row,'Cambiar estado',{confirmed:'Confirmado',preparing:'Preparando',on_way:'En camino'}[status]);
+        if(status==='on_way')await pick(page,row,'Repartidor','Repartidor de prueba');
         await row.getByRole('button',{name:'Actualizar',exact:true}).click();
         await page.waitForFunction(({number,status})=>[...document.querySelectorAll('article')].some(el=>el.innerText.includes(number)&&el.innerText.includes({confirmed:'Confirmado',preparing:'Preparando',on_way:'En camino'}[status])),{number:order.order_number,status});
       }
@@ -81,7 +82,7 @@ export async function runFinalRechecks({browser,base,out,dataset,scenario,observ
       await row.getByRole('link',{name:order.order_number,exact:true}).click({timeout:180000});
       await page.getByRole('heading',{name:order.order_number,exact:true}).waitFor();
       await visit('/repartidor');row=page.locator('article').filter({hasText:order.order_number});
-      await row.locator('select[name="status"]').selectOption('delivered');
+      await pick(page,row,'Cambiar estado','Entregado');
       const responsePromise=page.waitForResponse(r=>r.url()===base+'/api/ordenes/'+order.id&&r.request().method()==='PATCH');
       await row.getByRole('button',{name:'Actualizar',exact:true}).click();assert((await responsePromise).ok(),'No se guardó la entrega');
       await row.waitFor({state:'detached'});

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { adminRequest } from '@/lib/admin-client';
 import { Button } from '@/components/ui/button';
+import { SelectDropdown } from '@/components/ui/select-dropdown';
 import { isDemoMode } from '@/lib/config';
 import type { PaymentMethodConfig, DeliveryHours } from '@/types/commerce';
 type Config = {
@@ -77,7 +78,7 @@ export function StoreSettings() {
             max="100000000"
             defaultValue={Number(rate?.usd_to_ves) || ''}
             required
-            className="mx-3 rounded border p-2"
+            className="mx-3 rounded-lg border p-2"
           />
         </label>
         <Button disabled={busy}>Publicar tasa manual</Button>
@@ -124,7 +125,7 @@ export function StoreSettings() {
                 name={key}
                 required
                 defaultValue={String(hours?.[key as keyof DeliveryHours] || '09:00')}
-                className="mt-1 block w-full rounded border p-2"
+                className="mt-1 block w-full rounded-lg border p-2"
               />
             </label>
           ))}
@@ -142,7 +143,7 @@ export function StoreSettings() {
                 max={Number(max)}
                 required
                 defaultValue={Number(hours?.[key as keyof DeliveryHours] ?? fallback)}
-                className="mt-1 block w-full rounded border p-2"
+                className="mt-1 block w-full rounded-lg border p-2"
               />
             </label>
           ))}
@@ -179,19 +180,18 @@ export function StoreSettings() {
                 required
                 minLength={2}
                 defaultValue={method.label}
-                className="mt-1 block w-full rounded border p-2"
+                className="mt-1 block w-full rounded-lg border p-2"
               />
             </label>
             <label className="text-sm">
               Moneda
-              <select
+              <SelectDropdown
                 name="currency"
                 defaultValue={method.currency}
-                className="mt-1 block w-full rounded border p-2"
-              >
-                <option>USD</option>
-                <option>VES</option>
-              </select>
+                ariaLabel="Moneda del método"
+                className="mt-1 block w-full"
+                options={[{ value: 'USD', label: 'USD' }, { value: 'VES', label: 'VES' }]}
+              />
             </label>
           </div>
           <label className="mt-3 block text-sm">
@@ -201,7 +201,7 @@ export function StoreSettings() {
               maxLength={2000}
               defaultValue={method.instructions}
               rows={3}
-              className="mt-1 block w-full rounded border p-2"
+              className="mt-1 block w-full rounded-lg border p-2"
             />
           </label>
           <label className="my-3 flex gap-2 text-sm">

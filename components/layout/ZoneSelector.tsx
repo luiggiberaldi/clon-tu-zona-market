@@ -5,6 +5,7 @@ import { MapPin, ChevronDown, LoaderCircle } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { SelectDropdown } from '@/components/ui/select-dropdown';
 import { useZoneStore } from '@/store/zoneStore';
 import type { State, City, Area } from '@/types';
 
@@ -44,9 +45,9 @@ export function ZoneSelector({ variant = 'default' }: { variant?: 'default' | 'h
       <DialogContent className="max-h-[90dvh] max-w-md overflow-y-auto rounded-xl">
         <DialogTitle>¿Dónde recibes tu compra?</DialogTitle><DialogDescription>Elige tu sector para consultar la cobertura y el costo de entrega. El catálogo corresponde a un solo almacén.</DialogDescription>
         {isPending ? <p className="flex items-center gap-2 py-5 text-sm" role="status"><LoaderCircle className="animate-spin" size={18} /> Consultando zonas…</p> : isError ? <div role="alert" className="space-y-3 rounded-lg bg-red-50 p-4 text-sm"><p>No pudimos consultar las zonas de entrega.</p><Button variant="outline" onClick={() => refetch()}>Reintentar</Button></div> : !states.length ? <p className="rounded-lg bg-secondary p-4 text-sm">Aún no hay zonas de entrega publicadas.</p> : <div className="space-y-4">
-          <label className="block text-sm font-medium">Estado<select aria-label="Estado" className="mt-1.5 w-full rounded-lg border bg-white px-3 py-3" value={stateId} onChange={(e) => { setStateId(e.target.value); setCityId(''); setAreaId(''); }}><option value="">Selecciona un estado</option>{states.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}</select></label>
-          <label className="block text-sm font-medium">Ciudad<select aria-label="Ciudad" className="mt-1.5 w-full rounded-lg border bg-white px-3 py-3 disabled:opacity-50" disabled={!stateId} value={cityId} onChange={(e) => { setCityId(e.target.value); setAreaId(''); }}><option value="">Selecciona una ciudad</option>{cities.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
-          <label className="block text-sm font-medium">Urbanización o sector<select aria-label="Urbanización o sector" className="mt-1.5 w-full rounded-lg border bg-white px-3 py-3 disabled:opacity-50" disabled={!cityId} value={areaId} onChange={(e) => setAreaId(e.target.value)}><option value="">Selecciona tu sector</option>{areas.map((a) => <option key={a.id} value={a.id}>{a.name}</option>)}</select></label>
+          <label className="block text-sm font-medium">Estado<SelectDropdown ariaLabel="Estado" className="mt-1.5" placeholder="Selecciona un estado" options={states.map((s) => ({ value: s.id, label: s.name }))} value={stateId} onChange={(v) => { setStateId(v); setCityId(''); setAreaId(''); }} /></label>
+          <label className="block text-sm font-medium">Ciudad<SelectDropdown ariaLabel="Ciudad" className="mt-1.5" placeholder="Selecciona una ciudad" disabled={!stateId} options={cities.map((c) => ({ value: c.id, label: c.name }))} value={cityId} onChange={(v) => { setCityId(v); setAreaId(''); }} /></label>
+          <label className="block text-sm font-medium">Urbanización o sector<SelectDropdown ariaLabel="Urbanización o sector" className="mt-1.5" placeholder="Selecciona tu sector" disabled={!cityId} options={areas.map((a) => ({ value: a.id, label: a.name }))} value={areaId} onChange={setAreaId} /></label>
           {cityId && !areas.length && <p className="text-sm text-muted-foreground">Esta ciudad no tiene sectores disponibles.</p>}
           {city && <div className="rounded-lg bg-[#edf5ee] p-3 text-sm"><p>Entrega: <strong>${city.delivery_fee_usd.toFixed(2)} USD</strong></p><p className="mt-1">Pedido mínimo: ${city.min_order_usd.toFixed(2)} USD</p></div>}
           <Button onClick={confirm} disabled={!selectedArea} className="w-full">Confirmar mi zona</Button>

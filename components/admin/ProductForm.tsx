@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
+import { SelectDropdown } from '@/components/ui/select-dropdown';
 import { adminRequest } from '@/lib/admin-client';
 import { slugify } from '@/lib/utils/formatters';
 import type { Product, Category } from '@/types';
@@ -126,14 +127,7 @@ export function ProductForm({ initial }: { initial?: Product }) {
         </label>
         <label className="block">
           Categoría
-          <select name="category_id" defaultValue={initial?.category_id || ''} className={cls}>
-            <option value="">Sin categoría</option>
-            {cats.data?.data.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+          <SelectDropdown name="category_id" defaultValue={initial?.category_id || ''} ariaLabel="Categoría" placeholder="Sin categoría" className={cls} options={[{ value: '', label: 'Sin categoría' }, ...(cats.data?.data ?? []).map((c) => ({ value: c.id, label: c.name }))]} />
         </label>
         <div className="grid gap-3 sm:grid-cols-3">
           <label>
@@ -229,10 +223,7 @@ export function ProductForm({ initial }: { initial?: Product }) {
           <div className="flex flex-wrap gap-3">
             <label>
               Operación
-              <select name="mode" className={cls}>
-                <option value="delta">Sumar / restar</option>
-                <option value="set">Fijar disponible</option>
-              </select>
+              <SelectDropdown name="mode" defaultValue="delta" ariaLabel="Operación" className={cls} options={[{ value: 'delta', label: 'Sumar / restar' }, { value: 'set', label: 'Fijar disponible' }]} />
             </label>
             <label>
               Cantidad

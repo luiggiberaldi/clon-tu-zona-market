@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { adminRequest } from '@/lib/admin-client';
 import { Button } from '@/components/ui/button';
+import { SelectDropdown } from '@/components/ui/select-dropdown';
 import type { State, City, Area } from '@/types';
 type Zones = { states: State[]; cities: City[]; areas: Area[] };
 export function CoverageEditor() {
@@ -28,7 +29,7 @@ export function CoverageEditor() {
   if (query.isPending) return <p>Cargando cobertura…</p>;
   if (query.error) return <p role="alert">{query.error.message}</p>;
   const zones = query.data!;
-  const input = 'mt-1 block w-full rounded border p-2';
+  const input = 'mt-1 block w-full rounded-lg border p-2';
   return (
     <div className="space-y-5">
       {message && (
@@ -71,14 +72,7 @@ export function CoverageEditor() {
           <h2 className="mb-3 font-bold">Crear ciudad</h2>
           <label>
             Estado
-            <select name="state" required className={input}>
-              <option value="">Selecciona</option>
-              {zones.states.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.name}
-                </option>
-              ))}
-            </select>
+            <SelectDropdown name="state" ariaLabel="Estado" placeholder="Selecciona" className={input} options={zones.states.map((s) => ({ value: s.id, label: s.name }))} />
           </label>
           <label>
             Nombre
@@ -126,14 +120,7 @@ export function CoverageEditor() {
           <h2 className="mb-3 font-bold">Crear sector</h2>
           <label>
             Ciudad
-            <select name="city" required className={input}>
-              <option value="">Selecciona</option>
-              {zones.cities.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
+            <SelectDropdown name="city" ariaLabel="Ciudad" placeholder="Selecciona" className={input} options={zones.cities.map((c) => ({ value: c.id, label: c.name }))} />
           </label>
           <label>
             Sector

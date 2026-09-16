@@ -6,6 +6,7 @@ import { House, LayoutGrid, UserRound, Menu, ChevronRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { ZoneSelector } from '@/components/layout/ZoneSelector';
+import { SelectDropdown } from '@/components/ui/select-dropdown';
 import { useUserStore } from '@/store/userStore';
 import { storeConfig } from '@/lib/config';
 import type { Category } from '@/types';
@@ -28,7 +29,7 @@ export function MobileNav({ categories = [], triggerLabel = 'Más opciones', nav
         <DialogContent className="mobile-menu-dialog max-h-[90dvh] overflow-y-auto rounded-t-2xl">
           <DialogTitle>{storeConfig.name}</DialogTitle><DialogDescription>Tu supermercado en un solo lugar.</DialogDescription>
           <div className="rounded-xl bg-[#edf5ee] p-3"><ZoneSelector /></div>
-          <label className="flex min-w-0 flex-wrap items-center justify-between gap-3 text-sm font-medium">Ver precios en<select className="min-w-0 max-w-full rounded-lg border bg-white px-3 py-2" aria-label="Moneda" value={hydrated ? currency : 'USD'} onChange={(e) => setCurrency(e.target.value as 'USD' | 'VES')}><option value="USD">Dólares · USD</option><option value="VES">Bolívares · VES</option></select></label>
+          <label className="flex min-w-0 flex-wrap items-center justify-between gap-3 text-sm font-medium">Ver precios en<SelectDropdown className="min-w-0 max-w-full" ariaLabel="Moneda" options={[{ value: 'USD', label: 'Dólares · USD' }, { value: 'VES', label: 'Bolívares · VES' }]} value={hydrated ? currency : 'USD'} onChange={(v) => setCurrency(v as 'USD' | 'VES')} /></label>
           <div className="grid gap-1">{nav.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="flex items-center justify-between rounded-lg px-2 py-3 text-sm hover:bg-secondary">{item.label}<ChevronRight size={16} /></Link>)}</div>
           {categories.length > 0 && <div className="border-t pt-4"><p className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">Categorías</p>{categories.filter((c) => !c.parent_id).map((category) => <div key={category.id}><Link className="block py-2 text-sm font-medium" href={`/categorias/${category.slug}`} onClick={() => setOpen(false)}>{category.name}</Link>{categories.filter((c) => c.parent_id === category.id).map((child) => <Link key={child.id} className="block py-2 pl-4 text-sm text-muted-foreground" href={`/categorias/${child.slug}`} onClick={() => setOpen(false)}>{child.name}</Link>)}</div>)}</div>}
           {extra}

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/toast';
+import { SelectDropdown } from '@/components/ui/select-dropdown';
 import { formatMoney, formatDateTime } from '@/lib/utils/formatters';
 import { ORDER_STATUS_LABELS } from '@/lib/utils/constants';
 import type { Order, OrderStatus } from '@/types';
@@ -74,19 +75,14 @@ export function OrderTable({ orders }: { orders: Order[] }) {
                 </span>
               </td>
               <td className="px-3 py-2">
-                <select
+                <SelectDropdown
                   value={o.status}
                   disabled={busy === o.id}
-                  onChange={(e) => update(o.id, e.target.value as OrderStatus)}
-                  className="rounded-md border border-input bg-background px-2 py-1 text-xs"
-                  aria-label="Cambiar estado"
-                >
-                  {STATUSES.map((s) => (
-                    <option key={s} value={s}>
-                      {ORDER_STATUS_LABELS[s]}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(v) => update(o.id, v as OrderStatus)}
+                  className="min-w-[9rem]"
+                  ariaLabel="Cambiar estado"
+                  options={STATUSES.map((s) => ({ value: s, label: ORDER_STATUS_LABELS[s] }))}
+                />
               </td>
             </tr>
           ))}

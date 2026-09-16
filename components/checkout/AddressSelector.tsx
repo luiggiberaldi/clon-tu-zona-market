@@ -6,6 +6,7 @@ import { createBrowserSupabase } from '@/lib/supabase/client';
 import { zonesApi } from '@/lib/api/zones';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { SelectDropdown } from '@/components/ui/select-dropdown';
 import { addressSchema } from '@/lib/utils/validation';
 import { cn } from '@/lib/utils/cn';
 import type { Address } from '@/types';
@@ -86,8 +87,8 @@ export function AddressSelector({ userId, selectedId, onSelect }: { userId: stri
     {addresses.data?.length === 0 && <p className="text-sm text-muted-foreground">Agrega una dirección para consultar envío y disponibilidad.</p>}
     {draft ? <Card className="p-4"><form key={draft.id} onSubmit={event => void save(event)} className="space-y-3">
       <h3 className="font-semibold">{draft.existing ? 'Editar dirección' : 'Nueva dirección'}</h3>
-      <label className="block text-sm">Ciudad<select value={cityId} onChange={event => { setCityId(event.target.value); setAreaId(''); }} required className="mt-1 block w-full rounded border bg-background p-2"><option value="">Selecciona una ciudad</option>{cities.map(city => <option key={city.id} value={city.id}>{city.name}</option>)}</select></label>
-      <label className="block text-sm">Sector<select value={areaId} onChange={event => setAreaId(event.target.value)} disabled={!cityId} required className="mt-1 block w-full rounded border bg-background p-2"><option value="">Selecciona un sector</option>{areas.map(area => <option key={area.id} value={area.id}>{area.name}</option>)}</select></label>
+      <label className="block text-sm">Ciudad<SelectDropdown ariaLabel="Ciudad" placeholder="Selecciona una ciudad" className="mt-1" options={cities.map(city => ({ value: city.id, label: city.name }))} value={cityId} onChange={(v) => { setCityId(v); setAreaId(''); }} /></label>
+      <label className="block text-sm">Sector<SelectDropdown ariaLabel="Sector" placeholder="Selecciona un sector" disabled={!cityId} className="mt-1" options={areas.map(area => ({ value: area.id, label: area.name }))} value={areaId} onChange={setAreaId} /></label>
       <label className="block text-sm">Dirección completa<input name="full_address" required minLength={5} maxLength={500} autoComplete="street-address" defaultValue={draft.existing?.full_address || ''} className="mt-1 block w-full rounded border bg-background p-2" /></label>
       <div className="grid grid-cols-2 gap-2"><label className="text-sm">Edificio<input name="building" maxLength={255} defaultValue={draft.existing?.building || ''} className="mt-1 w-full rounded border p-2" /></label><label className="text-sm">Apartamento<input name="apartment" maxLength={50} defaultValue={draft.existing?.apartment || ''} className="mt-1 w-full rounded border p-2" /></label></div>
       <label className="block text-sm">Punto de referencia<input name="reference" maxLength={500} defaultValue={draft.existing?.reference || ''} className="mt-1 block w-full rounded border p-2" /></label>

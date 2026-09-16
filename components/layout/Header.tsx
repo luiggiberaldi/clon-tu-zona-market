@@ -10,6 +10,7 @@ import { MobileNav } from '@/components/layout/MobileNav';
 import { useCart } from '@/lib/hooks/useCart';
 import { useUserStore } from '@/store/userStore';
 import { storeConfig } from '@/lib/config';
+import { SelectDropdown } from '@/components/ui/select-dropdown';
 import type { Category } from '@/types';
 
 export function Header({ categories = [] }: { categories?: Category[] }) {
@@ -32,7 +33,7 @@ export function Header({ categories = [] }: { categories?: Category[] }) {
           <div className="store-header-search"><Suspense fallback={<div className="store-search h-11" />}><SearchBar /></Suspense></div>
           <div className="store-header-tools">
             <div className="header-zone"><ZoneSelector variant="header" /></div>
-            <label className="header-currency"><span>Moneda</span><select aria-label="Moneda de precios" value={hydrated ? currency : 'USD'} onChange={(e) => setCurrency(e.target.value as 'USD' | 'VES')}><option value="USD">USD $</option><option value="VES">VES Bs.</option></select></label>
+            <label className="header-currency"><span>Moneda</span><SelectDropdown tone="onDark" ariaLabel="Moneda de precios" options={[{ value: 'USD', label: 'USD $' }, { value: 'VES', label: 'VES Bs.' }]} value={hydrated ? currency : 'USD'} onChange={(v) => setCurrency(v as 'USD' | 'VES')} /></label>
             <Link href="/perfil" className="header-account"><UserRound size={23} /><span><small>Bienvenido</small><strong>Mi cuenta</strong></span></Link>
             <button onClick={cart.openDrawer} className="header-cart" aria-label={`Abrir carrito, ${cart.hydrated ? cart.count : 0} productos`}><ShoppingBasket size={27} /><span className="cart-count">{cart.hydrated ? cart.count : 0}</span></button>
           </div>
