@@ -30,6 +30,7 @@ type SelectDropdownProps = {
  */
 export function SelectDropdown({ options, value, defaultValue, onChange, name, placeholder, ariaLabel, disabled, className, tone = 'default' }: SelectDropdownProps) {
   const [internal, setInternal] = useState(defaultValue ?? '');
+  const [prevValue, setPrevValue] = useState(value);
   const [override, setOverride] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -39,9 +40,10 @@ export function SelectDropdown({ options, value, defaultValue, onChange, name, p
   const listId = useId();
   const isControlled = value !== undefined;
 
-  useEffect(() => {
+  if (value !== prevValue) {
+    setPrevValue(value);
     setOverride(null);
-  }, [value]);
+  }
 
   // Modo no controlado: si el valor interno no está entre las opciones
   // (inicial o porque la lista cambió), se usa defaultValue o la primera
