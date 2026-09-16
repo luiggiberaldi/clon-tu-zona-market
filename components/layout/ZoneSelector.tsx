@@ -49,7 +49,7 @@ export function ZoneSelector({ variant = 'default' }: { variant?: 'default' | 'h
           <label className="block text-sm font-medium">Ciudad<SelectDropdown ariaLabel="Ciudad" className="mt-1.5" placeholder="Selecciona una ciudad" disabled={!stateId} options={cities.map((c) => ({ value: c.id, label: c.name }))} value={cityId} onChange={(v) => { setCityId(v); setAreaId(''); }} /></label>
           <label className="block text-sm font-medium">Urbanización o sector<SelectDropdown ariaLabel="Urbanización o sector" className="mt-1.5" placeholder="Selecciona tu sector" disabled={!cityId} options={areas.map((a) => ({ value: a.id, label: a.name }))} value={areaId} onChange={setAreaId} /></label>
           {cityId && !areas.length && <p className="text-sm text-muted-foreground">Esta ciudad no tiene sectores disponibles.</p>}
-          {city && <div className="rounded-lg bg-[#edf5ee] p-3 text-sm"><p>Entrega: <strong>${city.delivery_fee_usd.toFixed(2)} USD</strong></p><p className="mt-1">Pedido mínimo: ${city.min_order_usd.toFixed(2)} USD</p></div>}
+          {city && <div className="zone-cost rounded-lg p-3 text-sm"><p>Entrega: <strong>${city.delivery_fee_usd.toFixed(2)} USD</strong></p><p className="mt-1">Pedido mínimo: ${city.min_order_usd.toFixed(2)} USD</p></div>}
           <Button onClick={confirm} disabled={!selectedArea} className="w-full">Confirmar mi zona</Button>
         </div>}
       </DialogContent>

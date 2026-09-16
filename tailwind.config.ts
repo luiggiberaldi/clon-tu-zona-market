@@ -1,4 +1,4 @@
-﻿import type { Config } from 'tailwindcss';
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   darkMode: ['class'],
@@ -43,6 +43,16 @@ const config: Config = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
+        },
+        brand: {
+          yellow: 'var(--brand-yellow)',
+          'yellow-dark': 'var(--brand-yellow-dark)',
+          'yellow-soft': 'var(--brand-yellow-soft)',
+          ink: 'var(--brand-ink)',
+          'ink-deep': 'var(--brand-ink-deep)',
+          border: 'var(--brand-border)',
+          offer: 'var(--brand-offer)',
+          stock: 'var(--brand-stock)'
         }
       },
       borderRadius: {

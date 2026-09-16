@@ -36,7 +36,11 @@ export function SelectDropdown({ options, value, defaultValue, onChange, name, p
   const listRef = useRef<HTMLUListElement>(null);
   const listId = useId();
   const isControlled = value !== undefined;
-  const current = isControlled ? value! : internal;
+  // Modo no controlado: si el valor interno no está entre las opciones
+  // (inicial o porque la lista cambió), se usa defaultValue o la primera
+  // opción — igual que hacía el <select> nativo que reemplaza.
+  const fallback = defaultValue ?? options[0]?.value ?? '';
+  const current = isControlled ? value! : internal && options.some(option => option.value === internal) ? internal : fallback;
   const selected = options.find(option => option.value === current);
   const label = selected ? selected.label : placeholder ?? '';
 
@@ -94,10 +98,10 @@ export function SelectDropdown({ options, value, defaultValue, onChange, name, p
         disabled={disabled}
         onClick={() => !disabled && setOpen(next => !next)}
         onKeyDown={onKeyDown}
-        className={`flex min-h-[44px] w-full items-center justify-between gap-2 rounded-xl border px-3 py-2.5 text-left text-sm shadow-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b7046] disabled:opacity-50 ${tone === 'onDark' ? 'max-h-9 min-h-0 border-transparent bg-transparent py-1 text-xs font-semibold text-white hover:bg-white/10' : 'bg-white'} ${open ? (tone === 'onDark' ? 'border-white/60' : 'border-[#0b7046] ring-2 ring-[#0b7046]/25') : tone === 'onDark' ? '' : 'border-[#e1e7d9] hover:border-[#c9d6bd]'}`}
+        className={`flex min-h-[44px] w-full items-center justify-between gap-2 rounded-xl border px-3 py-2.5 text-left text-sm shadow-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ECA700] disabled:opacity-50 ${tone === 'onDark' ? 'max-h-9 min-h-0 border-transparent bg-transparent py-1 text-xs font-semibold text-[#14191D] hover:bg-black/5' : 'bg-white'} ${open ? (tone === 'onDark' ? 'border-[#14191D]/50' : 'border-[#ECA700] ring-2 ring-[#ECA700]/25') : tone === 'onDark' ? '' : 'border-[#EAE4D5] hover:border-[#C68500]'}`}
       >
         <span className={`truncate ${selected ? '' : tone === 'onDark' ? '' : 'text-muted-foreground'}`}>{label}</span>
-        <ChevronDown size={tone === 'onDark' ? 13 : 16} className={`shrink-0 ${tone === 'onDark' ? 'text-white/80' : 'text-[#5c6f57]'} transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden />
+        <ChevronDown size={tone === 'onDark' ? 13 : 16} className={`shrink-0 ${tone === 'onDark' ? 'text-[#14191D]' : 'text-muted-foreground'} transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden />
       </button>
       {open && (
         <ul
@@ -106,7 +110,7 @@ export function SelectDropdown({ options, value, defaultValue, onChange, name, p
           role="listbox"
           aria-label={ariaLabel}
           tabIndex={-1}
-          className="absolute z-50 mt-1.5 max-h-64 w-full overflow-y-auto rounded-xl border border-[#e1e7d9] bg-white p-1.5 shadow-lg"
+          className="absolute z-50 mt-1.5 max-h-64 w-full overflow-y-auto rounded-xl border border-[#EAE4D5] bg-white p-1.5 shadow-lg"
         >
           {options.map((option, index) => {
             const isSelected = option.value === current;
@@ -119,7 +123,7 @@ export function SelectDropdown({ options, value, defaultValue, onChange, name, p
                   aria-selected={isSelected}
                   onMouseEnter={() => setActiveIndex(index)}
                   onClick={() => choose(option.value)}
-                  className={`w-full rounded-lg px-3 py-2 text-left text-sm ${isSelected ? 'bg-[#0b7046] font-semibold text-white' : isActive ? 'bg-[#edf5ee]' : 'bg-transparent'}`}
+                  className={`w-full rounded-lg px-3 py-2 text-left text-sm ${isSelected ? 'bg-[#ECA700] font-semibold text-[#14191D]' : isActive ? 'bg-[#FFF4D1] text-[#14191D]' : 'bg-white text-[#14191D] hover:bg-[#FFF4D1]/50'}`}
                 >
                   {option.label}
                 </button>

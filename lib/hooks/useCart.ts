@@ -77,7 +77,6 @@ export function useCart() {
     const after = useCartStore.getState().items.find((line) => line.product.id === product.id)?.quantity ?? 0;
     if (after > before) {
       openDrawer();
-      toast({ title: 'Agregado al carrito', description: product.name, variant: 'success' });
     } else {
       toast({ title: 'No se agregaron unidades', description: 'Revisa el stock disponible y la cantidad solicitada.', variant: 'info' });
     }

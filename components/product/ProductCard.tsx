@@ -34,7 +34,7 @@ export function ProductCard({ product, rate, rateUpdatedAt }: { product: Product
         {outOfStock && <span className="stock-badge">Agotado</span>}
       </Link>
       <div className="product-info">
-        <div className="product-price-row"><PriceDisplay usd={finalPrice} rate={rate} rateUpdatedAt={rateUpdatedAt} size="md" className={discounted ? 'text-[#c54532]' : undefined} />{discounted && <span className="old-price"><PriceDisplay usd={product.price_usd} rate={rate} rateUpdatedAt={rateUpdatedAt} size="sm" /></span>}</div>
+        <div className="product-price-row"><PriceDisplay usd={finalPrice} rate={rate} rateUpdatedAt={rateUpdatedAt} size="md" className={discounted ? 'text-destructive font-bold' : undefined} />{discounted && <span className="old-price"><PriceDisplay usd={product.price_usd} rate={rate} rateUpdatedAt={rateUpdatedAt} size="sm" /></span>}</div>
         {product.category && <Link href={`/categorias/${product.category.slug}`} className="product-category">{product.category.name}</Link>}
         <Link href={`/productos/${product.slug}`} className="product-name">{product.name}</Link>
         <p className="product-stock">{outOfStock ? 'Por ahora no disponible' : `${product.stock_quantity} ${isDemoMode() ? 'en la copia local' : 'disponibles'}`}</p>
