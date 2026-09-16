@@ -81,7 +81,7 @@ export function StoreSettings() {
             className="mx-3 rounded-lg border p-2"
           />
         </label>
-        <Button disabled={busy}>Publicar tasa manual</Button>
+        <Button disabled={busy}>Publicar tasa</Button>
         {!isDemoMode() && (
           <Button type="button" variant="outline" className="ml-2" disabled={busy}
             onClick={() => void save({ kind: 'exchange_rate', mode: 'auto' })}>
