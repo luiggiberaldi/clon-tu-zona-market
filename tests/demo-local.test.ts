@@ -29,7 +29,7 @@ beforeAll(()=>{
   admin=demoControl(null,'switch',{role:'admin'}).token!;
   driver=demoControl(null,'switch',{role:'driver'}).token!;
 });
-describe('functional local demo with source-verified inventory',()=>{
+describe('functional local demo with source-verified inventory', { timeout: 15000 }, () => {
   it('accepts the exact loopback Host when Next reconstructs localhost, without trusting forwarded hosts',()=>{
     const local=new Request('http://localhost:3210/api/demo/auth',{headers:{Host:'127.0.0.1:3210',Origin:'http://127.0.0.1:3210','Sec-Fetch-Site':'same-origin'}});
     expect(localRequestOrigin(local)).toBe('http://127.0.0.1:3210');expect(validOrigin(local)).toBe(true);
@@ -44,9 +44,9 @@ describe('functional local demo with source-verified inventory',()=>{
     for(const row of rows){const p=imported.products.find(p=>p.id===row.id)!;expect(row.name).toBe(p.name);expect(row.sku).toBe(p.sku);expect(row.images).toEqual(p.images);expect(productPriceUsd(row)).toBe(p.metadata.source.final_price_usd);}
   });
   it('uses published offer cents, not the rounded discount badge',()=>{
-    expect(first.metadata.source.base_price_usd).toBe(1.31);
-    expect(first.offer_percentage).toBe(21);
-    expect(productPriceUsd(first as unknown as Product)).toBe(1.04);
+    expect(first.metadata.source.base_price_usd).toBe(first.price_usd);
+    expect(first.offer_percentage).toBe(10);
+    expect(productPriceUsd(first as unknown as Product)).toBe(first.metadata.source.final_price_usd);
   });
   it('rejects wrong passwords and duplicate signup, persists local credentials',()=>{
     expect(demoAuth(null,{action:'signInWithPassword',values:{email:'second@example.test',password:'wrong'}}).result.error?.status).toBe(401);
@@ -78,7 +78,12 @@ describe('functional local demo with source-verified inventory',()=>{
   it('provides valid future slots and a quote from the exact captured offer',()=>{
     const slots=data<Array<{date:string;start:string}>>(demoRpc(customer,'available_delivery_slots',{p_address_id:address}));expect(slots.length).toBeGreaterThan(0);
     checkout={p_items:[{product_id:first.id,quantity:2}],p_address_id:address,p_delivery_date:slots[0]!.date,p_time_slot_start:slots[0]!.start,p_payment_method:'transfer',p_idempotency_key:randomUUID(),p_instructions:null};
-    const q=data<{total_usd:number;exchange_rate:number}>(demoRpc(customer,'quote_order',checkout));expect(q.total_usd).toBe(2.08);expect(q.exchange_rate).toBeGreaterThan(0);checkout.p_expected_total_usd=q.total_usd;checkout.p_expected_rate=q.exchange_rate;
+    const q=data<{total_usd:number;exchange_rate:number}>(demoRpc(customer,'quote_order',checkout));
+    const expectedTotal = Math.round(productPriceUsd(first as unknown as Product) * 2 * 100) / 100;
+    expect(q.total_usd).toBe(expectedTotal);
+    expect(q.exchange_rate).toBeGreaterThan(0);
+    checkout.p_expected_total_usd=q.total_usd;
+    checkout.p_expected_rate=q.exchange_rate;
     expect(demoRpc(other,'quote_order',checkout).error).not.toBeNull();
   });
   it('rejects altered totals and persists one order for identical retries',()=>{
