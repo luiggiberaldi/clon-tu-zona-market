@@ -113,7 +113,7 @@ export function ZoneSelector({ variant = 'default' }: { variant?: 'default' | 'h
                 className="mt-1.5"
                 placeholder="Selecciona una ciudad"
                 disabled={!effectiveStateId}
-                options={cities.map((c) => ({ value: c.id, label: `${c.name} (Envío $${c.delivery_fee_usd.toFixed(2)} USD)` }))}
+                options={cities.map((c) => ({ value: c.id, label: c.name }))}
                 value={cityId}
                 onChange={(v) => {
                   setCityId(v);
