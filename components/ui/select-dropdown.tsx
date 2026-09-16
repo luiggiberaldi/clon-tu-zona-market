@@ -30,17 +30,24 @@ type SelectDropdownProps = {
  */
 export function SelectDropdown({ options, value, defaultValue, onChange, name, placeholder, ariaLabel, disabled, className, tone = 'default' }: SelectDropdownProps) {
   const [internal, setInternal] = useState(defaultValue ?? '');
+  const [override, setOverride] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const rootRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const listId = useId();
   const isControlled = value !== undefined;
+
+  useEffect(() => {
+    setOverride(null);
+  }, [value]);
+
   // Modo no controlado: si el valor interno no está entre las opciones
   // (inicial o porque la lista cambió), se usa defaultValue o la primera
   // opción — igual que hacía el <select> nativo que reemplaza.
   const fallback = defaultValue ?? options[0]?.value ?? '';
-  const current = isControlled ? value! : internal && options.some(option => option.value === internal) ? internal : fallback;
+  const current = override ?? (isControlled ? value! : internal && options.some(option => option.value === internal) ? internal : fallback);
   const selected = options.find(option => option.value === current);
   const label = selected ? selected.label : placeholder ?? '';
 
@@ -59,6 +66,8 @@ export function SelectDropdown({ options, value, defaultValue, onChange, name, p
   }, [open, activeIndex]);
 
   function choose(next: string) {
+    if (inputRef.current) inputRef.current.value = next;
+    setOverride(next);
     if (!isControlled) setInternal(next);
     onChange?.(next);
     setOpen(false);
@@ -87,7 +96,7 @@ export function SelectDropdown({ options, value, defaultValue, onChange, name, p
 
   return (
     <div ref={rootRef} className={`relative ${className ?? ''}`}>
-      {name && <input type="hidden" name={name} value={current} />}
+      {name && <input ref={inputRef} type="hidden" name={name} value={current} onChange={() => {}} />}
       <button
         type="button"
         role="combobox"

@@ -29,6 +29,15 @@ export function ProductFilters({ categoryId, offerOnly = false, totalCount }: Pr
 
   function handleSortChange(nextSort: string) {
     const nextParams = new URLSearchParams(searchParams.toString());
+    if (formRef.current) {
+      const formData = new FormData(formRef.current);
+      const min = formData.get('minPrice')?.toString().trim();
+      if (min) nextParams.set('minPrice', min);
+      else nextParams.delete('minPrice');
+      const max = formData.get('maxPrice')?.toString().trim();
+      if (max) nextParams.set('maxPrice', max);
+      else nextParams.delete('maxPrice');
+    }
     if (nextSort && nextSort !== 'newest') {
       nextParams.set('sort', nextSort);
     } else {
@@ -70,12 +79,39 @@ export function ProductFilters({ categoryId, offerOnly = false, totalCount }: Pr
     return qs ? `${pathname}?${qs}` : pathname;
   })();
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const nextParams = new URLSearchParams(searchParams.toString());
+
+    const min = formData.get('minPrice')?.toString().trim();
+    if (min) nextParams.set('minPrice', min);
+    else nextParams.delete('minPrice');
+
+    const max = formData.get('maxPrice')?.toString().trim();
+    if (max) nextParams.set('maxPrice', max);
+    else nextParams.delete('maxPrice');
+
+    const formSort = formData.get('sort')?.toString() || sort;
+    if (formSort && formSort !== 'newest') {
+      nextParams.set('sort', formSort);
+    } else {
+      nextParams.delete('sort');
+    }
+
+    nextParams.delete('page');
+    startTransition(() => {
+      router.push(`${pathname}?${nextParams.toString()}`);
+    });
+  }
+
   return (
     <div className="space-y-3">
       <form
         ref={formRef}
         key={searchParams.toString()}
         action={pathname}
+        onSubmit={handleSubmit}
         className="catalog-filters-bar"
       >
         {search && <input type="hidden" name="search" value={search} />}
