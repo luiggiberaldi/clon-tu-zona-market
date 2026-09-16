@@ -1,5 +1,5 @@
 export interface CartInput { product_id: string; quantity: number }
-export type CorePaymentMethod = 'cash' | 'pagomovil' | 'transfer';
+export type CorePaymentMethod = 'cash' | 'pagomovil' | 'transfer' | 'zelle' | 'binance' | 'card';
 export interface PaymentMethodConfig {
   id: CorePaymentMethod;
   label: string;

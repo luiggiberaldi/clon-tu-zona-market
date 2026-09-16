@@ -47,7 +47,7 @@ function bootstrap(): DemoState {
     {id:randomUUID(),key:'exchange_rate',value:{usd_to_ves:sourceConfig.usd_to_ves,updated_at:sourceConfig.captured_at,source:'captura verificada, no tasa en vivo'},updated_at:now},
     {id:randomUUID(),key:'delivery_hours',value:{start:'09:00',end:'21:00',cutoff_time:'18:00',slot_capacity:20,lead_minutes:30,horizon_days:7,simulation:true},updated_at:now}
   ];
-  t.payment_methods=['cash','pagomovil','transfer'].map(id=>({id,label:({cash:'Efectivo · simulación',pagomovil:'PagoMóvil · simulación',transfer:'Transferencia · simulación'} as Record<string,string>)[id],currency:id==='cash'?'USD':'VES',enabled:true,instructions:'PRUEBA LOCAL. No envíes dinero ni datos bancarios. Registra una referencia de prueba y revisa el pago desde la administración del demo.'}));
+  t.payment_methods=['cash','pagomovil','transfer','zelle','binance','card'].map(id=>({id,label:({cash:'Efectivo · simulación',pagomovil:'PagoMóvil · simulación',transfer:'Transferencia · simulación',zelle:'Zelle · simulación',binance:'Binance Pay · simulación',card:'Tarjeta de crédito · simulación'} as Record<string,string>)[id],currency:['pagomovil','transfer'].includes(id)?'VES':'USD',enabled:true,instructions:'PRUEBA LOCAL. No envíes dinero ni datos bancarios. Registra una referencia de prueba y revisa el pago desde la administración del demo.'}));
   const accounts:LocalAccount[]=[];
   for(const role of ['customer','admin','driver'] as const){
     const id=seedIds[role];const salt=randomBytes(16).toString('hex');
@@ -148,7 +148,7 @@ const demoCategorySchema=categoryCreateSchema.extend({slug:demoSlug.max(100),des
 const demoStateSchema=z.object({name:z.string().trim().min(2).max(100),is_active:z.boolean()});
 const demoCitySchema=demoStateSchema.extend({state_id:z.string().uuid(),delivery_fee_usd:z.number().finite().min(0).max(999),min_order_usd:z.number().finite().min(0).max(99999)});
 const demoAreaSchema=demoStateSchema.extend({name:z.string().trim().min(2).max(150),city_id:z.string().uuid(),delivery_time_minutes:z.number().int().min(0).max(1440)});
-const mutationSchemas:Record<string,z.AnyZodObject>={products:demoProductSchema,categories:demoCategorySchema,states:demoStateSchema,cities:demoCitySchema,areas:demoAreaSchema,settings:z.object({key:z.enum(['exchange_rate','delivery_hours']),value:z.record(z.unknown()),updated_at:z.string().datetime().optional()}),payment_methods:z.object({id:z.enum(['cash','pagomovil','transfer']),label:z.string().trim().min(2).max(100),instructions:z.string().max(2000),currency:z.enum(['USD','VES']),enabled:z.boolean()}),audit_log:z.object({actor_id:z.string().uuid(),action:z.string().min(2).max(100),details:z.record(z.unknown())}),users:z.object({full_name:z.string().trim().min(2).max(255),phone:phoneSchema.nullable()})};
+const mutationSchemas:Record<string,z.AnyZodObject>={products:demoProductSchema,categories:demoCategorySchema,states:demoStateSchema,cities:demoCitySchema,areas:demoAreaSchema,settings:z.object({key:z.enum(['exchange_rate','delivery_hours']),value:z.record(z.unknown()),updated_at:z.string().datetime().optional()}),payment_methods:z.object({id:z.enum(['cash','pagomovil','transfer','zelle','binance','card']),label:z.string().trim().min(2).max(100),instructions:z.string().max(2000),currency:z.enum(['USD','VES']),enabled:z.boolean()}),audit_log:z.object({actor_id:z.string().uuid(),action:z.string().min(2).max(100),details:z.record(z.unknown())}),users:z.object({full_name:z.string().trim().min(2).max(255),phone:phoneSchema.nullable()})};
 function validateIncoming(table:string,values:DemoRow,operation:string,service:boolean){
   const schema=mutationSchemas[table];if(!schema)fail('Tabla no editable.','42501',403);
   schema.partial().strict().parse(values);
@@ -166,7 +166,7 @@ function validateMutation(state:DemoState,table:string,row:DemoRow,previous?:Dem
     else fail('Configuración local no reconocida.');
   }
   if (table === 'payment_methods') {
-    z.object({id:z.enum(['cash','pagomovil','transfer']),label:z.string().trim().min(2).max(100),currency:z.enum(['USD','VES']),enabled:z.boolean(),instructions:z.string().max(2000)}).passthrough().refine(method=>!method.enabled||method.instructions.trim().length>=10,'Añade instrucciones para la simulación.').parse(row);
+    z.object({id:z.enum(['cash','pagomovil','transfer','zelle','binance','card']),label:z.string().trim().min(2).max(100),currency:z.enum(['USD','VES']),enabled:z.boolean(),instructions:z.string().max(2000)}).passthrough().refine(method=>!method.enabled||method.instructions.trim().length>=10,'Añade instrucciones para la simulación.').parse(row);
   }
   if(table==='products'){
     demoProductSchema.parse(row);

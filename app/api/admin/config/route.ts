@@ -6,7 +6,7 @@ import { timeSchema } from '@/lib/utils/validation';
 const schema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('exchange_rate'), usd_to_ves: z.number().finite().positive().max(100000000).optional(), mode: z.enum(['manual', 'auto']).default('manual') }),
   z.object({ kind: z.literal('delivery_hours'), value: z.object({ start: timeSchema, end: timeSchema, cutoff_time: timeSchema, slot_capacity: z.number().int().min(1).max(1000), lead_minutes: z.number().int().min(0).max(1440), horizon_days: z.number().int().min(1).max(7) }).refine(v => { const minutes = (value: string) => Number(value.slice(0,2))*60 + Number(value.slice(3,5)); return minutes(v.end)-minutes(v.start)>=120 && v.cutoff_time<=v.end; }, 'Se requieren al menos dos horas de entrega y un corte anterior al cierre') }),
-  z.object({ kind: z.literal('payment_method'), value: z.object({ id: z.enum(['cash', 'pagomovil', 'transfer']), label: z.string().trim().min(2).max(100), instructions: z.string().trim().max(2000), currency: z.enum(['USD','VES']), enabled: z.boolean() }).refine(v => !v.enabled || v.instructions.length >= 5, 'Completa las instrucciones de pago') })
+  z.object({ kind: z.literal('payment_method'), value: z.object({ id: z.enum(['cash', 'pagomovil', 'transfer', 'zelle', 'binance', 'card']), label: z.string().trim().min(2).max(100), instructions: z.string().trim().max(2000), currency: z.enum(['USD','VES']), enabled: z.boolean() }).refine(v => !v.enabled || v.instructions.length >= 5, 'Completa las instrucciones de pago') })
 ]);
 export function GET() { return endpoint(async () => {
   const { supabase } = await session(['admin']);

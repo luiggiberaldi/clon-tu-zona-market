@@ -7,6 +7,7 @@ import { syncExchangeRateDeduped } from '@/lib/rates-sync';
 import { syncCatalogToSupabase } from '@/lib/catalog-sync';
 import catalog from '@/lib/demo/source-catalog.json';
 import { canonicalZonesTree } from '@/lib/data/carabobo-zones';
+import { canonicalPaymentMethods } from '@/lib/data/payment-methods';
 import type { ProductFilters, ProductWithCategory, Category, State, City, Area } from '@/types';
 import type { CheckoutConfig, PaymentMethodConfig } from '@/types/commerce';
 
@@ -125,9 +126,12 @@ export async function getZones(): Promise<{ states: State[]; cities: City[]; are
   } catch {}
   return canonicalZonesTree;
 }
+
 export async function getCheckoutConfig(): Promise<CheckoutConfig> {
   const defaults: CheckoutConfig = {
-    payment_methods: [], exchange_rate: null, rate_updated_at: null,
+    payment_methods: canonicalPaymentMethods,
+    exchange_rate: null,
+    rate_updated_at: null,
     delivery_hours: { start: '09:00', end: '19:00', cutoff_time: '17:00', slot_capacity: 20, lead_minutes: 60, horizon_days: 7 }
   };
   if (!hasSupabaseConfig() && !isDemoMode()) return defaults;
@@ -139,13 +143,27 @@ export async function getCheckoutConfig(): Promise<CheckoutConfig> {
     client.from('settings').select('key,value').in('key', ['exchange_rate', 'delivery_hours']),
     client.from('payment_methods').select('*').eq('enabled', true)
   ]);
-  if (settings.error || methods.error) return defaults;
   const rows = settings.data as Array<{ key: string; value: { usd_to_ves?: number; updated_at?: string } & Partial<CheckoutConfig['delivery_hours']> }> | null;
   const rate = rows?.find(s => s.key === 'exchange_rate')?.value;
   const hours = rows?.find(s => s.key === 'delivery_hours')?.value;
   const age = Date.now() - Date.parse(rate?.updated_at || '');
   const fresh = Number.isFinite(age) && age >= 0 && (isDemoMode() || age <= 86400000) && typeof rate?.usd_to_ves === 'number' && Number.isFinite(rate.usd_to_ves) && rate.usd_to_ves > 0;
-  return { payment_methods: (methods.data || []) as PaymentMethodConfig[], exchange_rate: fresh ? Number(rate.usd_to_ves) : null, rate_updated_at: rate?.updated_at || null, delivery_hours: { ...defaults.delivery_hours, ...(hours || {}) } };
+
+  const dbMethods = (!methods.error && Array.isArray(methods.data)) ? (methods.data as PaymentMethodConfig[]) : [];
+  const activeMethods: PaymentMethodConfig[] = canonicalPaymentMethods.map((canon) => {
+    const fromDb = dbMethods.find((m) => m.id === canon.id);
+    if (fromDb && fromDb.instructions) {
+      return { ...canon, ...fromDb, enabled: true };
+    }
+    return canon;
+  });
+
+  return {
+    payment_methods: activeMethods,
+    exchange_rate: fresh ? Number(rate.usd_to_ves) : null,
+    rate_updated_at: rate?.updated_at || null,
+    delivery_hours: { ...defaults.delivery_hours, ...(hours || {}) }
+  };
 }
 export async function getStorefrontSettings() {
   const { exchange_rate, rate_updated_at, payment_methods } = await getCheckoutConfig();

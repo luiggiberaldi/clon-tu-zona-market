@@ -66,7 +66,7 @@ export const quoteSchema = z.object({
 export const checkoutSchema = z.object({
   items: cartInputSchema.refine(items => items.length > 0, 'El carrito está vacío'),
   address_id: z.string().uuid('Selecciona una dirección'),
-  payment_method: z.enum(['transfer', 'pagomovil', 'cash']),
+  payment_method: z.enum(['transfer', 'pagomovil', 'cash', 'zelle', 'binance', 'card']),
   delivery_date: dateSchema,
   time_slot_start: timeSchema,
   time_slot_end: timeSchema.optional(),

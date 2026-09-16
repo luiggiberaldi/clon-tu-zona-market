@@ -51,7 +51,7 @@ export interface OrderWithItems extends Order {
 export interface CheckoutPayload {
   items: Array<{ product_id: string; quantity: number }>;
   address_id: string;
-  payment_method: 'transfer' | 'pagomovil' | 'cash';
+  payment_method: 'transfer' | 'pagomovil' | 'cash' | 'zelle' | 'binance' | 'card';
   delivery_date: string;
   time_slot_start: string;
   time_slot_end?: string;
