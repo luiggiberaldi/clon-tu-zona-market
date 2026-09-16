@@ -17,9 +17,17 @@ export async function syncCatalogToSupabase(force = false): Promise<{ success: b
 
       // Check current count
       if (!force) {
-        const { count, error } = await admin.from('products').select('id', { count: 'exact', head: true });
-        if (!error && typeof count === 'number' && count >= 500) {
-          return { success: true, count };
+        const [{ count: productCount }, { count: categoryCount }] = await Promise.all([
+          admin.from('products').select('id', { count: 'exact', head: true }),
+          admin.from('categories').select('id', { count: 'exact', head: true }),
+        ]);
+        if (
+          typeof productCount === 'number' &&
+          productCount >= 500 &&
+          typeof categoryCount === 'number' &&
+          categoryCount === catalog.categories.length
+        ) {
+          return { success: true, count: productCount };
         }
       }
 
@@ -63,7 +71,26 @@ export async function syncCatalogToSupabase(force = false): Promise<{ success: b
         pending.push(...catalog.categories.filter((c) => !inserted.has(c.id)));
       }
 
-      // 2. Upsert products in batches of 50
+      // 2. Prune remote categories not in current catalog
+      const validCategoryIds = new Set(catalog.categories.map((c) => c.id));
+      const { data: remoteCategories } = await admin.from('categories').select('id');
+      if (remoteCategories) {
+        const staleIds = (remoteCategories as Array<{ id: string }>).map((c) => c.id).filter((id) => !validCategoryIds.has(id));
+        if (staleIds.length > 0) {
+          console.log(`[CATALOG-SYNC] Eliminando ${staleIds.length} categorías obsoletas/vacías en Supabase...`);
+          for (let i = 0; i < staleIds.length; i += 50) {
+            const batch = staleIds.slice(i, i + 50);
+            await admin.from('products').update({ category_id: null }).in('category_id', batch);
+            await admin.from('categories').update({ parent_id: null }).in('id', batch);
+            const { error: delErr } = await admin.from('categories').delete().in('id', batch);
+            if (delErr) {
+              console.error('[CATALOG-SYNC] Error eliminando lote de categorías obsoletas:', delErr.message);
+            }
+          }
+        }
+      }
+
+      // 3. Upsert products in batches of 50
       const seenSkus = new Set<string>();
       const batchSize = 50;
       let insertedProducts = 0;

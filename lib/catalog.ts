@@ -92,7 +92,7 @@ export async function getCategories(): Promise<Category[]> {
   try {
     if (hasSupabaseConfig()) {
       const { data, error } = await publicClient().from('categories').select('*').eq('is_active', true).order('sort_order').order('name');
-      if (!error && data && data.length >= 50) return data as Category[];
+      if (!error && data && data.length > 0) return data as Category[];
     }
   } catch {}
   return (catalog.categories as unknown as Category[]);

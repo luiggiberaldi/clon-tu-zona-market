@@ -616,17 +616,6 @@
       "created_at": "2026-09-13T22:33:06.861Z"
     },
     {
-      "id": "bc347dfa-1da5-4e4d-a913-7e92cffc3cd2",
-      "name": "Sazonadoras",
-      "slug": "sazonadoras",
-      "description": "Sazonadoras",
-      "image_url": null,
-      "parent_id": "42ff267d-7503-43e2-aa44-d7a4e0308da1",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "e42265ab-b9f8-4322-a987-1649fa4604bc",
       "name": "Pastas",
       "slug": "pastas",
@@ -667,61 +656,6 @@
       "image_url": null,
       "parent_id": "227d28ba-9fcb-4031-ab43-5fcf8e88f5c7",
       "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "2ca558d0-8a63-4c0e-adf6-ed808fe707ff",
-      "name": "Articulos para Reposteria",
-      "slug": "articulos-para-reposteria",
-      "description": "articulos para reposteria",
-      "image_url": null,
-      "parent_id": "227d28ba-9fcb-4031-ab43-5fcf8e88f5c7",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "655f92b5-38b5-450f-a181-a4e82196488a",
-      "name": "Caramelos y Chupetas",
-      "slug": "caramelos-y-chupetas",
-      "description": "caramelos y chupetas",
-      "image_url": null,
-      "parent_id": "c735d613-4b59-4dc8-a93f-0dcb0611e1f9",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "d0c76f2d-c1d1-4a98-ac2e-cf6ddb2bd88d",
-      "name": "Mermeladas y Siropes",
-      "slug": "mermeladas-y-siropes",
-      "description": "Mermeladas y Siropes",
-      "image_url": null,
-      "parent_id": "c735d613-4b59-4dc8-a93f-0dcb0611e1f9",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "de879bc1-18d0-4190-ab05-b079974038a5",
-      "name": "Chiclets",
-      "slug": "chiclets",
-      "description": "chiclets",
-      "image_url": null,
-      "parent_id": "c735d613-4b59-4dc8-a93f-0dcb0611e1f9",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "4b837550-5258-41a2-a05c-15f549a0089c",
-      "name": "Tomate y Puré",
-      "slug": "tomate-y-pure",
-      "description": "tomate y salsas",
-      "image_url": null,
-      "parent_id": "28aa37e0-6cae-4be5-adfc-b0bf6f0126f5",
-      "sort_order": 1,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -781,17 +715,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "91bc8dc1-b419-4c48-a194-f2426f8771f6",
-      "name": "Ponqués",
-      "slug": "ponques",
-      "description": "ponques",
-      "image_url": null,
-      "parent_id": "12aca755-9803-4ac2-a3db-f7cbb8ed55a4",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "52a05786-c25e-4162-af0d-de24aa04175f",
       "name": "Snacks",
       "slug": "snacks",
@@ -825,17 +748,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "c5e7b3e4-5c6c-439d-a6f5-d840f881df23",
-      "name": "Infusiones y Té",
-      "slug": "infusiones-y-te",
-      "description": "infusiones y te",
-      "image_url": null,
-      "parent_id": "5a3ddb54-d6cb-4a0e-a4ae-0c40807a3fcd",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "e667d050-5754-472b-a07e-02e221b77528",
       "name": "Caldos y Sopas",
       "slug": "caldos-y-sopas",
@@ -858,17 +770,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "4f84a274-ebc0-41e9-abc6-448f7484eccb",
-      "name": "Europa",
-      "slug": "europa",
-      "description": "europa",
-      "image_url": null,
-      "parent_id": "50e092c4-1d3d-4e7d-a5c5-1d85bcc6d562",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "4dd97563-54f3-43fd-a3da-d872521b9801",
       "name": "Frutas",
       "slug": "frutas",
@@ -876,39 +777,6 @@
       "image_url": null,
       "parent_id": "c94e020d-0764-47f9-afba-9f598836d10d",
       "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "a15da537-1224-457c-ad34-7f8b404c06c7",
-      "name": "Colonia Tovar",
-      "slug": "colonia-tovar",
-      "description": "Colonia Tovar",
-      "image_url": null,
-      "parent_id": "c94e020d-0764-47f9-afba-9f598836d10d",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3110a7cf-5e01-4d5b-a502-c827c01357d1",
-      "name": "Pescados y Mariscos",
-      "slug": "pescados-y-mariscos",
-      "description": "pescados y mariscos",
-      "image_url": null,
-      "parent_id": "bf943fe8-1a4b-455f-ac27-50cb1736f09e",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "715bea46-43c8-4014-a985-29a8f8ab40a8",
-      "name": "Cordero y Otros",
-      "slug": "cordero-y-otros",
-      "description": "cordero y caza",
-      "image_url": null,
-      "parent_id": "bf943fe8-1a4b-455f-ac27-50cb1736f09e",
-      "sort_order": 6,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -935,72 +803,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "b214fab5-82dc-455e-a492-0a580c0a9e57",
-      "name": "Pastelería",
-      "slug": "pasteleria",
-      "description": "postres",
-      "image_url": null,
-      "parent_id": "177564b2-f15a-4577-acac-42c41c2ca8bf",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "57080bfa-45fa-4d06-a806-142ceb3ea372",
-      "name": "Tortas y más",
-      "slug": "tortas-y-mas",
-      "description": "tortas y mas",
-      "image_url": null,
-      "parent_id": "b214fab5-82dc-455e-a492-0a580c0a9e57",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "dfdc5d73-91c4-4500-a629-b5ad3e585f2c",
-      "name": "Velas y Toppers para Tortas",
-      "slug": "velas-y-toppers-para-tortas",
-      "description": "velas y toppers para tortas",
-      "image_url": null,
-      "parent_id": "b214fab5-82dc-455e-a492-0a580c0a9e57",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "c0205c8f-4014-4505-a849-cf222dd387a4",
-      "name": "Coffee Market",
-      "slug": "coffee-market",
-      "description": "coffee market",
-      "image_url": null,
-      "parent_id": "177564b2-f15a-4577-acac-42c41c2ca8bf",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "96ed5eaf-82c5-4492-a55c-7809e5a434c6",
-      "name": "Tu Zona Market Bakery",
-      "slug": "tu-zona-market-bakery",
-      "description": "Tu Zona Market Bakery",
-      "image_url": null,
-      "parent_id": "177564b2-f15a-4577-acac-42c41c2ca8bf",
-      "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "325c3223-f715-4241-ae66-81562b16c55c",
-      "name": "Donas, Croissants y más",
-      "slug": "donas-croissants-y-mas",
-      "description": "Donas, Croissants y más",
-      "image_url": null,
-      "parent_id": "96ed5eaf-82c5-4492-a55c-7809e5a434c6",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "0a0a962a-858a-414a-a0df-34a9ee737a57",
       "name": "Malestar General, Gripe y Tos",
       "slug": "malestar-general-gripe-y-tos",
@@ -1019,17 +821,6 @@
       "image_url": null,
       "parent_id": "0a0a962a-858a-414a-a0df-34a9ee737a57",
       "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "b93bb617-fcc9-40bf-a966-59225f6703ce",
-      "name": "Colutorios",
-      "slug": "colutorios",
-      "description": "Colutorios",
-      "image_url": null,
-      "parent_id": "0a0a962a-858a-414a-a0df-34a9ee737a57",
-      "sort_order": 2,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -1056,94 +847,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "4067a9ec-7f83-4236-ad4c-d523a3429379",
-      "name": "Expectorantes",
-      "slug": "expectorantes",
-      "description": "Expectorantes",
-      "image_url": null,
-      "parent_id": "0a0a962a-858a-414a-a0df-34a9ee737a57",
-      "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "0a386c63-785c-45a9-aead-c21aa484823e",
-      "name": "Calmante de la tos",
-      "slug": "calmante-de-la-tos",
-      "description": "Calmante de la tos",
-      "image_url": null,
-      "parent_id": "0a0a962a-858a-414a-a0df-34a9ee737a57",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "e47b48f2-8771-4e48-a94f-37b0520ab624",
-      "name": "Antialérgicos Respiratorios",
-      "slug": "antialergicos-respiratorios",
-      "description": "Antialérgicos Respiratorios",
-      "image_url": null,
-      "parent_id": "0a0a962a-858a-414a-a0df-34a9ee737a57",
-      "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "0d4b974a-ebe9-439f-a0ad-67621a5d7c8b",
-      "name": "Inhaladores y Terapia Respiratoria",
-      "slug": "inhaladores-y-terapia-respiratoria",
-      "description": "Inhaladores y Terapia Respiratoria",
-      "image_url": null,
-      "parent_id": "0a0a962a-858a-414a-a0df-34a9ee737a57",
-      "sort_order": 8,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "7f6e5770-4bf9-44c5-a2cd-93e158cae7d7",
-      "name": "Esteroides",
-      "slug": "estoroide",
-      "description": "ESteroides.",
-      "image_url": null,
-      "parent_id": "fb62f83d-157a-4a44-ab18-683f61588adb",
-      "sort_order": 0,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "84fd36fc-37c6-4a4c-ae72-0223e50ff310",
-      "name": "Relajantes muscular",
-      "slug": "relajantes-muscular",
-      "description": "Relajantes muscular",
-      "image_url": null,
-      "parent_id": "fb62f83d-157a-4a44-ab18-683f61588adb",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "90660016-300c-4da8-a2d3-7d8039068d62",
-      "name": "Antiespasmódico",
-      "slug": "antiespasmodico",
-      "description": "Antiespasmódico",
-      "image_url": null,
-      "parent_id": "fb62f83d-157a-4a44-ab18-683f61588adb",
-      "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "5697a013-60d5-4240-a66e-005c0be7a513",
-      "name": "Oxigenantes Cerebral",
-      "slug": "oxigenantes-eerebral",
-      "description": "Oxigenantes Cerebral",
-      "image_url": null,
-      "parent_id": "fb62f83d-157a-4a44-ab18-683f61588adb",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "fc3921ee-80a0-4a07-ac29-cc95b572c894",
       "name": "Neuroactivadores",
       "slug": "neuroactivadores",
@@ -1151,17 +854,6 @@
       "image_url": null,
       "parent_id": "fb62f83d-157a-4a44-ab18-683f61588adb",
       "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "aa861f96-8fc6-4e14-a6cf-3c34aa2b6bfd",
-      "name": "Ansiolíticos, Sedantes",
-      "slug": "ansioliticos-sedantes",
-      "description": "Ansiolíticos, Sedantes",
-      "image_url": null,
-      "parent_id": "fb62f83d-157a-4a44-ab18-683f61588adb",
-      "sort_order": 8,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -1188,39 +880,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "9a2f54c3-9bb5-4a0f-ac5e-3bbf5c46885f",
-      "name": "Anti Flatulentos",
-      "slug": "anti-flatulentos",
-      "description": "Anti Flatulentos",
-      "image_url": null,
-      "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "309d6fe5-a780-4a29-ae3a-ed31a6dd3197",
-      "name": "Antiácidos",
-      "slug": "antiacidos",
-      "description": "Antiácidos",
-      "image_url": null,
-      "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "6a1243da-d72a-46bf-ae98-4fcdc9b1835d",
-      "name": "Digestivos",
-      "slug": "digestivos",
-      "description": "Digestivos",
-      "image_url": null,
-      "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "dfbe00e4-448b-4445-afb9-b3e7c40090c8",
       "name": "Protector Gástrico",
       "slug": "protector-gastrico",
@@ -1232,39 +891,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "38237c30-28fb-47f5-a4ec-f495f5a3f974",
-      "name": "Motilidad Intestinal",
-      "slug": "motilidad-intestinal",
-      "description": "Motilidad Intestinal",
-      "image_url": null,
-      "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
-      "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "fcb8cd59-5858-4c13-a602-9e591d949d60",
-      "name": "Desparasitantes",
-      "slug": "desparasitantes",
-      "description": "Desparasitantes",
-      "image_url": null,
-      "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "9b991c49-9cd7-4616-a123-68e476fb0f30",
-      "name": "Antibacterianos",
-      "slug": "antibacterianos",
-      "description": "Antibacterianos",
-      "image_url": null,
-      "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
-      "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "de28c96a-2be5-431a-a4d1-69b16ea6374c",
       "name": "Antidiarreicos",
       "slug": "antidiarreicos",
@@ -1272,50 +898,6 @@
       "image_url": null,
       "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
       "sort_order": 8,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "e81bda43-cbb8-49dd-ab0f-1fc9c9007d37",
-      "name": "Laxantes",
-      "slug": "laxantes",
-      "description": "Laxantes",
-      "image_url": null,
-      "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
-      "sort_order": 9,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "48b93537-2a27-4566-ac14-9fe4c2f9fc46",
-      "name": "Anti Obesidad",
-      "slug": "anti-obesidad",
-      "description": "Anti Obesidad",
-      "image_url": null,
-      "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
-      "sort_order": 10,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "80f3f81d-b761-41d2-aee9-7d998ab2f3e7",
-      "name": "Anti Ulcerosos",
-      "slug": "anti-ulcerosos",
-      "description": "Anti Ulcerosos",
-      "image_url": null,
-      "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
-      "sort_order": 11,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "36b418bb-043e-4792-aa6f-045efe3ff82c",
-      "name": "Antieméticos",
-      "slug": "antiemeticos",
-      "description": "Antieméticos",
-      "image_url": null,
-      "parent_id": "1dc44bea-a008-4cdc-aa04-779a22f31aac",
-      "sort_order": 12,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -1397,50 +979,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "a28e7ea9-1fa4-4d3f-a061-c51882c505f6",
-      "name": "Piel",
-      "slug": "piel",
-      "description": "Piel",
-      "image_url": null,
-      "parent_id": "5c057f93-4d2d-44d4-af2a-fb84932740e9",
-      "sort_order": 0,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "2be3c816-f800-42f0-a632-ea3253bb045f",
-      "name": "Duchas y Jabones",
-      "slug": "duchas-y-jabones",
-      "description": "Duchas y Jabones",
-      "image_url": null,
-      "parent_id": "5c057f93-4d2d-44d4-af2a-fb84932740e9",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "27787c31-ffa9-43d5-a88f-3c003d33a712",
-      "name": "Óvulos y Cremas",
-      "slug": "ovulos-y-cremas",
-      "description": "Óvulos y Cremas",
-      "image_url": null,
-      "parent_id": "5c057f93-4d2d-44d4-af2a-fb84932740e9",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "85b3009b-6e49-47a4-adb3-fcb98532a3c1",
-      "name": "Champús Dermatológicos",
-      "slug": "champus-dermatologicos",
-      "description": "Champús Dermatológicos",
-      "image_url": null,
-      "parent_id": "5c057f93-4d2d-44d4-af2a-fb84932740e9",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
       "name": "Medicamentos",
       "slug": "medicamentos",
@@ -1456,28 +994,6 @@
       "name": "Anticonceptivos",
       "slug": "anticonceptivos",
       "description": "Anticonceptivos",
-      "image_url": null,
-      "parent_id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
-      "sort_order": 0,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "a23a19a8-6a00-490a-aeab-cd1507c28739",
-      "name": "Circulación",
-      "slug": "circulacion",
-      "description": "Circulación",
-      "image_url": null,
-      "parent_id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
-      "sort_order": 0,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "2d37a5ab-6f25-4240-af87-b33d2d604798",
-      "name": "General",
-      "slug": "general",
-      "description": "General",
       "image_url": null,
       "parent_id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
       "sort_order": 0,
@@ -1507,28 +1023,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "b4300271-fd62-4d1a-a52d-d686772e5e3b",
-      "name": "Diabetes",
-      "slug": "diabetes",
-      "description": "Diabetes",
-      "image_url": null,
-      "parent_id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "8477eed6-3dbb-49c5-adbf-68d20b818d33",
-      "name": "Vasos Dilatadores",
-      "slug": "vasos-dilatadores",
-      "description": "Vasos Dilatadores",
-      "image_url": null,
-      "parent_id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "878c1856-9729-41ad-ab88-1bde93eabeea",
       "name": "Antibióticos",
       "slug": "antibioticos",
@@ -1536,17 +1030,6 @@
       "image_url": null,
       "parent_id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
       "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "748d120b-5198-432f-a7aa-f5d94cce8780",
-      "name": "Antirreumáticos",
-      "slug": "antirreumaticos",
-      "description": "Antirreumáticos",
-      "image_url": null,
-      "parent_id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
-      "sort_order": 5,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -1562,17 +1045,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "11a79bc7-4a79-4213-a9eb-f5627d69b69a",
-      "name": "Anticonvulsivos",
-      "slug": "anticonvulsivos",
-      "description": "Anticonvulsivos",
-      "image_url": null,
-      "parent_id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
-      "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "263a1da2-455e-4ce9-a1f9-f8de8f8f3716",
       "name": "Antidepresivos",
       "slug": "antidepresivos",
@@ -1580,50 +1052,6 @@
       "image_url": null,
       "parent_id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
       "sort_order": 8,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "f89d16ef-4c8a-4ceb-a3bf-4d82d3b06fb6",
-      "name": "Anticoagulantes",
-      "slug": "anticoagulantes",
-      "description": "Anticoagulantes",
-      "image_url": null,
-      "parent_id": "93689ef2-5e6f-47c7-a242-78d48e3a3f62",
-      "sort_order": 9,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "d24bb7e9-59ca-468c-adde-dbb8db17624d",
-      "name": "Psicotrópicos",
-      "slug": "Psicotrópicos",
-      "description": "Pscotrópicos",
-      "image_url": null,
-      "parent_id": "717d68a6-d81d-4690-ab8c-877d88a13034",
-      "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "c9358f23-58bd-41e5-a090-997a041c6d1e",
-      "name": "Estimulantes",
-      "slug": "estimulantes",
-      "description": "estimulantes",
-      "image_url": null,
-      "parent_id": "717d68a6-d81d-4690-ab8c-877d88a13034",
-      "sort_order": 8,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "86fa6cd2-cb17-4f23-a5e7-8ef124b8dfd7",
-      "name": "Cuidado de la Vista y Lentes",
-      "slug": "cuidado-de-la-vista-y-lentes",
-      "description": "Cuidado de la Vista y Lentes",
-      "image_url": null,
-      "parent_id": "717d68a6-d81d-4690-ab8c-877d88a13034",
-      "sort_order": 99,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -1667,138 +1095,6 @@
       "description": "bolsas",
       "image_url": null,
       "parent_id": "d4c2a639-8c29-4993-adc1-502d319579ef",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "9d70635e-086c-4297-ab13-a6e62d370df9",
-      "name": "Ambientadores e Insecticidas",
-      "slug": "ambientadores-e-insecticidas",
-      "description": "Ambientadores",
-      "image_url": null,
-      "parent_id": "d4c2a639-8c29-4993-adc1-502d319579ef",
-      "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "720a41f0-17ec-4775-a9e2-7b9337f837a7",
-      "name": "Campamento",
-      "slug": "campamento",
-      "description": "campamento",
-      "image_url": null,
-      "parent_id": "d4c2a639-8c29-4993-adc1-502d319579ef",
-      "sort_order": 9,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "a32d0b3c-a4fb-472f-ae0c-68e2e8789e9d",
-      "name": "Licoreria",
-      "slug": "licoreria",
-      "description": "licores",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "252effd1-78a5-4096-aecf-8532d9066f55",
-      "name": "Cervezas",
-      "slug": "cervezas",
-      "description": "Cervezas",
-      "image_url": null,
-      "parent_id": "a32d0b3c-a4fb-472f-ae0c-68e2e8789e9d",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "fe96f7a5-08ce-4e3c-aff6-5a1d93a59668",
-      "name": "Vinos y Espumantes",
-      "slug": "vinos-y-espumantes",
-      "description": "vinos y espumantes",
-      "image_url": null,
-      "parent_id": "a32d0b3c-a4fb-472f-ae0c-68e2e8789e9d",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "fcbb81de-61b2-4cfa-a8a3-542a881f5da7",
-      "name": "Vinos Tintos",
-      "slug": "vinos-tintos",
-      "description": "Vinos Tintos",
-      "image_url": null,
-      "parent_id": "fe96f7a5-08ce-4e3c-aff6-5a1d93a59668",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "5a25073d-c5eb-43db-a0bd-159b880a590f",
-      "name": "Vinos Blancos y Rosados",
-      "slug": "vinos-blancos-y-rosados",
-      "description": "Vinos Blancos y Rosados",
-      "image_url": null,
-      "parent_id": "fe96f7a5-08ce-4e3c-aff6-5a1d93a59668",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "431bdcc4-9fc5-470b-a80c-1f86a8292cac",
-      "name": "Vinos Espumantes",
-      "slug": "vinos-espumantes",
-      "description": "Vinos Espumantes",
-      "image_url": null,
-      "parent_id": "fe96f7a5-08ce-4e3c-aff6-5a1d93a59668",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "ee4759a9-a103-40a9-a30e-10719cad2082",
-      "name": "Ron",
-      "slug": "ron",
-      "description": "ron",
-      "image_url": null,
-      "parent_id": "a32d0b3c-a4fb-472f-ae0c-68e2e8789e9d",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3e29555b-5506-411e-a65a-bde3512ab5c9",
-      "name": "Whisky",
-      "slug": "whisky",
-      "description": "whisky",
-      "image_url": null,
-      "parent_id": "a32d0b3c-a4fb-472f-ae0c-68e2e8789e9d",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "72f7b2ac-97ef-4844-a597-96d54d738477",
-      "name": "Destilados y Aperitivos",
-      "slug": "destilados-y-aperitivos",
-      "description": "vodka",
-      "image_url": null,
-      "parent_id": "a32d0b3c-a4fb-472f-ae0c-68e2e8789e9d",
-      "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "0f2ecce2-86ee-4ac6-a79c-0e41ab4d3582",
-      "name": "Coolers y Accesorios",
-      "slug": "coolers-y-accesorios",
-      "description": "Cooler",
-      "image_url": null,
-      "parent_id": "a32d0b3c-a4fb-472f-ae0c-68e2e8789e9d",
       "sort_order": 6,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
@@ -1848,17 +1144,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "15b1fc98-1579-4827-a405-2b739042dbd3",
-      "name": "Splash y Perfumes",
-      "slug": "splash-y-perfumes",
-      "description": "Splash y Perfumes",
-      "image_url": null,
-      "parent_id": "0e9b1fcb-6a06-4864-a4d8-748571419915",
-      "sort_order": 0,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "84a6e046-e41f-49fe-a0a2-f9c1c7703993",
       "name": "Cuidado del Cabello",
       "slug": "cuidado-del-cabello",
@@ -1877,39 +1162,6 @@
       "image_url": null,
       "parent_id": "84a6e046-e41f-49fe-a0a2-f9c1c7703993",
       "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "8209754c-acbe-4013-af06-97726d0c3da1",
-      "name": "Gel, Cremas y Tratamientos",
-      "slug": "gel-cremas-y-tratamientos",
-      "description": "gel, cremas y tratamientos",
-      "image_url": null,
-      "parent_id": "84a6e046-e41f-49fe-a0a2-f9c1c7703993",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "9572194a-b90b-4697-ab58-3dbf344fd8bf",
-      "name": "Tintes y Decolorantes",
-      "slug": "tintes-y-decolorantes",
-      "description": "Tintes y Decolorantes",
-      "image_url": null,
-      "parent_id": "84a6e046-e41f-49fe-a0a2-f9c1c7703993",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "2217d103-2303-4e58-ae80-5686beb885bd",
-      "name": "Accesorios para el Cabello",
-      "slug": "accesorios-para-el-cabello",
-      "description": "Accesorios para el Cabello",
-      "image_url": null,
-      "parent_id": "84a6e046-e41f-49fe-a0a2-f9c1c7703993",
-      "sort_order": 4,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -1947,28 +1199,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "e05c081d-e944-432e-ab5d-9896b0920b4e",
-      "name": "Cremas, Protectores y Repelentes",
-      "slug": "cremas-protectores-y-repelentes",
-      "description": "cremas protectores y repelentes",
-      "image_url": null,
-      "parent_id": "530287a9-b22d-4e3f-a7c4-c9deb5d041bd",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "0815e0c0-1e01-427c-af5b-c9da32c0ca4a",
-      "name": "Talcos e Hisopos",
-      "slug": "talcos-e-Hisopos",
-      "description": "talcos e isopos",
-      "image_url": null,
-      "parent_id": "530287a9-b22d-4e3f-a7c4-c9deb5d041bd",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "48d282cc-2d09-40f9-a970-47cce4699797",
       "name": "Cuidado Facial",
       "slug": "cuidado-facial",
@@ -1991,17 +1221,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "8f3ae031-f945-4672-a8b7-2af8d6ce16ba",
-      "name": "Hidratación",
-      "slug": "hidratacion",
-      "description": "hidratacion",
-      "image_url": null,
-      "parent_id": "48d282cc-2d09-40f9-a970-47cce4699797",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "d32f026d-38d7-4b01-a988-69d8c0f2115c",
       "name": "Maquillaje",
       "slug": "maquillaje",
@@ -2009,39 +1228,6 @@
       "image_url": null,
       "parent_id": "0e9b1fcb-6a06-4864-a4d8-748571419915",
       "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "811af587-4de0-4a99-aedc-1889f8f7479c",
-      "name": "Cuidado de Manos, Pies y Uñas",
-      "slug": "cuidado-de-manos-pies",
-      "description": "manos",
-      "image_url": null,
-      "parent_id": "0e9b1fcb-6a06-4864-a4d8-748571419915",
-      "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "7023a23c-cc84-4777-afd4-f854221303f1",
-      "name": "Gel y Cremas",
-      "slug": "gel-y-cremas",
-      "description": "Gel y Cremas",
-      "image_url": null,
-      "parent_id": "811af587-4de0-4a99-aedc-1889f8f7479c",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "5f3b6ca9-8a98-4a96-a21e-1dda2d9b87ca",
-      "name": "Esmaltes y Utensilios",
-      "slug": "esmaltes-y-utensilios",
-      "description": "esmaltes y utensilios",
-      "image_url": null,
-      "parent_id": "811af587-4de0-4a99-aedc-1889f8f7479c",
-      "sort_order": 2,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -2079,28 +1265,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "97f6d3c8-6b38-4adb-a744-1964a1640f3a",
-      "name": "Recargas de Saldo Celular",
-      "slug": "recargas-de-saldo-celular",
-      "description": "Recargas de Saldo Celular",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 9,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "0bcc533e-0264-4eff-ac1c-d23b42cb9903",
-      "name": "Recarga Saldo Movistar",
-      "slug": "recarga-saldo-movistar",
-      "description": "Recargas de telefonia",
-      "image_url": null,
-      "parent_id": "97f6d3c8-6b38-4adb-a744-1964a1640f3a",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "7a0ba3f4-21d4-425f-a768-01af667a388b",
       "name": "Masas y Pasapalos",
       "slug": "masas-y-pasapalos",
@@ -2123,336 +1287,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "ab0bd3f3-be5d-4288-aec2-6d6c1790977f",
-      "name": "Helados y Postres",
-      "slug": "helados-y-postres",
-      "description": "Helados y Postres",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 11,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "c65d87ce-3eb9-4162-afab-b6b0eacf18c0",
-      "name": "Helados",
-      "slug": "helados",
-      "description": "helados",
-      "image_url": null,
-      "parent_id": "ab0bd3f3-be5d-4288-aec2-6d6c1790977f",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "b6c7bb8f-cf9e-40df-a09d-1d730bc70a0b",
-      "name": "Postres",
-      "slug": "postres",
-      "description": "postres",
-      "image_url": null,
-      "parent_id": "ab0bd3f3-be5d-4288-aec2-6d6c1790977f",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "f4e9cef4-9239-4359-a010-8fd40ec27488",
-      "name": "Bebes",
-      "slug": "bebes",
-      "description": "bebe",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 12,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "9cc02953-0104-48fd-a93a-4f22028c9c3d",
-      "name": "Higiene",
-      "slug": "higiene",
-      "description": "higiene",
-      "image_url": null,
-      "parent_id": "f4e9cef4-9239-4359-a010-8fd40ec27488",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "27b66ef4-2068-4566-afa4-e01fc8bceb3e",
-      "name": "Alimentación",
-      "slug": "alimentacion",
-      "description": "alimentos",
-      "image_url": null,
-      "parent_id": "f4e9cef4-9239-4359-a010-8fd40ec27488",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "dd0ff4b5-a52a-4aaa-ac33-2147b7e4c42f",
-      "name": "Accesorios Para Niños",
-      "slug": "accesorios-para-ninos",
-      "description": "accesorios",
-      "image_url": null,
-      "parent_id": "f4e9cef4-9239-4359-a010-8fd40ec27488",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "049a0063-3266-467b-aa03-786965c002e9",
-      "name": "Cigarros",
-      "slug": "cigarros",
-      "description": "cigarros",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 13,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "cf798129-b2c8-4f54-a7ee-3e50588ee8e4",
-      "name": "Cigarrillos",
-      "slug": "cigarrillos",
-      "description": "cigarrillos",
-      "image_url": null,
-      "parent_id": "049a0063-3266-467b-aa03-786965c002e9",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "14616cd6-a540-4292-a87c-c1b2f2492a3f",
-      "name": "Electrónicos",
-      "slug": "electronicos-y-hogar",
-      "description": "articulos",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 14,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "a3353936-df5e-4a80-af8c-ac81b1fd1406",
-      "name": "Electrodomésticos",
-      "slug": "electrodomesticos",
-      "description": "Cocina.",
-      "image_url": null,
-      "parent_id": "14616cd6-a540-4292-a87c-c1b2f2492a3f",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "c9eee8cb-4df7-4260-a120-d4b1bb657029",
-      "name": "Cuidado y Belleza",
-      "slug": "cuidado-y-belleza",
-      "description": "Afeitadoras, Secadores.",
-      "image_url": null,
-      "parent_id": "14616cd6-a540-4292-a87c-c1b2f2492a3f",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "5c7ddc05-0f45-4dce-af1d-977c55307721",
-      "name": "Celulares, Tablets y Routers",
-      "slug": "celulares-tablets-y-routers",
-      "description": "celulares",
-      "image_url": null,
-      "parent_id": "14616cd6-a540-4292-a87c-c1b2f2492a3f",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "88d423ce-d34a-4d52-a87b-790062b6db99",
-      "name": "Accesorios para Celulares",
-      "slug": "accesorios-para-celulares",
-      "description": "accesorios para celulares",
-      "image_url": null,
-      "parent_id": "14616cd6-a540-4292-a87c-c1b2f2492a3f",
-      "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "805ebcee-00e8-4de2-a259-4db882e456f0",
-      "name": "Linea Blanca",
-      "slug": "linea-blanca",
-      "description": "linea blanca",
-      "image_url": null,
-      "parent_id": "14616cd6-a540-4292-a87c-c1b2f2492a3f",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "df6434df-6329-48b8-a4f5-b4fdef52489a",
-      "name": "Mascotas",
-      "slug": "mascotas",
-      "description": "Mascotas",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 15,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "d8ad377b-c023-4a45-a822-5de77eae2adf",
-      "name": "Alimento",
-      "slug": "alimento",
-      "description": "alimento",
-      "image_url": null,
-      "parent_id": "df6434df-6329-48b8-a4f5-b4fdef52489a",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "db3c6d99-81d8-4284-a5ca-62f585a2ae45",
-      "name": "Cuidado y Accesorios",
-      "slug": "cuidado-y-accesorios",
-      "description": "cuidado",
-      "image_url": null,
-      "parent_id": "df6434df-6329-48b8-a4f5-b4fdef52489a",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "590401a1-1ea4-4d94-abbb-8899c7b6e8b8",
-      "name": "Juguetes y Snacks",
-      "slug": "juguetes-y-snacks",
-      "description": "Juguetes y Snacks",
-      "image_url": null,
-      "parent_id": "df6434df-6329-48b8-a4f5-b4fdef52489a",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "6d589d11-a1ad-435e-a7eb-f1a4c02cb65d",
-      "name": "Medicamentos para Mascotas",
-      "slug": "medicamentos-para-mascotas",
-      "description": "medicinas",
-      "image_url": null,
-      "parent_id": "df6434df-6329-48b8-a4f5-b4fdef52489a",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "78706e2a-809c-466a-aff6-73c648a8318e",
-      "name": "Desparasitantes para mascotas",
-      "slug": "desparasitantes-para-mascotas",
-      "description": "Desparasitantes",
-      "image_url": null,
-      "parent_id": "6d589d11-a1ad-435e-a7eb-f1a4c02cb65d",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "13318a4e-713a-4dce-a86f-7d6a68d79dd2",
-      "name": "Antibióticos para Mascotas",
-      "slug": "antibioticos-para-mascotas",
-      "description": "Antibióticos para Mascotas",
-      "image_url": null,
-      "parent_id": "6d589d11-a1ad-435e-a7eb-f1a4c02cb65d",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "d87d7698-c59f-49b3-a20b-783a403d05a0",
-      "name": "Control de Pulgas y Garrapatas",
-      "slug": "control-de-pulgas-y-garrapatas",
-      "description": "Garrapaticidas para Mascotas",
-      "image_url": null,
-      "parent_id": "6d589d11-a1ad-435e-a7eb-f1a4c02cb65d",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "5df70477-ba81-4a2d-ac86-3c75ff1bb647",
-      "name": "Medicamentos General",
-      "slug": "medicamentos-general",
-      "description": "Medicamentos General",
-      "image_url": null,
-      "parent_id": "6d589d11-a1ad-435e-a7eb-f1a4c02cb65d",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "cd00cff1-712e-471f-a101-96257cc2f1cc",
-      "name": "Enlatados Importados",
-      "slug": "enlatados-importados",
-      "description": "enlatados importados",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "e1e94cda-59fc-4994-a19b-782404b54f5c",
-      "name": "Snacks Importados",
-      "slug": "snacks-importados",
-      "description": "snacks importados",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3c311765-c748-4873-a2b0-99429aba334d",
-      "name": "Bebidas Importadas",
-      "slug": "bebidas-importadas",
-      "description": "bebidas importadas",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "4620e607-d5b8-4c91-a968-eb56fe6fc55b",
-      "name": "Hogar y Limpieza Importados",
-      "slug": "hogar-y-limpieza-importados",
-      "description": "hogar y limpieza importados",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "22aefbe1-fbbb-4624-a2d9-09d0f079320c",
-      "name": "Utensilios Importados",
-      "slug": "utensilios-importados",
-      "description": "utensilios importados",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "795aafa7-1d32-4e62-af82-bf8bb1ca80dc",
-      "name": "Ropa Importada",
-      "slug": "ropa-importada",
-      "description": "ropa importada",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "d4602afa-2987-4b27-af64-27f7a8fe496e",
       "name": "Cuidado Personal Importado",
       "slug": "cuidado-personal-importado",
@@ -2460,193 +1294,6 @@
       "image_url": null,
       "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
       "sort_order": 8,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "455b8771-a0a0-4928-ac50-499b4fc4c0c5",
-      "name": "Belleza Importado",
-      "slug": "belleza-importado",
-      "description": "Belleza Importado",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 9,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "106c94d0-3c92-4d34-a412-d91bf6a96537",
-      "name": "Medicinas Importadas",
-      "slug": "medicinas-importadas",
-      "description": "medicinas-importadas",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 10,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "13c6b03b-c701-4d82-a138-f08d7e14b7d7",
-      "name": "Empaques con detalle",
-      "slug": "empaques-con-detalle",
-      "description": "Empaques con detalle",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 11,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "a24fd090-13f4-434e-acc0-48c61054895e",
-      "name": "Mascotas Importados",
-      "slug": "mascotas-importados",
-      "description": "mascotas importados",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 12,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "9657c3fa-e7d8-40c5-adb7-30e9d14c9afc",
-      "name": "Vitaminas y Suplementos Importados",
-      "slug": "vitaminas-y-suplementos-importados",
-      "description": "Vitaminas y Suplementos Importados",
-      "image_url": null,
-      "parent_id": "2232ee4e-2ccd-460e-ab69-d72cf3b44416",
-      "sort_order": 13,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "1cbe3205-c69a-45bc-a436-0839deb3a715",
-      "name": "Hogar",
-      "slug": "hogar-y-ferreteria",
-      "description": "hogar y ferreteria",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 17,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "e13da2d5-7704-4c06-a06c-1ee4852ea0ca",
-      "name": "Cocina y Baño",
-      "slug": "cocina-y-bano",
-      "description": "hogar",
-      "image_url": null,
-      "parent_id": "1cbe3205-c69a-45bc-a436-0839deb3a715",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "e7e71268-9ed6-4dd7-a60b-3d58a7985e7b",
-      "name": "Decoración",
-      "slug": "decoracion",
-      "description": "decoracion",
-      "image_url": null,
-      "parent_id": "1cbe3205-c69a-45bc-a436-0839deb3a715",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "85b2868a-1879-4586-af5b-306290cd7e8c",
-      "name": "Iluminación y Pilas",
-      "slug": "iluminacion-y-pilas",
-      "description": "Iluminación",
-      "image_url": null,
-      "parent_id": "1cbe3205-c69a-45bc-a436-0839deb3a715",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "70967d19-b598-4bf3-a1c6-a93617f92ab8",
-      "name": "Ferreteria",
-      "slug": "ferreteria",
-      "description": "ferreteria",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 18,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "5afc6dc7-3c47-4b83-a76b-b032a37be468",
-      "name": "Construcción",
-      "slug": "construccion",
-      "description": "construccion",
-      "image_url": null,
-      "parent_id": "70967d19-b598-4bf3-a1c6-a93617f92ab8",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "448b612c-eebd-414c-a36b-3cc61f20604d",
-      "name": "Herramientas",
-      "slug": "herramientas",
-      "description": "herramientas",
-      "image_url": null,
-      "parent_id": "70967d19-b598-4bf3-a1c6-a93617f92ab8",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3e89b487-eb91-44d9-a589-f80894f719f2",
-      "name": "Cerraduras y Seguridad",
-      "slug": "cerraduras-y-seguridad",
-      "description": "cerraduras y seguridad",
-      "image_url": null,
-      "parent_id": "70967d19-b598-4bf3-a1c6-a93617f92ab8",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "68ffa37b-7c7d-4d57-a8fa-46c4ec1d032a",
-      "name": "Plomeria",
-      "slug": "plomeria",
-      "description": "plomeria",
-      "image_url": null,
-      "parent_id": "70967d19-b598-4bf3-a1c6-a93617f92ab8",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "cda05e1c-f839-4bcf-a3b7-434be40a863a",
-      "name": "Electricidad",
-      "slug": "electricidad",
-      "description": "electricidad",
-      "image_url": null,
-      "parent_id": "70967d19-b598-4bf3-a1c6-a93617f92ab8",
-      "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "1192b688-64aa-4605-a3c3-f8db70678638",
-      "name": "Pinturas",
-      "slug": "pinturas",
-      "description": "pinturas",
-      "image_url": null,
-      "parent_id": "70967d19-b598-4bf3-a1c6-a93617f92ab8",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "5e33d732-0acc-4716-a5fe-e068324c14ed",
-      "name": "Aceites Saludables",
-      "slug": "aceites-saludables",
-      "description": "aceites saludables",
-      "image_url": null,
-      "parent_id": "19348107-3059-4e93-aafc-d3b57c091e64",
-      "sort_order": 2,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -2662,61 +1309,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "0cbca068-c33c-4756-af97-2fb14fc65321",
-      "name": "Granos Saludables",
-      "slug": "granos-saludables",
-      "description": "Granos Saludables",
-      "image_url": null,
-      "parent_id": "19348107-3059-4e93-aafc-d3b57c091e64",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3e3fdf6a-2aaa-4858-a340-c0a9781ebd94",
-      "name": "Snack y Frutos Secos",
-      "slug": "snack-y-frutos-secos",
-      "description": "snack y frutos secos",
-      "image_url": null,
-      "parent_id": "19348107-3059-4e93-aafc-d3b57c091e64",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "43999fee-7316-4de4-aecb-5c5c3584fe3f",
-      "name": "Cereales y Granolas Saludables",
-      "slug": "cereales-y-granolas-saludables",
-      "description": "cereales y granolas-saludables",
-      "image_url": null,
-      "parent_id": "19348107-3059-4e93-aafc-d3b57c091e64",
-      "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "ac5ba98e-8ef3-4098-a5a8-9ee2984cb03f",
-      "name": "Enlatados Saludables",
-      "slug": "enlatados-saludables",
-      "description": "Enlatados libres de gluten",
-      "image_url": null,
-      "parent_id": "19348107-3059-4e93-aafc-d3b57c091e64",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "4a0c8d50-5330-4b30-ae65-998d7c112493",
-      "name": "Untables Saludables",
-      "slug": "untables-saludables",
-      "description": "untables saludables",
-      "image_url": null,
-      "parent_id": "19348107-3059-4e93-aafc-d3b57c091e64",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "fef99eeb-c881-477d-ae0c-d1ceae2c81b0",
       "name": "Listo para Servir Saludable",
       "slug": "listo-para-servir-saludable",
@@ -2724,28 +1316,6 @@
       "image_url": null,
       "parent_id": "19348107-3059-4e93-aafc-d3b57c091e64",
       "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "a8927650-4028-4af2-a842-1bd13eb37c82",
-      "name": "Salsas y Condimentos Saludables",
-      "slug": "salsas-y-condimentos-saludables",
-      "description": "salsas y condimentos saludables",
-      "image_url": null,
-      "parent_id": "19348107-3059-4e93-aafc-d3b57c091e64",
-      "sort_order": 8,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "7229c09c-c255-4f75-af87-de0e3a91590a",
-      "name": "Endulzantes",
-      "slug": "endulzantes",
-      "description": "endulzantes",
-      "image_url": null,
-      "parent_id": "19348107-3059-4e93-aafc-d3b57c091e64",
-      "sort_order": 9,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
@@ -2761,303 +1331,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "19340159-8741-47d6-a5f0-b53d947737dc",
-      "name": "Papelería",
-      "slug": "papeleria",
-      "description": "Papeleria",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 21,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3892255c-237c-4994-a588-6d0afdf52e9c",
-      "name": "Oficina",
-      "slug": "oficina",
-      "description": "oficina",
-      "image_url": null,
-      "parent_id": "19340159-8741-47d6-a5f0-b53d947737dc",
-      "sort_order": 20,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "f6f42f00-3db3-4ade-af59-0e3b6544248b",
-      "name": "Librería",
-      "slug": "libreria",
-      "description": "Librería",
-      "image_url": null,
-      "parent_id": "19340159-8741-47d6-a5f0-b53d947737dc",
-      "sort_order": 21,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "60e4e388-f2d7-4e55-a17d-79fd506034ee",
-      "name": "Juguetería y Fiesta",
-      "slug": "jugueteria-y-fiesta",
-      "description": "Jugueterías",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 22,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "1e7ba0b1-e89b-4f8d-ab37-c6d59d2e3d8c",
-      "name": "Juguete",
-      "slug": "juguete",
-      "description": "juguete",
-      "image_url": null,
-      "parent_id": "60e4e388-f2d7-4e55-a17d-79fd506034ee",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "d944a7aa-b470-4f05-af2a-fc93e7c77119",
-      "name": "De 0 a 4 años",
-      "slug": "de-0-a-4-anos",
-      "description": "De 1 a 4 años",
-      "image_url": null,
-      "parent_id": "1e7ba0b1-e89b-4f8d-ab37-c6d59d2e3d8c",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "124544e7-7baf-498e-a3ea-d2892fe37ae0",
-      "name": "Mas de 4 años",
-      "slug": "mas-de-4-anos",
-      "description": "Mas de 4 años",
-      "image_url": null,
-      "parent_id": "1e7ba0b1-e89b-4f8d-ab37-c6d59d2e3d8c",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "26c1b542-7b2c-4934-a8a6-0e67f7c0d304",
-      "name": "Juegos de Mesa",
-      "slug": "juegos-de-mesa",
-      "description": "Juegos de Mesa",
-      "image_url": null,
-      "parent_id": "1e7ba0b1-e89b-4f8d-ab37-c6d59d2e3d8c",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "725d5537-42b3-486b-a606-638b4770a818",
-      "name": "Fiesta",
-      "slug": "fiesta",
-      "description": "fiesta",
-      "image_url": null,
-      "parent_id": "60e4e388-f2d7-4e55-a17d-79fd506034ee",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "61e722fe-6e74-4f7f-a0ce-cd97c1f317e2",
-      "name": "Automotriz",
-      "slug": "automotriz",
-      "description": "Automotriz",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 23,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "03007642-5629-4464-a5c7-34708418d8d7",
-      "name": "Lubricantes y Fluidos",
-      "slug": "lubricantes-y-fluidos",
-      "description": "lubricantes y fluidos",
-      "image_url": null,
-      "parent_id": "61e722fe-6e74-4f7f-a0ce-cd97c1f317e2",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "7dde7dfa-91b5-4f41-a8ad-4dea4bc95c1c",
-      "name": "Baterias",
-      "slug": "baterias",
-      "description": "baterias",
-      "image_url": null,
-      "parent_id": "61e722fe-6e74-4f7f-a0ce-cd97c1f317e2",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "e8cf8b6c-4adb-401b-a20d-5f1dc27319d2",
-      "name": "Repuestos y Cuidado",
-      "slug": "repuestos-y-cuidado",
-      "description": "repuestos y cuidado",
-      "image_url": null,
-      "parent_id": "61e722fe-6e74-4f7f-a0ce-cd97c1f317e2",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "40dd2a86-d3f2-43e9-aab8-ce5150504c41",
-      "name": "Cauchos",
-      "slug": "cauchos",
-      "description": "cauchos",
-      "image_url": null,
-      "parent_id": "61e722fe-6e74-4f7f-a0ce-cd97c1f317e2",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "cb5056ab-6826-42d8-ae68-8767c1618202",
-      "name": "Deportes",
-      "slug": "deportes",
-      "description": "deportes",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 24,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3280551c-b5d8-4adf-ad49-4ef6335217e1",
-      "name": "Implementos",
-      "slug": "implementos",
-      "description": "implementos",
-      "image_url": null,
-      "parent_id": "cb5056ab-6826-42d8-ae68-8767c1618202",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "6e83926a-5ce7-4db2-a007-30e48c7cc02b",
-      "name": "Accesorios",
-      "slug": "accesorios",
-      "description": "accesorios",
-      "image_url": null,
-      "parent_id": "cb5056ab-6826-42d8-ae68-8767c1618202",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "8ccc501b-bb42-4560-a844-333e2101a08a",
-      "name": "Suplementos",
-      "slug": "suplementos",
-      "description": "suplementos",
-      "image_url": null,
-      "parent_id": "cb5056ab-6826-42d8-ae68-8767c1618202",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "09b3b9b9-2960-43d3-a873-07f41056f254",
-      "name": "Ropa y Accesorios",
-      "slug": "ropa-y-accesorios",
-      "description": "ropa y accesorios",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 25,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "4add1116-a116-4a6d-a09b-ecdfe00b5019",
-      "name": "Calzados",
-      "slug": "calzados",
-      "description": "calzados",
-      "image_url": null,
-      "parent_id": "09b3b9b9-2960-43d3-a873-07f41056f254",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "6f05d513-68d7-4e92-ad09-f4948390eb0a",
-      "name": "Top Caballero",
-      "slug": "top-caballero",
-      "description": "top",
-      "image_url": null,
-      "parent_id": "09b3b9b9-2960-43d3-a873-07f41056f254",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3e66c2c6-abca-41c6-a60b-aa1c1d141b0e",
-      "name": "Bolsos y Accesorios",
-      "slug": "bolsos-y-accesorios",
-      "description": "bolsos y accesorios",
-      "image_url": null,
-      "parent_id": "09b3b9b9-2960-43d3-a873-07f41056f254",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3f3f9bf8-884d-43de-a876-fa9fad6dc8f9",
-      "name": "Gorras y Sombreros",
-      "slug": "gorras-y-sombreros",
-      "description": "gorras",
-      "image_url": null,
-      "parent_id": "09b3b9b9-2960-43d3-a873-07f41056f254",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "81c5802c-07e7-43cf-a886-0188b77a77e7",
-      "name": "Delicatessen",
-      "slug": "delicatessen",
-      "description": "delicateses",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 26,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "82bf154a-d1a3-4f17-a8c5-160f7330dc46",
-      "name": "Navidad",
-      "slug": "navidad",
-      "description": "navidad",
-      "image_url": null,
-      "parent_id": null,
-      "sort_order": 27,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3841b3e3-b363-45a4-ac2b-f94829becf0d",
-      "name": "Navidad Articulos",
-      "slug": "navidad-articulos",
-      "description": "articulos navidad",
-      "image_url": null,
-      "parent_id": "82bf154a-d1a3-4f17-a8c5-160f7330dc46",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "c4e4b48e-f0df-4b05-af79-88908c9a8755",
-      "name": "Sabores de Navidad",
-      "slug": "sabores-de-navidad",
-      "description": "sabores de navidad",
-      "image_url": null,
-      "parent_id": "82bf154a-d1a3-4f17-a8c5-160f7330dc46",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
       "name": "Bodegón Italiano",
       "slug": "bodegon-italiano",
@@ -3069,50 +1342,6 @@
       "created_at": "2026-09-16T04:54:04.182Z"
     },
     {
-      "id": "a49d9cd4-0a7a-4535-a43e-207c5725418a",
-      "name": "Salsas Italianas",
-      "slug": "salsas-Italianas",
-      "description": "Salsas Italianas",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "e55f3d6d-782c-4cb3-ad72-60b206d4a849",
-      "name": "Aceites Italianos",
-      "slug": "aceites-Italianos",
-      "description": "Aceites Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "ee928e72-0f93-4604-a14d-61bf337547dd",
-      "name": "Condimentos Italianos",
-      "slug": "condimentos-Italianos",
-      "description": "Condimentos Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "bb9304db-ccfd-44e0-a8a3-1602757aa0d6",
-      "name": "Café e Infusiones Italianas",
-      "slug": "cafe-e-infusiones-italianas",
-      "description": "Café e Infuciones Italianas",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
       "id": "9307cf54-2431-4b82-a3f5-136d5bb06acf",
       "name": "Charcuteria Italiana",
       "slug": "charcuteria-italiana",
@@ -3120,127 +1349,6 @@
       "image_url": null,
       "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
       "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "201f10b3-576a-4cbc-a2ba-0031920502ab",
-      "name": "Chocolates y Dulces Italianos",
-      "slug": "chocolates-y-dulces-italianos",
-      "description": "Chocolates y Dulces Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 6,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "b5ca9cfe-a740-476f-ae49-27fee409f968",
-      "name": "Enlatados Italianos",
-      "slug": "enlatados-italianos",
-      "description": "Enlatados Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "3b5b2ffc-803d-40b2-a268-13724f2e4446",
-      "name": "Galletas y Ponques Italianos",
-      "slug": "galletas-y-ponques-italianos",
-      "description": "Galletas y Ponques Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 8,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "c898ae1a-7f6b-46bb-a14c-43cd1bf67e3a",
-      "name": "Snacks Italianos",
-      "slug": "snacks-italianos",
-      "description": "Snacks Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 9,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "953545e6-7c51-4470-a94d-99f1002005ab",
-      "name": "Masas y Pasapalos Italianos",
-      "slug": "masas-y-pasapalos-italianos",
-      "description": "Masas y Pasapalos Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 10,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "94d53393-29c5-4e0f-a672-876328542039",
-      "name": "Pasta y Arroz Italiano",
-      "slug": "pasta-y-arroz-italiano",
-      "description": "Pasta y Arroz Italiano",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 12,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "b5b77aba-5dd7-4033-a517-1bd67e3cc67d",
-      "name": "Licores y Bebidas Italianos",
-      "slug": "licores-y-bebidas-italianos",
-      "description": "Licores y Bebidas Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 13,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "62b5ff41-c0c0-4429-a922-05994d18f2c2",
-      "name": "Vinagres Italianos",
-      "slug": "vinagres-italianos",
-      "description": "Vinagres Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 14,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "48dc127a-8721-4a0b-ae47-dc42c8bf962d",
-      "name": "Harinas Italianas",
-      "slug": "harinas-italianas",
-      "description": "Harinas Italianas",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 15,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "5c1b507a-7747-4656-aad0-98c4043686fc",
-      "name": "Mermeladas y Siropes Italianos",
-      "slug": "mermeladas-y-siropes-italianos",
-      "description": "Mermeladas y Siropes Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 16,
-      "is_active": true,
-      "created_at": "2026-09-16T04:54:04.182Z"
-    },
-    {
-      "id": "bd89ae06-8f5a-446a-a15a-4ff0466ad0ab",
-      "name": "Untables Italianos",
-      "slug": "untables-italianos",
-      "description": "Untables Italianos",
-      "image_url": null,
-      "parent_id": "36b37961-0d90-4a4b-a9d1-97317c57b4b7",
-      "sort_order": 17,
       "is_active": true,
       "created_at": "2026-09-16T04:54:04.182Z"
     },
