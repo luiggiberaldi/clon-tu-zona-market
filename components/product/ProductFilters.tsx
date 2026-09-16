@@ -102,7 +102,7 @@ export function ProductFilters({ categoryId, offerOnly = false, totalCount }: Pr
                 defaultValue={minPrice}
                 placeholder="Mín"
                 aria-label="Precio mínimo en USD"
-                className="h-7 w-16 rounded-md bg-transparent pl-5 pr-1 text-xs text-[#14191D] placeholder:text-[#80939F] focus:outline-none"
+                className="h-7 w-16 rounded-md bg-transparent pl-5 pr-1 text-xs text-[#14191D] placeholder:text-[#80939F] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
             </div>
             <span className="text-xs text-[#5C6770] font-light">–</span>
@@ -116,16 +116,14 @@ export function ProductFilters({ categoryId, offerOnly = false, totalCount }: Pr
                 defaultValue={maxPrice}
                 placeholder="Máx"
                 aria-label="Precio máximo en USD"
-                className="h-7 w-16 rounded-md bg-transparent pl-5 pr-1 text-xs text-[#14191D] placeholder:text-[#80939F] focus:outline-none"
+                className="h-7 w-16 rounded-md bg-transparent pl-5 pr-1 text-xs text-[#14191D] placeholder:text-[#80939F] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
             </div>
             <button
               type="submit"
-              aria-label="Aplicar rango de precio"
-              className="ml-1 inline-flex h-7 w-7 items-center justify-center rounded-lg bg-[#ECA700] text-[#14191D] hover:bg-[#C68500] hover:text-white transition-colors cursor-pointer"
-              title="Aplicar rango de precio"
+              className="ml-1 inline-flex h-7 items-center justify-center rounded-lg bg-[#ECA700] px-2.5 text-xs font-bold text-[#14191D] hover:bg-[#C68500] hover:text-white transition-colors cursor-pointer"
             >
-              <ArrowRight size={13} strokeWidth={2.5} />
+              Aplicar
             </button>
           </div>
 
