@@ -110,7 +110,7 @@ export function SelectDropdown({ options, value, defaultValue, onChange, name, p
         disabled={disabled}
         onClick={() => !disabled && setOpen(next => !next)}
         onKeyDown={onKeyDown}
-        className={`flex min-h-[44px] w-full items-center justify-between gap-2 rounded-xl border px-3 py-2.5 text-left text-sm shadow-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ECA700] disabled:opacity-50 ${tone === 'onDark' ? 'max-h-9 min-h-0 border-transparent bg-transparent py-1 text-xs font-semibold text-[#14191D] hover:bg-black/5' : 'bg-white'} ${open ? (tone === 'onDark' ? 'border-[#14191D]/50' : 'border-[#ECA700] ring-2 ring-[#ECA700]/25') : tone === 'onDark' ? '' : 'border-[#EAE4D5] hover:border-[#C68500]'}`}
+        className={`flex min-h-[44px] w-full items-center justify-between gap-2 rounded-xl border px-3 py-2.5 text-left text-sm shadow-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFEB01] disabled:opacity-50 ${tone === 'onDark' ? 'max-h-9 min-h-0 border-transparent bg-transparent py-1 text-xs font-semibold text-[#14191D] hover:bg-black/5' : 'bg-white'} ${open ? (tone === 'onDark' ? 'border-[#14191D]/50' : 'border-[#FFEB01] ring-2 ring-[#FFEB01]/30') : tone === 'onDark' ? '' : 'border-[#EAE4D5] hover:border-[#D4C200]'}`}
       >
         <span className={`truncate ${selected ? '' : tone === 'onDark' ? '' : 'text-muted-foreground'}`}>{label}</span>
         <ChevronDown size={tone === 'onDark' ? 13 : 16} className={`shrink-0 ${tone === 'onDark' ? 'text-[#14191D]' : 'text-muted-foreground'} transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden />
@@ -135,7 +135,7 @@ export function SelectDropdown({ options, value, defaultValue, onChange, name, p
                   aria-selected={isSelected}
                   onMouseEnter={() => setActiveIndex(index)}
                   onClick={() => choose(option.value)}
-                  className={`w-full rounded-lg px-3 py-2 text-left text-sm ${isSelected ? 'bg-[#ECA700] font-semibold text-[#14191D]' : isActive ? 'bg-[#FFF4D1] text-[#14191D]' : 'bg-white text-[#14191D] hover:bg-[#FFF4D1]/50'}`}
+                  className={`w-full rounded-lg px-3 py-2 text-left text-sm ${isSelected ? 'bg-[#FFEB01] font-semibold text-[#14191D]' : isActive ? 'bg-[#FFFBD1] text-[#14191D]' : 'bg-white text-[#14191D] hover:bg-[#FFFBD1]/50'}`}
                 >
                   {option.label}
                 </button>

@@ -9,28 +9,28 @@
     --foreground: 206 20% 10%;
     --card: 0 0% 100%;
     --card-foreground: 206 20% 10%;
-    --primary: 42 100% 46%;
+    --primary: 55 100% 50%;
     --primary-foreground: 206 20% 10%;
-    --secondary: 46 100% 91%;
-    --secondary-foreground: 40 100% 25%;
-    --muted: 42 30% 96%;
+    --secondary: 55 100% 92%;
+    --secondary-foreground: 45 100% 20%;
+    --muted: 55 30% 96%;
     --muted-foreground: 206 12% 45%;
-    --accent: 42 100% 95%;
+    --accent: 55 100% 95%;
     --accent-foreground: 206 20% 10%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
-    --border: 40 25% 88%;
-    --input: 40 25% 85%;
-    --ring: 42 100% 46%;
+    --border: 50 15% 88%;
+    --input: 50 15% 85%;
+    --ring: 55 100% 50%;
     --radius: 0.75rem;
   }
   * { @apply border-border; }
   body { @apply bg-background text-foreground antialiased; }
   button, input, select, textarea { font: inherit; }
   button, a, input, select, textarea, summary { -webkit-tap-highlight-color: transparent; }
-  :focus-visible { outline: 3px solid #ECA700; outline-offset: 3px; }
+  :focus-visible { outline: 3px solid #FFEB01; outline-offset: 3px; }
   button:disabled { cursor: not-allowed; }
-  ::selection { background: #FFF4D1; color: #14191D; }
+  ::selection { background: #FFFBD1; color: #14191D; }
 }
 
 @layer utilities {
@@ -447,16 +447,16 @@ form input, form select, form textarea { max-width: 100%; }
   .catalog-pagination { gap: 7px; }
 }
 /* ==========================================================================
-   TU ZONA MARKET - SISTEMA CROMÁTICO YELLOW-FIRST (PREMIUM EDITION)
+   TODO MARKET - SISTEMA CROMÁTICO YELLOW-FIRST (ELECTRIC SUNSHINE #FFEB01)
    ========================================================================== */
 :root {
   --brand-ink: #14191D;
   --brand-ink-deep: #1C242A;
-  --brand-yellow: #ECA700;
-  --brand-yellow-dark: #C68500;
-  --brand-yellow-soft: #FFF4D1;
+  --brand-yellow: #FFEB01;
+  --brand-yellow-dark: #D4C200;
+  --brand-yellow-soft: #FFFBD1;
   --brand-cream: #FFFFFF;
-  --brand-border: #EAE4D5;
+  --brand-border: #E8E5CE;
   --brand-offer: #DC2626;
   --brand-stock: #15803D;
 }
@@ -482,7 +482,7 @@ body { background: #FFFFFF; color: var(--brand-ink); }
 .hero-copy h1 em { color: var(--brand-yellow-dark); }
 .hero-copy > p:not(.hero-eyebrow) { color: #5C6770; }
 .store-button { background: var(--brand-yellow); color: var(--brand-ink); font-weight: 650; }
-.store-button:hover { background: var(--brand-yellow-dark); color: #FFFFFF; }
+.store-button:hover { background: var(--brand-yellow-dark); color: var(--brand-ink); }
 .hero-orbit { background: #FDE8A5; }
 .hero-orbit::before { border-color: #F0CF6F; }
 .category-tiles a:hover .category-icon, .category-tiles a.active .category-icon { background: var(--brand-yellow-soft); color: var(--brand-yellow-dark); }
@@ -493,7 +493,7 @@ body { background: #FFFFFF; color: var(--brand-ink); }
 .product-card { background: #FFFFFF; border: 1px solid #ECE7DA; }
 .product-card:hover { border-color: #E2C46C; box-shadow: 0 8px 24px rgba(20, 25, 29, 0.08); }
 .product-add { background: var(--brand-yellow); color: var(--brand-ink); font-weight: 650; }
-.product-add:hover:not(:disabled) { background: var(--brand-yellow-dark); color: #FFFFFF; }
+.product-add:hover:not(:disabled) { background: var(--brand-yellow-dark); color: var(--brand-ink); }
 .product-add:disabled { background: #F3EEDB; color: #8C8471; }
 .market-ribbon { background: #FFF9E6; border: 1px solid #EFE2BE; }
 .ribbon-symbol, .market-ribbon a { color: var(--brand-yellow-dark); }

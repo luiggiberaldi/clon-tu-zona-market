@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Suspense, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { ShoppingBasket, UserRound, ChevronDown, LayoutGrid, Tag, ArrowRight } from 'lucide-react';
@@ -27,8 +28,15 @@ export function Header({ categories = [] }: { categories?: Category[] }) {
       <header className="store-header">
         <div className="store-header-main storefront-container">
           <Link href="/carabobo" className="store-brand" aria-label={`${storeConfig.name}, inicio`}>
-            <span className="brand-symbol" aria-hidden="true"><ShoppingBasket size={30} strokeWidth={1.8} /><span /></span>
-            <span><strong>{storeConfig.name}</strong><small>Tu supermercado, más cerca.</small></span>
+            <Image
+              src="/images/todo-market-cart.png"
+              alt=""
+              width={48}
+              height={31}
+              className="h-10 w-auto object-contain shrink-0"
+              priority
+            />
+            <span><strong>{storeConfig.name}</strong><small>Tu supermercado en un solo lugar.</small></span>
           </Link>
           <div className="store-header-search"><Suspense fallback={<div className="store-search h-11" />}><SearchBar /></Suspense></div>
           <div className="store-header-tools">

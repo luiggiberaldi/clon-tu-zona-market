@@ -124,7 +124,7 @@ export function ProductFilters({ categoryId, offerOnly = false, totalCount }: Pr
         {/* Grupo Izquierdo: Rango de Precio y Ofertas */}
         <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
           {/* Módulo de Rango de Precio */}
-          <div className="flex items-center gap-1.5 rounded-xl border border-[#EAE4D5] bg-white px-2.5 py-1.5 shadow-2xs focus-within:border-[#ECA700] focus-within:ring-2 focus-within:ring-[#ECA700]/20 transition-all">
+          <div className="flex items-center gap-1.5 rounded-xl border border-[#EAE4D5] bg-white px-2.5 py-1.5 shadow-2xs focus-within:border-[#FFEB01] focus-within:ring-2 focus-within:ring-[#FFEB01]/25 transition-all">
             <SlidersHorizontal size={15} className="text-[#5C6770] shrink-0" aria-hidden="true" />
             <span className="text-[11px] font-semibold text-[#5C6770] pr-0.5 hidden sm:inline">Precio</span>
             <div className="relative flex items-center">
@@ -156,7 +156,7 @@ export function ProductFilters({ categoryId, offerOnly = false, totalCount }: Pr
             </div>
             <button
               type="submit"
-              className="ml-1 inline-flex h-7 items-center justify-center rounded-lg bg-[#ECA700] px-2.5 text-xs font-bold text-[#14191D] hover:bg-[#C68500] hover:text-white transition-colors cursor-pointer"
+              className="ml-1 inline-flex h-7 items-center justify-center rounded-lg bg-[#FFEB01] px-2.5 text-xs font-bold text-[#14191D] hover:bg-[#D4C200] hover:text-[#14191D] transition-colors cursor-pointer"
             >
               Aplicar
             </button>
@@ -170,13 +170,13 @@ export function ProductFilters({ categoryId, offerOnly = false, totalCount }: Pr
               aria-pressed={isOffer}
               className={`inline-flex h-10 items-center gap-1.5 rounded-xl border px-3 text-xs font-medium transition-all cursor-pointer select-none ${
                 isOffer
-                  ? 'border-[#ECA700] bg-[#FFF4D1] text-[#14191D] font-semibold shadow-2xs'
-                  : 'border-[#EAE4D5] bg-white text-[#5C6770] hover:border-[#ECA700]/70 hover:text-[#14191D]'
+                  ? 'border-[#FFEB01] bg-[#FFFBD1] text-[#14191D] font-semibold shadow-2xs'
+                  : 'border-[#EAE4D5] bg-white text-[#5C6770] hover:border-[#FFEB01]/70 hover:text-[#14191D]'
               }`}
             >
-              <Tag size={14} className={isOffer ? 'text-[#ECA700] fill-[#ECA700]/20' : 'text-[#5C6770]'} />
+              <Tag size={14} className={isOffer ? 'text-[#D4C200] fill-[#FFEB01]/30' : 'text-[#5C6770]'} />
               <span>Solo ofertas</span>
-              {isOffer && <Check size={13} className="text-[#ECA700] stroke-[2.5]" />}
+              {isOffer && <Check size={13} className="text-[#D4C200] stroke-[2.5]" />}
             </button>
           )}
         </div>
@@ -231,9 +231,9 @@ export function ProductFilters({ categoryId, offerOnly = false, totalCount }: Pr
             <button
               type="button"
               onClick={() => removeFilter('isOffer')}
-              className="inline-flex items-center gap-1.5 rounded-full bg-[#FFF4D1] border border-[#ECA700]/50 px-2.5 py-1 text-xs font-medium text-[#14191D] hover:bg-[#FFE8A3] transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full bg-[#FFFBD1] border border-[#FFEB01]/60 px-2.5 py-1 text-xs font-medium text-[#14191D] hover:bg-[#FFF4D1] transition-colors cursor-pointer"
             >
-              <Tag size={12} className="text-[#ECA700]" />
+              <Tag size={12} className="text-[#D4C200]" />
               Solo ofertas
               <X size={13} className="text-muted-foreground hover:text-[#14191D]" />
             </button>

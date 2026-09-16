@@ -94,7 +94,7 @@ export function CategoryNav({ categories, className, activeSlug, tiles = false }
               {idx > 0 && <ChevronRight size={12} className="opacity-50" />}
               <Link
                 href={`/categorias/${category.slug}`}
-                className={cn('hover:text-foreground transition-colors', activeSlug === category.slug && 'font-semibold text-foreground underline decoration-[#ECA700] underline-offset-4')}
+                className={cn('hover:text-foreground transition-colors', activeSlug === category.slug && 'font-semibold text-foreground underline decoration-[#FFEB01] underline-offset-4')}
                 aria-current={activeSlug === category.slug ? 'page' : undefined}
               >
                 {category.name}
@@ -116,8 +116,8 @@ export function CategoryNav({ categories, className, activeSlug, tiles = false }
               className={cn(
                 'rounded-full border px-3 py-1.5 font-medium transition-colors',
                 activeSlug === category.slug
-                  ? 'border-[#C68500] bg-[#FFF4D1] text-[#7F5500] font-semibold'
-                  : 'border-[#EAE4D5] bg-white text-[#3B464F] hover:border-[#C68500] hover:bg-[#FFF4D1]/60'
+                  ? 'border-[#D4C200] bg-[#FFFBD1] text-[#614F00] font-semibold'
+                  : 'border-[#EAE4D5] bg-white text-[#3B464F] hover:border-[#D4C200] hover:bg-[#FFFBD1]/60'
               )}
             >
               {category.name}

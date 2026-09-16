@@ -1,4 +1,4 @@
-# Mercado Cercano · Demo / MVP modificable
+# Todo Market · Supermercado online · Demo / MVP modificable
 
 Tienda de un comercio y un almacén, con marca configurable, catálogo público en español, carrito, checkout, administración y reparto asignado. Next.js App Router + Supabase PostgreSQL/Auth/Storage. Tarjetas, Zelle, Prime y recargas permanecen desactivados.
 

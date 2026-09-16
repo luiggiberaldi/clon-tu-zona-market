@@ -1,7 +1,7 @@
 export const storeConfig = {
-  name: process.env.NEXT_PUBLIC_STORE_NAME?.trim() || 'Mercado Cercano',
-  shortName: process.env.NEXT_PUBLIC_STORE_SHORT_NAME?.trim() || 'Cercano',
-  description: 'Tu supermercado, más cerca de ti.',
+  name: process.env.NEXT_PUBLIC_STORE_NAME?.trim() || 'Todo Market',
+  shortName: process.env.NEXT_PUBLIC_STORE_SHORT_NAME?.trim() || 'TodoMarket',
+  description: 'Tu supermercado en un solo lugar.',
   email: process.env.NEXT_PUBLIC_SUPPORT_EMAIL?.trim() || '',
   phone: process.env.NEXT_PUBLIC_SUPPORT_PHONE?.trim() || '',
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'http://localhost:3000',
