@@ -84,7 +84,6 @@ export function ProductFilters({ categoryId, offerOnly = false, totalCount }: Pr
         )}
         {/* Hidden inputs to preserve parameters on form submit */}
         {isOffer && <input type="hidden" name="isOffer" value="true" />}
-        <input type="hidden" name="sort" value={sort} />
 
         {/* Grupo Izquierdo: Rango de Precio y Ofertas */}
         <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">

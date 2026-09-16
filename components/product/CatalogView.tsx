@@ -9,7 +9,7 @@ import { CategoryNav } from '@/components/shared/CategoryNav';
 import type { ProductFilters as Filters } from '@/types';
 
 export type CatalogSearch = Record<string, string | string[] | undefined>;
-const first = (value: string | string[] | undefined) => typeof value === 'string' ? value : undefined;
+const first = (value: string | string[] | undefined) => typeof value === 'string' ? value : Array.isArray(value) ? value[value.length - 1] : undefined;
 const price = (value: string | undefined) => value && Number.isFinite(Number(value)) && Number(value) >= 0 ? Number(value) : undefined;
 const sorts: NonNullable<Filters['sort']>[] = ['newest', 'price_asc', 'price_desc', 'name_asc'];
 
