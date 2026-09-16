@@ -3,7 +3,7 @@
 import { useRef, useTransition } from 'react';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { SlidersHorizontal, Tag, X, ArrowRight, RotateCcw, Check } from 'lucide-react';
+import { SlidersHorizontal, Tag, X, RotateCcw, Check } from 'lucide-react';
 import { SelectDropdown } from '@/components/ui/select-dropdown';
 
 interface ProductFiltersProps {

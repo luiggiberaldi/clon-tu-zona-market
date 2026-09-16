@@ -61,8 +61,8 @@ try{
     await shot(page,'demo-real-desktop.png');
   });
   await scenario('Search submits actual terms and returns matching product',async()=>{
-    await page.getByRole('searchbox',{name:'Buscar productos'}).fill('Arroz Mary');
-    await page.getByRole('searchbox',{name:'Buscar productos'}).press('Enter',{timeout:180000});await page.waitForURL('**/productos?search=Arroz+Mary');
+    await page.getByRole('searchbox',{name:'Buscar productos'}).fill('Arroz Mary Integral');
+    await page.getByRole('searchbox',{name:'Buscar productos'}).press('Enter',{timeout:180000});await page.waitForURL('**/productos?search=Arroz+Mary+Integral');
     await page.getByRole('heading',{name:/Resultados para/}).waitFor();assert(await page.locator('.product-card').count()===1,'Unexpected search count');assert((await page.locator('.product-card').innerText()).includes('Arroz Mary Integral'),'Incorrect search result');
   });
   await scenario('Filters, price sort and clear use the published final price',async()=>{

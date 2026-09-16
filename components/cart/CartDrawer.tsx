@@ -8,7 +8,6 @@ import { CartItem } from '@/components/cart/CartItem';
 import { EmptyCart } from '@/components/cart/EmptyCart';
 import { useCartStore, selectCartSubtotalUsd } from '@/store/cartStore';
 import { PriceDisplay } from '@/components/shared/PriceDisplay';
-import { formatMoney } from '@/lib/utils/formatters';
 
 export function CartDrawer() {
   const isOpen = useCartStore(state => state.isOpen);

@@ -23,7 +23,6 @@ function finite(value: number | undefined, fallback: number, maximum = 10000) {
 export async function getCatalog(filters: ProductFilters = {}): Promise<{ data: ProductWithCategory[]; total: number; page: number; pageSize: number; hasMore: boolean; error?: string }> {
   const page = finite(filters.page, 1);
   const pageSize = finite(filters.pageSize, 24, 60);
-  const empty = { data: [] as ProductWithCategory[], total: 0, page, pageSize, hasMore: false };
   try {
     const categoryIds = new Set<string>();
     if (filters.category) {
