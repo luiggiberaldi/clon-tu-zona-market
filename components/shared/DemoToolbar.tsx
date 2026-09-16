@@ -4,6 +4,33 @@ import Link from 'next/link';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { useCartStore } from '@/store/cartStore';
 
+const inlineSwitchScript = `
+(function(){
+  if (window.__demoSwitchInit) return;
+  window.__demoSwitchInit = true;
+  document.addEventListener('click', function(e) {
+    var btn = e.target && e.target.closest ? e.target.closest('button[data-demo-role]') : null;
+    if (!btn || btn.disabled) return;
+    var role = btn.getAttribute('data-demo-role');
+    if (!role) return;
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    fetch('/api/demo/control', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'switch', values: { role: role } })
+    }).then(function(r) { return r.json(); }).then(function(res) {
+      if (res && res.error) throw new Error(res.error.message || 'Error');
+      var target = role === 'admin' ? '/admin' : role === 'driver' ? '/repartidor' : '/perfil';
+      window.location.assign(target);
+    }).catch(function() {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    });
+  }, true);
+})();
+`;
+
 export function DemoToolbar(){
   const auth=useAuth();const [busy,setBusy]=useState(false);const [error,setError]=useState('');
   async function switchRole(role:'customer'|'admin'|'driver'){
@@ -17,25 +44,14 @@ export function DemoToolbar(){
   }
   return (
     <aside className="demo-toolbar border-b border-amber-200 bg-amber-50 px-4 py-2 text-amber-950" aria-label="Controles de demo local">
+      <script dangerouslySetInnerHTML={{ __html: inlineSwitchScript }} />
       <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-2 text-xs">
         <strong>DEMO LOCAL · Sin cobros ni envíos reales</strong>
         <span>{auth.loading?'Comprobando sesión…':auth.user?.full_name||'Invitado'}</span>
         <nav className="flex flex-wrap items-center gap-3" aria-label="Cuentas de prueba">
-          <form action="/api/demo/control" method="POST" onSubmit={(e)=>{e.preventDefault();void switchRole('customer');}} className="inline">
-            <input type="hidden" name="action" value="switch" />
-            <input type="hidden" name="role" value="customer" />
-            <button type="submit" disabled={busy} className="underline disabled:opacity-50">Entrar como cliente</button>
-          </form>
-          <form action="/api/demo/control" method="POST" onSubmit={(e)=>{e.preventDefault();void switchRole('admin');}} className="inline">
-            <input type="hidden" name="action" value="switch" />
-            <input type="hidden" name="role" value="admin" />
-            <button type="submit" disabled={busy} className="underline disabled:opacity-50">Administrar demo</button>
-          </form>
-          <form action="/api/demo/control" method="POST" onSubmit={(e)=>{e.preventDefault();void switchRole('driver');}} className="inline">
-            <input type="hidden" name="action" value="switch" />
-            <input type="hidden" name="role" value="driver" />
-            <button type="submit" disabled={busy} className="underline disabled:opacity-50">Entrar como repartidor</button>
-          </form>
+          <button type="button" data-demo-role="customer" disabled={busy} className="underline disabled:opacity-50" onClick={()=>void switchRole('customer')}>Entrar como cliente</button>
+          <button type="button" data-demo-role="admin" disabled={busy} className="underline disabled:opacity-50" onClick={()=>void switchRole('admin')}>Administrar demo</button>
+          <button type="button" data-demo-role="driver" disabled={busy} className="underline disabled:opacity-50" onClick={()=>void switchRole('driver')}>Entrar como repartidor</button>
           <Link className="underline" href="/demo/buzon">Buzón local</Link>
           <Link className="underline" href="/demo/procedencia">Origen del catálogo</Link>
         </nav>
