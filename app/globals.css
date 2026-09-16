@@ -198,6 +198,7 @@
 .catalog-heading h1 { margin-top: 10px; font-size: 32px; line-height: 1.2; letter-spacing: -1px; font-weight: 700; }
 .catalog-heading > div > p:last-child { margin-top: 12px; max-width: 600px; font-size: 12px; line-height: 1.7; color: #5c6770; }
 .catalog-count { border-radius: 20px; padding: 9px 14px; background: var(--brand-yellow-soft); font-size: 11px; color: #664600; white-space: nowrap; font-weight: 600; }
+.catalog-filters-bar { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 12px 16px; padding: 10px 14px; background: #faf8f5; border: 1px solid var(--brand-border); border-radius: 16px; box-shadow: 0 1px 3px rgba(20, 25, 29, 0.03); }
 .catalog-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 17px; padding: 18px 0; border-block: 1px solid #ece7da; }
 .filter-price { display: flex; align-items: center; gap: 8px; color: #5c6770; }
 .filter-price input { border: 1px solid #e5d6aa; border-radius: 6px; background: #fff; padding: 8px; width: 78px; font-size: 11px; }
