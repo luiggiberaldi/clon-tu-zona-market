@@ -82,7 +82,7 @@ try{
     await goto(page,'/productos/'+dataset.products[0].slug);await page.getByRole('heading',{name:dataset.products[0].name,exact:true}).waitFor();
     const gallery=page.getByRole('button',{name:'Ver imagen 2',exact:true});await gallery.click();assert(await gallery.getAttribute('aria-pressed')==='true','Gallery selection failed');
     assert((await page.locator('main').innerText()).includes('1.04'),'Published offer price changed');
-    await pick(page,page,'Moneda de precios','VES Bs.');await page.waitForFunction(()=>document.querySelector('main')?.innerText.includes('875'));
+    await pick(page,page,'Moneda de precios','VES Bs');await page.waitForFunction(()=>document.querySelector('main')?.innerText.includes('875'));
     await pick(page,page,'Moneda de precios','USD $');
     await page.getByRole('button',{name:'Agregar al carrito',exact:true}).click();const dialog=page.getByRole('dialog');await dialog.waitFor();await dialog.getByRole('button',{name:'Aumentar',exact:true}).click();assert((await dialog.innerText()).includes('$2.08'),'Cart price discounted twice');await page.keyboard.press('Escape');
     await goto(page,'/carrito');await page.getByRole('heading',{name:'Resumen estimado'}).waitFor();assert((await page.locator('main').innerText()).includes('$2.08'),'Cart did not persist');

@@ -7,8 +7,11 @@ describe('formatters', () => {
     expect(out).toMatch(/10/);
   });
 
-  it('formatMoney VES usa símbolo Bs en fallback', () => {
-    expect(formatMoney(12.5, 'VES')).toMatch(/12/);
+  it('formatMoney VES usa símbolo Bs y no Bs.S', () => {
+    const out = formatMoney(12.5, 'VES');
+    expect(out).toMatch(/^Bs\s12,50/);
+    expect(out).not.toContain('Bs.S');
+    expect(out).not.toContain('Bs.');
   });
 
   it('formatNumber separa miles (es-VE)', () => {

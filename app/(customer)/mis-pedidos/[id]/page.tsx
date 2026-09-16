@@ -83,7 +83,7 @@ function OrderDetail({ id, userId }: { id: string; userId: string }) {
           ))}
         </dl>
         <p className="mt-2 text-right text-sm">
-          Total Bs: {formatMoney(order.total_ves, 'VES')} · Tasa registrada:{' '}
+          Total: {formatMoney(order.total_ves, 'VES')} · Tasa registrada:{' '}
           {order.exchange_rate ?? 'No disponible'}
         </p>
       </div>

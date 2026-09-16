@@ -16,9 +16,18 @@ function getFormatter(locale: string, currency: string): Intl.NumberFormat {
 export function formatMoney(amount: number, currency: Currency = 'USD'): string {
   const c = CURRENCIES[currency];
   try {
-    return getFormatter(c.locale, c.code).format(amount);
+    const formatted = getFormatter(c.locale, c.code).format(amount);
+    if (currency === 'VES') {
+      return formatted
+        .replace(/Bs\.S\.?[\s\u00a0]*/gi, 'Bs ')
+        .replace(/Bs\.[\s\u00a0]*/gi, 'Bs ')
+        .replace(/[\s\u00a0]*Bs\.S\.?/gi, ' Bs')
+        .replace(/[\s\u00a0]*Bs\./gi, ' Bs')
+        .trim();
+    }
+    return formatted;
   } catch {
-    return `${c.symbol}${amount.toFixed(2)}`;
+    return currency === 'VES' ? `Bs ${amount.toFixed(2)}` : `${c.symbol}${amount.toFixed(2)}`;
   }
 }
 
