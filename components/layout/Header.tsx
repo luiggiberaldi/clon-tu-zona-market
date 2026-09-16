@@ -32,9 +32,10 @@ export function Header({ categories = [] }: { categories?: Category[] }) {
               src="/images/todo-market-cart.png"
               alt=""
               width={48}
-              height={31}
+              height={38}
               className="h-10 w-auto object-contain shrink-0"
               priority
+              unoptimized
             />
             <span><strong>{storeConfig.name}</strong><small>Tu supermercado en un solo lugar.</small></span>
           </Link>

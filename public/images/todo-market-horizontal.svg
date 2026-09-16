@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+
+  <g transform="translate(-115, -120) scale(0.72)">
+<g fill="none" stroke="#14191D" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Handle bar with rounded grips -->
+    <path d="M 164 216 L 164 193 Q 164 190 168 190 L 260 190 Q 263 190 263 193 L 263 216" stroke-width="19" />
+    <!-- Basket top rim -->
+    <path d="M 239 235 L 431 235" stroke-width="18.5" />
+    <!-- Basket body -->
+    <path d="M 213 190 L 216 235 L 228 331 C 230 343 240 348 254 348 L 379 348 C 393 348 401 343 404 331 L 424 240" stroke-width="18.5" />
+    <!-- Eyebrow -->
+    <path d="M 278 269 Q 288 260 302 253" stroke-width="7.5" />
+  </g>
+  <!-- Left eye -->
+  <ellipse cx="295" cy="284.5" rx="9.8" ry="10.2" fill="#14191D" />
+  <!-- Wink -->
+  <path d="M 357 274 C 348 279 337 283 331 285.5 C 337 287.5 348 289.5 358 289.5 C 350 286 343 284 337 285 C 343 281 351 277 357 274 Z" fill="#14191D" stroke="#14191D" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+  <!-- Smile -->
+  <path d="M 290 314 C 304 315 334 315 348 314 C 342 326 332 331.5 319 331.5 C 306 331.5 296 326 290 314 Z" fill="#14191D" />
+  <!-- Wheels -->
+  <circle cx="275" cy="387" r="12.8" fill="none" stroke="#14191D" stroke-width="12.4" />
+  <circle cx="365" cy="387" r="12.8" fill="none" stroke="#14191D" stroke-width="12.4" />
+  </g>
+  <text x="235" y="122" font-family="'Century Gothic', Montserrat, 'Segoe UI', system-ui, sans-serif" font-size="64" font-weight="bold" fill="#14191D" letter-spacing="-0.8px">Todo Market</text>
+</svg>

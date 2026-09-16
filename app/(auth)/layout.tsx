@@ -13,9 +13,10 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
               src="/images/todo-market-cart.png"
               alt=""
               width={38}
-              height={24}
+              height={30}
               className="h-8 w-auto object-contain"
               priority
+              unoptimized
             />
             <span>{storeConfig.name}</span>
           </Link>
