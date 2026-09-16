@@ -10,17 +10,23 @@ import { ZoneSelector } from '@/components/layout/ZoneSelector';
 import { MobileNav } from '@/components/layout/MobileNav';
 import { useCart } from '@/lib/hooks/useCart';
 import { useUserStore } from '@/store/userStore';
+import { useAuth } from '@/lib/hooks/useAuth';
 import { storeConfig } from '@/lib/config';
 import { SelectDropdown } from '@/components/ui/select-dropdown';
 import type { Category } from '@/types';
 
 export function Header({ categories = [] }: { categories?: Category[] }) {
   const cart = useCart();
+  const auth = useAuth();
   const { currency, setCurrency, hydrated } = useUserStore();
   const parents = categories.filter((c) => !c.parent_id);
   const pathname = usePathname();
   const categoryMenu = useRef<HTMLDetailsElement>(null);
   useEffect(() => { if (categoryMenu.current) categoryMenu.current.open = false; }, [pathname]);
+
+  const userName = auth.user
+    ? (auth.user.full_name?.trim() || auth.user.email.split('@')[0])
+    : null;
 
   return (
     <>
@@ -43,7 +49,19 @@ export function Header({ categories = [] }: { categories?: Category[] }) {
           <div className="store-header-tools">
             <div className="header-zone"><ZoneSelector variant="header" /></div>
             <label className="header-currency"><span>Moneda</span><SelectDropdown tone="onDark" ariaLabel="Moneda de precios" options={[{ value: 'USD', label: 'USD $' }, { value: 'VES', label: 'VES Bs' }]} value={hydrated ? currency : 'USD'} onChange={(v) => setCurrency(v as 'USD' | 'VES')} /></label>
-            <Link href="/perfil" className="header-account"><UserRound size={23} /><span><small>Bienvenido</small><strong>Mi cuenta</strong></span></Link>
+            <Link
+              href="/perfil"
+              className="header-account"
+              aria-label={userName ? `Cuenta de ${userName}` : 'Mi cuenta'}
+            >
+              <UserRound size={23} />
+              <span>
+                <small>Bienvenido</small>
+                <strong className="block max-w-[130px] truncate" title={userName || 'Mi cuenta'}>
+                  {userName || 'Mi cuenta'}
+                </strong>
+              </span>
+            </Link>
             <button onClick={cart.openDrawer} className="header-cart" aria-label={`Abrir carrito, ${cart.hydrated ? cart.count : 0} productos`}><ShoppingBasket size={27} /><span className="cart-count">{cart.hydrated ? cart.count : 0}</span></button>
           </div>
         </div>
