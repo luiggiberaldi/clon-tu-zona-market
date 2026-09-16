@@ -6,6 +6,7 @@ import { productPriceUsd } from '@/lib/demo/pricing';
 import { syncExchangeRateDeduped } from '@/lib/rates-sync';
 import { syncCatalogToSupabase } from '@/lib/catalog-sync';
 import catalog from '@/lib/demo/source-catalog.json';
+import { canonicalZonesTree } from '@/lib/data/carabobo-zones';
 import type { ProductFilters, ProductWithCategory, Category, State, City, Area } from '@/types';
 import type { CheckoutConfig, PaymentMethodConfig } from '@/types/commerce';
 
@@ -108,13 +109,21 @@ export async function getProduct(slug: string): Promise<ProductWithCategory | nu
   return (found as unknown as ProductWithCategory) || null;
 }
 export async function getZones(): Promise<{ states: State[]; cities: City[]; areas: Area[] }> {
-  if (!hasSupabaseConfig() && !isDemoMode()) return { states: [], cities: [], areas: [] };
-  const client = publicClient();
-  const [states, cities, areas] = await Promise.all(['states', 'cities', 'areas'].map(table => client.from(table).select('*').eq('is_active', true).order('name')));
-  if (states?.error || cities?.error || areas?.error) throw new Error('No se pudieron cargar las zonas.');
-  const stateRows = (states?.data || []) as State[];
-  const cityRows = ((cities?.data || []) as City[]).filter(c => stateRows.some(s => s.id === c.state_id));
-  return { states: stateRows, cities: cityRows, areas: ((areas?.data || []) as Area[]).filter(a => cityRows.some(c => c.id === a.city_id)) };
+  try {
+    if (hasSupabaseConfig() || isDemoMode()) {
+      const client = publicClient();
+      const [states, cities, areas] = await Promise.all(['states', 'cities', 'areas'].map(table => client.from(table).select('*').eq('is_active', true).order('name')));
+      if (!states?.error && !cities?.error && !areas?.error && Array.isArray(states?.data) && states.data.length > 0) {
+        const stateRows = states.data as State[];
+        const cityRows = ((cities?.data || []) as City[]).filter(c => stateRows.some(s => s.id === c.state_id));
+        const areaRows = ((areas?.data || []) as Area[]).filter(a => cityRows.some(c => c.id === a.city_id));
+        if (cityRows.length > 0 && areaRows.length > 0) {
+          return { states: stateRows, cities: cityRows, areas: areaRows };
+        }
+      }
+    }
+  } catch {}
+  return canonicalZonesTree;
 }
 export async function getCheckoutConfig(): Promise<CheckoutConfig> {
   const defaults: CheckoutConfig = {

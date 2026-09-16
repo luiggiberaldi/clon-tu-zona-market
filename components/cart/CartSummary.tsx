@@ -16,9 +16,15 @@ export function CartSummary({ showCheckout = true }: { showCheckout?: boolean })
           <dt>{count} unidades</dt>
           <dd>{formatMoney(subtotalUsd, 'USD')}</dd>
         </div>
-        <div className="flex justify-between text-muted-foreground">
-          <dt>Entrega</dt>
-          <dd>Se calcula al continuar</dd>
+        <div className="flex justify-between items-center text-sm">
+          <dt className="text-muted-foreground">Entrega</dt>
+          <dd>
+            {subtotalUsd >= 40 ? (
+              <span className="font-semibold text-emerald-600">¡Gratis! (compras $40+)</span>
+            ) : (
+              <span className="text-muted-foreground">Calculado por zona (gratis en $40+)</span>
+            )}
+          </dd>
         </div>
         <div className="flex items-start justify-between border-t pt-2">
           <div>
