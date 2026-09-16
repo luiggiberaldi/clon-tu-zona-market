@@ -52,7 +52,7 @@ export function OrderSummary({ quote, loading, error }: { quote?: CheckoutQuote;
             </div>
           )}
           <p className="mt-3 text-xs text-muted-foreground">
-            1 USD = {quote.exchange_rate} VES · {isDemoMode() ? 'Tasa capturada o configurada en el demo, no cotización en vivo' : 'Tasa publicada'} {formatDateTime(quote.rate_updated_at)}. Mínimo en productos: {formatMoney(quote.min_order_usd, 'USD')}.
+            1 USD = {quote.exchange_rate} VES · {isDemoMode() ? 'Tasa capturada o configurada en el demo, no cotización en vivo' : 'Tasa publicada'} {formatDateTime(quote.rate_updated_at)}. {quote.min_order_usd > 0 ? `Mínimo en productos: ${formatMoney(quote.min_order_usd, 'USD')}.` : 'Sin compra mínima obligatoria.'}
           </p>
         </>
       )}

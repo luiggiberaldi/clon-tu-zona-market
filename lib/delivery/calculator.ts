@@ -1,5 +1,5 @@
 export const FREE_DELIVERY_THRESHOLD_USD = 40.00;
-export const DEFAULT_MIN_ORDER_USD = 10.00;
+export const DEFAULT_MIN_ORDER_USD = 0.00;
 
 export interface DeliveryCalculation {
   baseFeeUsd: number;

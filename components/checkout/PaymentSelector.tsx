@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import {
   Smartphone,
   Landmark,
@@ -42,6 +43,12 @@ export function PaymentSelector({
 }) {
   const enabled = methods.filter((m) => m.enabled);
   const currentMethod = enabled.find((entry) => entry.id === selected);
+
+  useEffect(() => {
+    if (!selected && enabled[0]) {
+      onSelect(enabled[0].id);
+    }
+  }, [selected, enabled, onSelect]);
 
   return (
     <section className="space-y-4" aria-labelledby="payment-title">

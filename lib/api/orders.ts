@@ -34,6 +34,9 @@ export const ordersApi = {
   paymentReference(id: string, reference: string): Promise<{ order: Order }> {
     return http(`/api/ordenes/${encodeURIComponent(id)}/pago`, { method: 'POST', body: JSON.stringify({ reference }) });
   },
+  simulatePayment(id: string): Promise<{ order: Order; reference?: string; simulated?: boolean }> {
+    return http(`/api/ordenes/${encodeURIComponent(id)}/simular-pago`, { method: 'POST' });
+  },
   config(signal?: AbortSignal): Promise<CheckoutConfig> {
     return http('/api/checkout/config', { signal });
   },

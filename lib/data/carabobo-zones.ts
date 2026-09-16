@@ -15,7 +15,7 @@ export const canonicalCities: City[] = [
     state_id: CARABOBO_STATE_ID,
     name: 'Valencia Norte',
     delivery_fee_usd: 2.50,
-    min_order_usd: 10.00,
+    min_order_usd: 0.00,
     is_active: true,
     created_at: '2026-09-15T14:59:17.962814+00:00'
   },
@@ -24,7 +24,7 @@ export const canonicalCities: City[] = [
     state_id: CARABOBO_STATE_ID,
     name: 'Naguanagua',
     delivery_fee_usd: 3.00,
-    min_order_usd: 10.00,
+    min_order_usd: 0.00,
     is_active: true,
     created_at: '2026-09-15T14:59:18.194109+00:00'
   },
@@ -33,7 +33,7 @@ export const canonicalCities: City[] = [
     state_id: CARABOBO_STATE_ID,
     name: 'La Isabelica',
     delivery_fee_usd: 3.50,
-    min_order_usd: 10.00,
+    min_order_usd: 0.00,
     is_active: true,
     created_at: '2026-09-15T14:59:18.065538+00:00'
   },
@@ -42,7 +42,7 @@ export const canonicalCities: City[] = [
     state_id: CARABOBO_STATE_ID,
     name: 'San Diego',
     delivery_fee_usd: 4.00,
-    min_order_usd: 10.00,
+    min_order_usd: 0.00,
     is_active: true,
     created_at: '2026-09-15T14:59:18.294096+00:00'
   },
@@ -51,7 +51,7 @@ export const canonicalCities: City[] = [
     state_id: CARABOBO_STATE_ID,
     name: 'Guacara',
     delivery_fee_usd: 5.00,
-    min_order_usd: 15.00,
+    min_order_usd: 0.00,
     is_active: true,
     created_at: '2026-09-16T12:00:00.000000+00:00'
   },
@@ -60,7 +60,7 @@ export const canonicalCities: City[] = [
     state_id: CARABOBO_STATE_ID,
     name: 'Los Guayos',
     delivery_fee_usd: 4.50,
-    min_order_usd: 12.00,
+    min_order_usd: 0.00,
     is_active: true,
     created_at: '2026-09-16T12:00:00.000000+00:00'
   }

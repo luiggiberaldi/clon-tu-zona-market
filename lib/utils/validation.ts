@@ -73,7 +73,8 @@ export const checkoutSchema = z.object({
   idempotency_key: z.string().uuid('Identificador de solicitud inválido'),
   expected_total_usd: z.number().finite().nonnegative().max(99999999),
   expected_rate: z.number().finite().positive().max(100000000),
-  delivery_instructions: z.string().trim().max(1000).optional()
+  delivery_instructions: z.string().trim().max(1000).optional(),
+  simulate_payment: z.boolean().optional()
 }).strict();
 
 export const productCreateSchema = z.object({

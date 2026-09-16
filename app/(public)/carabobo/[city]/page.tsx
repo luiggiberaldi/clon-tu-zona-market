@@ -36,7 +36,7 @@ export default async function CityPage({ params }: Props) {
         </div>
         <div className="rounded-lg border bg-card px-3.5 py-2">
           <span className="text-xs text-muted-foreground">Pedido mínimo</span>
-          <p className="font-semibold text-foreground">${city.min_order_usd.toFixed(2)} USD</p>
+          <p className="font-semibold text-foreground">{city.min_order_usd > 0 ? `$${city.min_order_usd.toFixed(2)} USD` : 'Sin mínimo'}</p>
         </div>
         <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-2 dark:border-emerald-900/50 dark:bg-emerald-950/30">
           <span className="text-xs font-medium text-emerald-700 dark:text-emerald-400">Promoción especial</span>

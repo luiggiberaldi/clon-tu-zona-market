@@ -2,6 +2,7 @@
 import { use, useState } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
+import { CheckCircle2, Sparkles } from 'lucide-react';
 import { CustomerGate } from '@/components/checkout/CustomerGate';
 import { ordersApi } from '@/lib/api/orders';
 import { formatMoney } from '@/lib/utils/formatters';
@@ -29,6 +30,19 @@ function OrderDetail({ id, userId }: { id: string; userId: string }) {
       );
     } catch (e) {
       setMessage(e instanceof Error ? e.message : 'No se pudo enviar.');
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function simulatePayment() {
+    setBusy(true);
+    setMessage('');
+    try {
+      await ordersApi.simulatePayment(id);
+      await query.refetch();
+      setMessage('¡Pago simulado y aprobado con éxito en entorno de prueba!');
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : 'No se pudo simular el pago.');
     } finally {
       setBusy(false);
     }
@@ -87,62 +101,121 @@ function OrderDetail({ id, userId }: { id: string; userId: string }) {
           {order.exchange_rate ?? 'No disponible'}
         </p>
       </div>
-      <section className="space-y-3 rounded-xl border bg-white p-5">
-        <h2 className="font-bold">
-          Pago:{' '}
-          {order.payment_status === 'paid'
-            ? 'Confirmado'
-            : order.payment_status === 'refunded'
-              ? 'Devolución registrada'
-              : order.payment_status === 'failed'
-                ? 'Fallido'
-                : 'Pendiente de verificación'}
-        </h2>
-        <p className="text-sm">
-          Método: {order.payment_method}. Un pedido creado no significa que el pago esté confirmado.
+      <section className="space-y-4 rounded-xl border bg-card p-5">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="font-bold text-lg text-foreground">
+            Estado del Pago:{' '}
+            <span className={order.payment_status === 'paid' ? 'text-emerald-700 dark:text-emerald-400' : ''}>
+              {order.payment_status === 'paid'
+                ? 'Confirmado ✓'
+                : order.payment_status === 'refunded'
+                  ? 'Devolución registrada'
+                  : order.payment_status === 'failed'
+                    ? 'Fallido'
+                    : 'Pendiente de verificación'}
+            </span>
+          </h2>
+          {order.payment_status === 'paid' && (
+            <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+              ✓ Pagado
+            </span>
+          )}
+        </div>
+
+        {order.payment_status === 'paid' && (
+          <div className="rounded-xl border border-emerald-300 bg-emerald-50/80 p-4 text-emerald-950 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200">
+            <div className="flex items-center gap-2 font-bold text-sm text-emerald-900 dark:text-emerald-100">
+              <CheckCircle2 size={18} className="text-emerald-600 dark:text-emerald-400" />
+              ¡Pago recibido y verificado con éxito!
+            </div>
+            <p className="mt-1 text-xs text-emerald-800/90 dark:text-emerald-300/90">
+              Tu compra ha sido confirmada en el sistema. Tu pedido ya se encuentra agendado para su despacho.
+            </p>
+            {order.payment_reference && (
+              <p className="mt-2 text-xs font-semibold">
+                Referencia: <code className="rounded bg-emerald-200/60 px-1.5 py-0.5 font-mono text-emerald-950 dark:bg-emerald-900/60 dark:text-emerald-100">{order.payment_reference}</code>
+              </p>
+            )}
+          </div>
+        )}
+
+        <p className="text-sm text-muted-foreground">
+          Método seleccionado: <strong className="text-foreground capitalize">{order.payment_method}</strong>.
         </p>
-        {order.payment_instructions && (
-          <p className="whitespace-pre-line rounded-lg bg-slate-50 p-3 text-sm">
+
+        {order.payment_instructions && order.payment_status !== 'paid' && (
+          <p className="whitespace-pre-line rounded-lg bg-secondary/50 p-3 text-sm">
             {order.payment_instructions}
           </p>
         )}
-        {order.reservation_expires_at && (
-          <p className="text-xs">
+
+        {order.reservation_expires_at && order.payment_status !== 'paid' && (
+          <p className="text-xs text-muted-foreground">
             {expired ? 'Reserva vencida' : 'Reserva vigente hasta'}:{' '}
             {new Date(order.reservation_expires_at).toLocaleString('es-VE', {
               timeZone: 'America/Caracas'
             })}
           </p>
         )}
-        {order.payment_reference && (
-          <p className="text-sm">Referencia enviada: {order.payment_reference}</p>
+
+        {order.payment_reference && order.payment_status !== 'paid' && (
+          <p className="text-sm">Referencia enviada: <span className="font-mono font-semibold">{order.payment_reference}</span></p>
         )}
+
         {order.user_id === userId &&
           order.status === 'pending' &&
           order.payment_status === 'pending' &&
-          order.payment_method !== 'cash' &&
           !expired && (
-            <form className="space-y-3" onSubmit={(e) => void submit(e)}>
-              <label className="block text-sm">
-                Referencia de la transferencia / PagoMóvil
-                <input
-                  name="reference"
-                  minLength={6}
-                  maxLength={100}
-                  required
-                  defaultValue={order.payment_reference || ''}
-                  className="mt-1 block w-full rounded border p-2"
-                />
-              </label>
-              <p className="text-xs text-muted-foreground">
-                No envíes contraseñas ni datos de tarjeta. La referencia será conciliada por una
-                persona autorizada.
-              </p>
-              <Button disabled={busy}>{busy ? 'Enviando…' : 'Enviar referencia'}</Button>
-            </form>
+            <div className="space-y-4 pt-2">
+              <div className="rounded-xl border border-amber-300 bg-amber-50/70 p-4 text-xs text-amber-950 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200">
+                <div className="flex items-center justify-between gap-2 font-semibold">
+                  <span className="flex items-center gap-1.5">
+                    <Sparkles size={14} className="text-amber-600 dark:text-amber-400" />
+                    Modo Demostración / Simulación
+                  </span>
+                  <span className="rounded bg-amber-200/80 px-1.5 py-0.5 text-[9px] uppercase font-bold text-amber-900">
+                    Demo
+                  </span>
+                </div>
+                <p className="mt-1 text-[11px] leading-relaxed text-amber-900/80 dark:text-amber-200/80">
+                  ¿Quieres probar cómo se ve la orden al completarse la venta? Puedes aprobar el pago simulado con un solo clic:
+                </p>
+                <Button
+                  type="button"
+                  size="sm"
+                  disabled={busy}
+                  onClick={() => void simulatePayment()}
+                  className="mt-3 font-semibold"
+                >
+                  {busy ? 'Simulando…' : '⚡ Simular aprobación de pago (Modo Demo)'}
+                </Button>
+              </div>
+
+              {order.payment_method !== 'cash' && (
+                <form className="space-y-3 border-t pt-4" onSubmit={(e) => void submit(e)}>
+                  <label className="block text-sm font-medium">
+                    O reporta una referencia manual:
+                    <input
+                      name="reference"
+                      minLength={6}
+                      maxLength={100}
+                      required
+                      defaultValue={order.payment_reference || ''}
+                      placeholder="Ej: 12345678"
+                      className="mt-1 block w-full rounded-md border border-input bg-background p-2 text-sm"
+                    />
+                  </label>
+                  <p className="text-xs text-muted-foreground">
+                    No envíes contraseñas ni datos de tarjeta. La referencia será conciliada por el comercio.
+                  </p>
+                  <Button variant="outline" disabled={busy}>{busy ? 'Enviando…' : 'Enviar referencia'}</Button>
+                </form>
+              )}
+            </div>
           )}
+
         {message && (
-          <p role="status" className="text-sm">
+          <p role="status" className="rounded-md bg-secondary p-3 text-sm font-medium">
             {message}
           </p>
         )}

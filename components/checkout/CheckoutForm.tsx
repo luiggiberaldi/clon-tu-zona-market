@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
+import { Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useCartStore } from '@/store/cartStore';
@@ -38,6 +39,7 @@ function AuthenticatedCheckout({ userId }: { userId: string }) {
   const [slot, setSlot] = useState<DeliverySlot>();
   const [payment, setPayment] = useState<CorePaymentMethod>();
   const [instructions, setInstructions] = useState('');
+  const [simulatePayment, setSimulatePayment] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string>();
@@ -153,7 +155,8 @@ function AuthenticatedCheckout({ userId }: { userId: string }) {
         expected_total_usd: quote.data.total_usd,
         expected_rate: quote.data.exchange_rate,
         idempotency_key: crypto.randomUUID(),
-        delivery_instructions: instructions.trim() || undefined
+        delivery_instructions: instructions.trim() || undefined,
+        simulate_payment: simulatePayment
       };
       current = { payload, intent: quoteKey };
     }
@@ -169,6 +172,13 @@ function AuthenticatedCheckout({ userId }: { userId: string }) {
       const { order } = await ordersApi.create(current.payload);
       if (!order?.id || order.user_id !== userId)
         throw new OrderRequestError('La confirmación quedó incompleta.', 0);
+      if (simulatePayment && order.payment_status !== 'paid') {
+        try {
+          await ordersApi.simulatePayment(order.id);
+        } catch {
+          /* Optional fallback */
+        }
+      }
       try {
         sessionStorage.removeItem(storageKey);
       } catch {
@@ -318,11 +328,35 @@ function AuthenticatedCheckout({ userId }: { userId: string }) {
             </Link>
           </div>
         )}
+        <div className="rounded-xl border border-amber-300 bg-amber-50/70 p-3.5 text-xs text-amber-950 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200">
+          <div className="flex items-center justify-between gap-2 font-semibold">
+            <span className="flex items-center gap-1.5">
+              <Sparkles size={14} className="text-amber-600 dark:text-amber-400" />
+              Simulación de Venta Demo
+            </span>
+            <span className="rounded bg-amber-200/80 px-1.5 py-0.5 text-[9px] uppercase font-bold tracking-wider text-amber-900">
+              Modo Prueba
+            </span>
+          </div>
+          <p className="mt-1 text-[11px] leading-relaxed text-amber-900/80 dark:text-amber-200/80">
+            Prueba la experiencia de compra completa. Al confirmar, el pedido se aprobará automáticamente para que evalúes el flujo de cliente.
+          </p>
+          <label className="mt-2.5 flex cursor-pointer items-center gap-2 font-medium select-none">
+            <input
+              type="checkbox"
+              checked={simulatePayment}
+              onChange={(e) => setSimulatePayment(e.target.checked)}
+              className="h-4 w-4 rounded border-amber-400 text-amber-600 focus:ring-amber-500"
+            />
+            <span>Simular pago aprobado al confirmar</span>
+          </label>
+        </div>
+
         <Button
           type="button"
           onClick={() => void onSubmit()}
           disabled={submitting || (!canSubmit && !unresolved)}
-          className="w-full"
+          className="w-full text-sm font-semibold"
         >
           {submitting
             ? 'Confirmando…'
@@ -336,9 +370,10 @@ function AuthenticatedCheckout({ userId }: { userId: string }) {
             verificar al confirmar.
           </p>
         )}
-        <p className="text-xs text-muted-foreground">
-          El pago permanece pendiente hasta la verificación del comercio. No se recopilan datos de
-          tarjeta.
+        <p className="text-xs text-muted-foreground text-center">
+          {simulatePayment
+            ? 'Entorno de demostración activo. No se generan cargos reales en tus cuentas.'
+            : 'El pago permanece pendiente hasta la verificación del comercio.'}
         </p>
       </div>
     </div>

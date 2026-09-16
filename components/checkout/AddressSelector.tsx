@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createBrowserSupabase } from '@/lib/supabase/client';
 import { zonesApi } from '@/lib/api/zones';
@@ -30,6 +30,16 @@ export function AddressSelector({ userId, selectedId, onSelect }: { userId: stri
   const zones = useQuery({ queryKey: ['zones'], queryFn: zonesApi.tree });
   const cities = zones.data?.cities.filter(city => city.is_active) ?? [];
   const areas = zones.data?.areas.filter(area => area.is_active && area.city_id === cityId) ?? [];
+
+  useEffect(() => {
+    if (!selectedId && addresses.data && addresses.data.length > 0) {
+      const covered = addresses.data.find(a => zones.data?.areas.some(area => area.id === a.area_id));
+      const target = addresses.data.find(a => a.is_default && zones.data?.areas.some(area => area.id === a.area_id)) || covered || addresses.data[0];
+      if (target) {
+        onSelect(target.id);
+      }
+    }
+  }, [addresses.data, selectedId, zones.data, onSelect]);
 
   function edit(address?: Address) {
     const area = zones.data?.areas.find(entry => entry.id === address?.area_id);
@@ -77,12 +87,80 @@ export function AddressSelector({ userId, selectedId, onSelect }: { userId: stri
     {addresses.isPending && <p role="status">Consultando tus direcciones…</p>}
     {addresses.error && <div role="alert"><p>{addresses.error.message}</p><Button type="button" variant="outline" onClick={() => void addresses.refetch()}>Reintentar direcciones</Button></div>}
     {zones.error && <div role="alert"><p>No se pudo consultar la cobertura.</p><Button type="button" variant="outline" onClick={() => void zones.refetch()}>Reintentar cobertura</Button></div>}
-    <div className="grid gap-2 sm:grid-cols-2">{addresses.data?.map(address => {
+    <div className="grid gap-2.5 sm:grid-cols-2">{addresses.data?.map(address => {
       const covered = zones.data?.areas.some(area => area.id === address.area_id);
-      return <div key={address.id} className={cn('rounded-lg border p-3', selectedId === address.id && 'border-primary bg-primary/5')}>
-        <button type="button" aria-pressed={selectedId === address.id} disabled={!covered || saving} onClick={() => onSelect(address.id)} className="w-full text-left text-sm disabled:opacity-60"><span className="block font-medium">{address.full_address}</span><span className="text-muted-foreground">{zones.data?.areas.find(area => area.id === address.area_id)?.name || 'Sector no disponible'}</span>{address.is_default && <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs font-bold text-amber-900 dark:bg-amber-950/60 dark:text-amber-200">Predeterminada</span>}</button>
-        <div className="mt-2 flex gap-3"><button type="button" className="text-xs font-medium text-amber-900 underline dark:text-amber-300" disabled={saving} onClick={() => edit(address)}>Editar</button><button type="button" className="text-xs text-destructive underline" disabled={saving} onClick={() => void remove(address)}>Eliminar</button></div>
-      </div>;
+      const isSelected = selectedId === address.id;
+      const areaName = zones.data?.areas.find(area => area.id === address.area_id)?.name || 'Sector no disponible';
+
+      return (
+        <div
+          key={address.id}
+          onClick={() => { if (covered && !saving) onSelect(address.id); }}
+          className={cn(
+            'group relative flex flex-col justify-between rounded-xl border p-4 transition-all cursor-pointer text-left',
+            isSelected
+              ? 'border-amber-400 bg-amber-50/50 shadow-xs ring-1 ring-amber-400 dark:bg-amber-950/20'
+              : 'border-border bg-card hover:border-amber-400/50 hover:bg-secondary/40',
+            (!covered || saving) && 'cursor-not-allowed opacity-60'
+          )}
+        >
+          <div>
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex items-center gap-2.5">
+                <span className={cn(
+                  'flex h-5 w-5 shrink-0 items-center justify-center rounded-full border transition-colors',
+                  isSelected
+                    ? 'border-amber-500 bg-amber-400 text-amber-950 font-bold'
+                    : 'border-muted-foreground/30 bg-background'
+                )}>
+                  {isSelected && <span className="h-2 w-2 rounded-full bg-amber-950" />}
+                </span>
+                <span className="font-semibold text-foreground text-sm leading-tight">
+                  {address.full_address}
+                </span>
+              </div>
+              {isSelected && (
+                <span className="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+                  ✓ Seleccionada
+                </span>
+              )}
+            </div>
+
+            <p className="mt-1.5 pl-7 text-xs text-muted-foreground">
+              {areaName}
+              {address.building ? ` · ${address.building}` : ''}
+              {address.apartment ? ` Apt ${address.apartment}` : ''}
+            </p>
+
+            {address.is_default && (
+              <div className="mt-2 pl-7">
+                <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-900 dark:bg-amber-950/60 dark:text-amber-200">
+                  Predeterminada
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="mt-3 flex items-center justify-end gap-3 border-t border-border/40 pt-2 pl-7">
+            <button
+              type="button"
+              className="text-xs font-medium text-amber-900 underline hover:text-amber-950 dark:text-amber-300"
+              disabled={saving}
+              onClick={(e) => { e.stopPropagation(); edit(address); }}
+            >
+              Editar
+            </button>
+            <button
+              type="button"
+              className="text-xs text-destructive underline hover:opacity-80"
+              disabled={saving}
+              onClick={(e) => { e.stopPropagation(); void remove(address); }}
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+      );
     })}</div>
     {addresses.data?.length === 0 && <p className="text-sm text-muted-foreground">Agrega una dirección para consultar envío y disponibilidad.</p>}
     {draft ? <Card className="p-4"><form key={draft.id} onSubmit={event => void save(event)} className="space-y-3">

@@ -59,6 +59,7 @@ export interface CheckoutPayload {
   expected_total_usd: number;
   expected_rate: number;
   delivery_instructions?: string;
+  simulate_payment?: boolean;
 }
 
 export interface CreateOrderResponse {

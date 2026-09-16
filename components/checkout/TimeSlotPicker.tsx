@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils/cn';
 import { useNow } from '@/lib/hooks/useNow';
 import type { DeliverySlot } from '@/types/commerce';
@@ -25,13 +25,31 @@ export function TimeSlotPicker({
 }) {
   const [date, setDate] = useState('');
   const now = useNow();
-  const available = availableDeliverySlots(slots, now);
-  const days = [...new Set(available.map((slot) => slot.date))];
+  const available = useMemo(() => availableDeliverySlots(slots, now), [slots, now]);
+  const days = useMemo(() => [...new Set(available.map((slot) => slot.date))], [available]);
+  const activeDate = date && days.includes(date) ? date : (days[0] ?? '');
+
+  useEffect(() => {
+    if (activeDate && (!selected || selected.date !== activeDate)) {
+      const firstSlot = available.find((slot) => slot.date === activeDate);
+      if (firstSlot) {
+        onChange(firstSlot);
+      }
+    }
+  }, [activeDate, selected, available, onChange]);
+
   return (
     <section className="space-y-3" aria-labelledby="slot-title">
-      <h2 id="slot-title" className="text-lg font-semibold">
-        2. Horario de entrega
-      </h2>
+      <div className="flex items-center justify-between">
+        <h2 id="slot-title" className="text-lg font-semibold text-foreground">
+          2. Horario de entrega
+        </h2>
+        {selected && (
+          <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+            ✓ Horario seleccionado
+          </span>
+        )}
+      </div>
       {loading && <p role="status">Consultando disponibilidad…</p>}
       {error && (
         <div role="alert">
@@ -51,16 +69,19 @@ export function TimeSlotPicker({
           <button
             key={day}
             type="button"
-            aria-pressed={date === day}
+            aria-pressed={activeDate === day}
             onClick={() => {
-              if (date !== day) {
+              if (activeDate !== day) {
                 setDate(day);
-                onChange(undefined);
+                const firstSlot = available.find((slot) => slot.date === day);
+                if (firstSlot) onChange(firstSlot);
               }
             }}
             className={cn(
-              'rounded-lg border p-3 text-sm',
-              date === day ? 'border-primary bg-primary/10' : 'hover:bg-secondary'
+              'rounded-xl border p-3 text-sm transition-all',
+              activeDate === day
+                ? 'border-amber-400 bg-amber-50 font-semibold text-amber-950 shadow-xs ring-1 ring-amber-400 dark:bg-amber-950/40 dark:text-amber-200'
+                : 'border-border bg-card hover:border-amber-400/50 hover:bg-secondary'
             )}
           >
             {new Intl.DateTimeFormat('es-VE', {
@@ -72,26 +93,29 @@ export function TimeSlotPicker({
           </button>
         ))}
       </div>
-      {date && (
+      {activeDate && (
         <div className="grid grid-cols-2 gap-2">
           {available
-            .filter((slot) => slot.date === date)
-            .map((slot) => (
-              <button
-                key={slot.start}
-                type="button"
-                aria-pressed={selected?.date === date && selected.start === slot.start}
-                onClick={() => onChange(slot)}
-                className={cn(
-                  'rounded-lg border p-3 text-sm',
-                  selected?.date === date && selected.start === slot.start
-                    ? 'border-primary bg-primary/10'
-                    : 'hover:bg-secondary'
-                )}
-              >
-                {slot.start.slice(0, 5)} – {slot.end.slice(0, 5)}
-              </button>
-            ))}
+            .filter((slot) => slot.date === activeDate)
+            .map((slot) => {
+              const isSelected = selected?.date === activeDate && selected.start === slot.start;
+              return (
+                <button
+                  key={slot.start}
+                  type="button"
+                  aria-pressed={isSelected}
+                  onClick={() => onChange(slot)}
+                  className={cn(
+                    'rounded-xl border p-3 text-sm transition-all text-center',
+                    isSelected
+                      ? 'border-amber-400 bg-amber-50 font-semibold text-amber-950 shadow-xs ring-1 ring-amber-400 dark:bg-amber-950/40 dark:text-amber-200'
+                      : 'border-border bg-card hover:border-amber-400/50 hover:bg-secondary'
+                  )}
+                >
+                  {slot.start.slice(0, 5)} – {slot.end.slice(0, 5)}
+                </button>
+              );
+            })}
         </div>
       )}
       <p className="text-xs text-muted-foreground">
