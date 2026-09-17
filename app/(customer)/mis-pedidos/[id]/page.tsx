@@ -132,8 +132,8 @@ function OrderDetail({ id, userId }: { id: string; userId: string }) {
               Tu compra ha sido confirmada en el sistema. Tu pedido ya se encuentra agendado para su despacho.
             </p>
             {order.payment_reference && (
-              <p className="mt-2 text-xs font-semibold">
-                Referencia: <code className="rounded bg-emerald-200/60 px-1.5 py-0.5 font-mono text-emerald-950 dark:bg-emerald-900/60 dark:text-emerald-100">{order.payment_reference}</code>
+              <p className="mt-2 text-xs font-semibold break-all">
+                Referencia: <code className="rounded bg-emerald-200/60 px-1.5 py-0.5 font-mono text-emerald-950 dark:bg-emerald-900/60 dark:text-emerald-100 break-all">{order.payment_reference}</code>
               </p>
             )}
           </div>
@@ -144,7 +144,7 @@ function OrderDetail({ id, userId }: { id: string; userId: string }) {
         </p>
 
         {order.payment_instructions && order.payment_status !== 'paid' && (
-          <p className="whitespace-pre-line rounded-lg bg-secondary/50 p-3 text-sm">
+          <p className="whitespace-pre-line rounded-lg bg-secondary/50 p-3 text-sm break-words">
             {order.payment_instructions}
           </p>
         )}
@@ -159,7 +159,7 @@ function OrderDetail({ id, userId }: { id: string; userId: string }) {
         )}
 
         {order.payment_reference && order.payment_status !== 'paid' && (
-          <p className="text-sm">Referencia enviada: <span className="font-mono font-semibold">{order.payment_reference}</span></p>
+          <p className="text-sm break-all">Referencia enviada: <span className="font-mono font-semibold break-all">{order.payment_reference}</span></p>
         )}
 
         {order.user_id === userId &&
@@ -185,9 +185,9 @@ function OrderDetail({ id, userId }: { id: string; userId: string }) {
                   size="sm"
                   disabled={busy}
                   onClick={() => void simulatePayment()}
-                  className="mt-3 font-semibold"
+                  className="mt-3 h-auto max-w-full whitespace-normal text-wrap py-2 text-center font-semibold leading-snug"
                 >
-                  {busy ? 'Simulando…' : '⚡ Simular aprobación de pago (Modo Demo)'}
+                  {busy ? 'Simulando…' : '⚡ Simular pago aprobado (Demo)'}
                 </Button>
               </div>
 
