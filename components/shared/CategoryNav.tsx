@@ -79,6 +79,11 @@ export function CategoryNav({ categories, className, activeSlug, tiles = false }
   const parents = categories.filter((c) => !c.parent_id);
   const descendants = activeCategory ? categories.filter(c => c.parent_id === activeCategory.id) : [];
   const children = descendants.length ? descendants : activeCategory ? categories.filter(c => c.parent_id === activeCategory.parent_id && c.parent_id) : [];
+  const parentCategory = descendants.length
+    ? activeCategory
+    : activeCategory?.parent_id
+      ? categories.find(c => c.id === activeCategory.parent_id)
+      : undefined;
   const ancestry: NavCategory[] = []; let ancestor = activeCategory; const seen = new Set<string>();
   while (ancestor && !seen.has(ancestor.id)) { seen.add(ancestor.id); ancestry.unshift(ancestor); ancestor = categories.find(c => c.id === ancestor?.parent_id); }
   return (
@@ -104,26 +109,54 @@ export function CategoryNav({ categories, className, activeSlug, tiles = false }
         </nav>
       )}
       {!tiles && children.length > 0 && (
-        <nav className="mt-3 flex flex-wrap items-center gap-2 border-t border-dashed border-[#EAE4D5] pt-2.5 text-xs" aria-label="Subcategorías">
-          <span className="flex items-center gap-1 font-medium text-muted-foreground">
-            <ChevronRight size={13} /> Subcategorías:
-          </span>
-          {children.map((category) => (
-            <Link
-              key={category.id}
-              href={`/categorias/${category.slug}`}
-              aria-current={activeSlug === category.slug ? 'page' : undefined}
-              className={cn(
-                'rounded-full border px-3 py-1.5 font-medium transition-colors',
-                activeSlug === category.slug
-                  ? 'border-[#D4C200] bg-[#FFFBD1] text-[#614F00] font-semibold'
-                  : 'border-[#EAE4D5] bg-white text-[#3B464F] hover:border-[#D4C200] hover:bg-[#FFFBD1]/60'
-              )}
-            >
-              {category.name}
-            </Link>
-          ))}
-        </nav>
+        <div className="mt-3 border-t border-dashed border-[#EAE4D5] pt-2.5">
+          <div className="mb-2 flex items-center justify-between text-xs">
+            <span className="flex items-center gap-1 font-semibold text-foreground/85">
+              <ChevronRight size={13} className="text-amber-600 dark:text-amber-400" />
+              <span>Subcategorías{parentCategory ? `: ${parentCategory.name}` : ''}</span>
+              <span className="rounded-full bg-amber-100/80 px-1.5 py-0.5 text-[10px] font-bold text-amber-900 dark:bg-amber-950/50 dark:text-amber-300">
+                {children.length}
+              </span>
+            </span>
+            <span className="text-[11px] font-medium text-muted-foreground/70 flex items-center gap-1">
+              Desliza para ver más <span aria-hidden="true">→</span>
+            </span>
+          </div>
+          <nav
+            className="subcategory-chips -mx-4 flex items-center gap-2 overflow-x-auto px-4 pb-2 pt-0.5 sm:mx-0 sm:px-0"
+            aria-label="Subcategorías"
+          >
+            {parentCategory && (
+              <Link
+                href={`/categorias/${parentCategory.slug}`}
+                aria-current={activeSlug === parentCategory.slug ? 'page' : undefined}
+                className={cn(
+                  'shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors',
+                  activeSlug === parentCategory.slug
+                    ? 'active border-[#D4C200] bg-[#FFFBD1] text-[#614F00] font-bold ring-1 ring-[#D4C200] dark:bg-amber-950/60 dark:text-amber-200 dark:border-amber-600'
+                    : 'border-[#EAE4D5] bg-white text-[#3B464F] hover:border-[#D4C200] hover:bg-[#FFFBD1]/60 dark:bg-card dark:border-border dark:text-foreground'
+                )}
+              >
+                Todas ({children.length})
+              </Link>
+            )}
+            {children.map((category) => (
+              <Link
+                key={category.id}
+                href={`/categorias/${category.slug}`}
+                aria-current={activeSlug === category.slug ? 'page' : undefined}
+                className={cn(
+                  'shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors',
+                  activeSlug === category.slug
+                    ? 'active border-[#D4C200] bg-[#FFFBD1] text-[#614F00] font-bold ring-1 ring-[#D4C200] dark:bg-amber-950/60 dark:text-amber-200 dark:border-amber-600'
+                    : 'border-[#EAE4D5] bg-white text-[#3B464F] hover:border-[#D4C200] hover:bg-[#FFFBD1]/60 dark:bg-card dark:border-border dark:text-foreground'
+                )}
+              >
+                {category.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
       )}
     </div>
   );
